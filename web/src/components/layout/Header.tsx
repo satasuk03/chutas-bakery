@@ -27,7 +27,7 @@ export default function Header() {
             className="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide"
             href="#"
           >
-            ตู้กับข้าว
+            เมนู
           </a>
           <a
             className="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide"
@@ -62,7 +62,7 @@ export default function Header() {
                     หน้าแรก
                   </a>
                   <a className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors" href="#">
-                    ตู้กับข้าว
+                    เมนู
                   </a>
                   <a className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors" href="#">
                     เรื่องราวของเรา

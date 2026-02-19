@@ -13,23 +13,31 @@ export default function JsonLd() {
     name: "Chuta's Bakery",
     alternateName: "ชูตาเบเกอรี่",
     description:
-      "ขนมปังโฮมเมด ซาวโดว์ ครัวซองต์ และขนมอบสดใหม่ทุกวัน ทำด้วยใจ ไม่ใส่สารกันเสีย",
+      "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
     url: "https://fromchutas.com",
-    telephone: "+66-XX-XXX-XXXX", // TODO: real phone
+    telephone: "+66-64-549-2982",
     priceRange: "฿฿",
-    servesCuisine: ["เบเกอรี่", "ขนมปังโฮมเมด", "ของอบ"],
+    servesCuisine: [
+      "ขนมไหว้เจ้า",
+      "ฮวกเปา",
+      "ฮวกก้วย",
+      "ซาลาเปา",
+      "ซิ่วท้อ",
+      "ขนมไหว้พระจันทร์",
+      "เบเกอรี่จีน",
+    ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "", // TODO: your street address
-      addressLocality: "", // TODO: your district / city
-      addressRegion: "", // TODO: province e.g. กรุงเทพมหานคร
-      postalCode: "", // TODO: postal code
+      streetAddress: "64 ซอยเพชรเกษม 55/2",
+      addressLocality: "เขตบางแค แขวงหลักสอง",
+      addressRegion: "กรุงเทพมหานคร",
+      postalCode: "10160",
       addressCountry: "TH",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 0, // TODO: paste from Google Maps
-      longitude: 0,
+      latitude: 13.708214281606999,
+      longitude: 100.39429540947636,
     },
     openingHoursSpecification: [
       {
@@ -41,17 +49,16 @@ export default function JsonLd() {
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Saturday", "Sunday"],
-        opens: "08:00",
-        closes: "19:00",
+        opens: "07:00",
+        closes: "18:00",
       },
     ],
     sameAs: [
-      // TODO: paste your real social profile URLs
-      // "https://www.facebook.com/chutasbakery",
-      // "https://www.instagram.com/chutasbakery",
+      "https://www.facebook.com/chutasbakery",
+      "https://www.instagram.com/chutasbakery",
     ],
     image: "https://fromchutas.com/og-image.jpg", // TODO: real image
-    hasMap: "", // TODO: paste Google Maps share link
+    hasMap: "https://maps.app.goo.gl/j3jvUV4n1swc7HJm6",
   };
 
   return (
