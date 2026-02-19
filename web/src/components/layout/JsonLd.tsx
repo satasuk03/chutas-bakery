@@ -14,7 +14,7 @@ export default function JsonLd() {
     alternateName: "ชูตาเบเกอรี่",
     description:
       "ขนมปังโฮมเมด ซาวโดว์ ครัวซองต์ และขนมอบสดใหม่ทุกวัน ทำด้วยใจ ไม่ใส่สารกันเสีย",
-    url: "https://chutasbakery.com", // TODO: replace with real domain
+    url: "https://fromchutas.com",
     telephone: "+66-XX-XXX-XXXX", // TODO: real phone
     priceRange: "฿฿",
     servesCuisine: ["เบเกอรี่", "ขนมปังโฮมเมด", "ของอบ"],
@@ -50,7 +50,7 @@ export default function JsonLd() {
       // "https://www.facebook.com/chutasbakery",
       // "https://www.instagram.com/chutasbakery",
     ],
-    image: "https://chutasbakery.com/og-image.jpg", // TODO: real image
+    image: "https://fromchutas.com/og-image.jpg", // TODO: real image
     hasMap: "", // TODO: paste Google Maps share link
   };
 

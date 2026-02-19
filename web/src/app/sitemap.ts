@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://chutasbakery.com"; // TODO: replace with real domain
+const SITE_URL = "https://fromchutas.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
