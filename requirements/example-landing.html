@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chuta's Bakery - The Kitchen Table</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&amp;family=Quicksand:wght@400;500;600;700&amp;family=Spline+Sans:wght@300;400;500;600;700&amp;family=Mali:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ef4734", 
+                        "terracotta": "#C86B5D", 
+                        "background-light": "#F9F6F0", 
+                        "background-dark": "#221210",
+                        "surface": "#EFECE6", 
+                        "text-main": "#4A4238", 
+                        "text-muted": "#8C867D", 
+                        "sage": "#8DA399", 
+                        "warm-beige": "#F5EFE6",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "hand": ["Mali", "cursive", "Gochi Hand"],
+                        "body": ["Quicksand", "sans-serif"],
+                    },
+                    boxShadow: {
+                        "paper": "4px 4px 0px 0px #E6DCCD",
+                        "paper-hover": "6px 6px 0px 0px #DBCAB8",
+                    },
+                    backgroundImage: {
+                        "noise": "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .clip-torn-paper {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 95%, 90% 90%, 85% 95%, 80% 90%, 75% 95%, 70% 90%, 65% 95%, 60% 90%, 55% 95%, 50% 90%, 45% 95%, 40% 90%, 35% 95%, 30% 90%, 25% 95%, 20% 90%, 15% 95%, 10% 90%, 5% 95%, 0% 90%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-body text-text-main relative overflow-x-hidden selection:bg-terracotta/30">
+<div class="fixed inset-0 pointer-events-none z-50 bg-noise mix-blend-multiply opacity-50"></div>
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-40 w-full bg-background-light/95 backdrop-blur-sm border-b border-[#E6DCCD] px-4 py-3 shadow-sm transition-all duration-300">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-terracotta flex items-center justify-center">
+<span class="material-symbols-outlined !text-3xl">bakery_dining</span>
+</div>
+<h1 class="font-hand text-2xl md:text-3xl text-text-main leading-none mt-1">Chuta's Bakery</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body font-bold text-terracotta underline decoration-2 decoration-sage/50 underline-offset-4 text-base tracking-wide" href="#">หน้าแรก</a>
+<a class="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide" href="#">ตู้กับข้าว</a>
+<a class="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide" href="#">เรื่องราวของเรา</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative group flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2">
+<span class="material-symbols-outlined text-terracotta text-xl group-hover:scale-110 transition-transform">shopping_basket</span>
+<span class="font-bold text-sm text-text-main">ตะกร้า (0)</span>
+</button>
+<button class="md:hidden p-2 text-text-main">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full">
+<section class="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Freshly baked sourdough on wooden table in sunlight" class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY-xYIfdk2DAQgyFxrlxQLdDF3ic7V3KdOPNXyWkMWcDUQjLxldf3tESmtcetOJOtMOBmrLoz4XcjGoD_fjW7bbi6xEDTqJbLrZlMytDrbdN-hN1Ti8-s1qM8odTM8BRxKVUxRj7HU112Xtf3lc8n4ZhM_PbZ5X1SzexRQpMxCmaktOx5gdO94tstn6Y0ZeJHmd_e_vWjSA_DpLSYK_YPhGQSpWLWl5jGdXHbJLNOYLeXRmo56ow5IkV76teKXOqZJEznk9wfjC8k"/>
+<div class="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-12">
+<div class="inline-block mb-4 px-4 py-1 bg-white/80 backdrop-blur-sm rounded-full border border-surface shadow-sm transform -rotate-2">
+<span class="font-hand text-terracotta text-lg">ยินดีต้อนรับสู่ครัวเล็กๆ ของเรา</span>
+</div>
+<h1 class="font-hand text-5xl md:text-7xl text-white drop-shadow-md mb-6 leading-tight">
+                        อบด้วยใจ <br class="md:hidden"/>ในครัวบ้านเรา
+                    </h1>
+<p class="font-body text-xl md:text-2xl text-white/90 drop-shadow-sm mb-10 max-w-2xl mx-auto font-medium">
+                        ขนมปังโฮมเมด กลิ่นหอมกรุ่นจากเตาทุกเช้า
+                    </p>
+<a class="inline-flex items-center gap-2 bg-terracotta hover:bg-[#B55B4D] text-white px-8 py-4 rounded-full font-hand text-xl shadow-paper hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-300" href="#">
+<span>ดูตู้กับข้าววันนี้</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</section>
+<section class="py-20 px-4 bg-warm-beige relative overflow-hidden">
+<div class="absolute -right-20 top-20 text-terracotta/5 rotate-12 pointer-events-none select-none">
+<span class="material-symbols-outlined text-[400px]">grass</span>
+</div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<span class="material-symbols-outlined text-sage text-6xl mb-4">agriculture</span>
+<h2 class="font-hand text-3xl md:text-4xl text-text-main mb-6">เราเชื่อในความเรียบง่ายและเวลา</h2>
+<div class="w-24 h-1 bg-terracotta/30 mx-auto mb-8 rounded-full"></div>
+<p class="font-body text-lg text-text-main/80 leading-relaxed max-w-2xl mx-auto">
+                        ที่ Chuta's Bakery เราไม่รีบร้อน ขนมปังทุกก้อนผ่านกระบวนการหมักธรรมชาตินานกว่า 24 ชั่วโมง เพื่อรสชาติที่ลึกซึ้งและเนื้อสัมผัสที่เป็นเอกลักษณ์ เราใช้วัตถุดิบเท่าที่จำเป็น แป้ง น้ำ เกลือ และยีสต์ธรรมชาติ เพราะเราเชื่อว่าสิ่งที่ดีที่สุดมักจะมาจากความใส่ใจ ไม่ใช่การปรุงแต่ง
+                    </p>
+</div>
+</section>
+<section class="py-20 px-4 max-w-[1280px] mx-auto">
+<div class="text-center mb-12">
+<h2 class="font-hand text-3xl md:text-4xl text-text-main mb-2">เลือกอร่อยกับเมนูโปรด</h2>
+<p class="font-body text-text-muted">ปรุงสดใหม่ทุกวันเพื่อคุณ</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<a class="group block relative aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-paper hover:shadow-paper-hover transition-all duration-300 border-2 border-surface bg-white" href="#">
+<div class="absolute inset-0">
+<img alt="Fresh Bread" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY-xYIfdk2DAQgyFxrlxQLdDF3ic7V3KdOPNXyWkMWcDUQjLxldf3tESmtcetOJOtMOBmrLoz4XcjGoD_fjW7bbi6xEDTqJbLrZlMytDrbdN-hN1Ti8-s1qM8odTM8BRxKVUxRj7HU112Xtf3lc8n4ZhM_PbZ5X1SzexRQpMxCmaktOx5gdO94tstn6Y0ZeJHmd_e_vWjSA_DpLSYK_YPhGQSpWLWl5jGdXHbJLNOYLeXRmo56ow5IkV76teKXOqZJEznk9wfjC8k"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+</div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+<div class="bg-white/90 backdrop-blur-md px-6 py-4 rounded-xl border border-surface shadow-sm transform group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-terracotta text-4xl mb-2 block">bakery_dining</span>
+<h3 class="font-hand text-2xl text-text-main">ขนมปังอบใหม่</h3>
+</div>
+</div>
+</a>
+<a class="group block relative aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-paper hover:shadow-paper-hover transition-all duration-300 border-2 border-surface bg-white" href="#">
+<div class="absolute inset-0">
+<img alt="Sweet Treats" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCloHt_xnnl-x1iLaklWdmoV-_o4jBL5yadt2YO3i3j1p7RckKedIOAiAQPZXO1SBpofpg7UYGb9ik8RD9t2Xf6qYpD4F3U1EdZ87qGQAaCsJHFtKldCLeAJodK5y2YPlXBl-QhF7CEp5jqjuDx6s7_zH9Ly3ozDn4XI9Af7UWXvIpHytrAhwJofxX-VQf1X9B0t3aNPbnfFtCgw4RjXJczzkhooGTKzavHjqN2SSd15xYyLyN_3DBJoBLasNlKjNQrWpkKCSAVfAs"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+</div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+<div class="bg-white/90 backdrop-blur-md px-6 py-4 rounded-xl border border-surface shadow-sm transform group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-terracotta text-4xl mb-2 block">cookie</span>
+<h3 class="font-hand text-2xl text-text-main">ขนมหวาน</h3>
+</div>
+</div>
+</a>
+<a class="group block relative aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-paper hover:shadow-paper-hover transition-all duration-300 border-2 border-surface bg-white" href="#">
+<div class="absolute inset-0">
+<img alt="Pantry Staples" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA50JwcL_SEHHOrILyngFLra1xOCG80O-yUv5bV4M0IkhTYLqGtwJ7w4VyP9Pw_Jdwi4Rz9CLISTl7v8P2ecQIpDavV9TqOpaB1Csk9CvrJtEH10vLmHmOeIolfmLDrVhlM24LzpRC4fTKf_ZsGsT_2LALTt9SF3-LS6epY1inH0GqF0Lxyon3_wDpL3RGNmIgN4-_WzfCAZAFWhQ6b6HEcKlQMi5ojdAW5Y4bi3KmbrfuqOTjno2qkdObzewhiIkAtqxFUMcdaXi4"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+</div>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+<div class="bg-white/90 backdrop-blur-md px-6 py-4 rounded-xl border border-surface shadow-sm transform group-hover:-translate-y-2 transition-transform duration-300">
+<span class="material-symbols-outlined text-terracotta text-4xl mb-2 block">local_cafe</span>
+<h3 class="font-hand text-2xl text-text-main">ของติดครัว</h3>
+</div>
+</div>
+</a>
+</div>
+</section>
+<section class="py-20 px-4 bg-white border-y border-[#E6DCCD]">
+<div class="max-w-[1000px] mx-auto flex flex-col md:flex-row items-center gap-12">
+<div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative">
+<div class="absolute inset-0 bg-sage/20 rounded-full transform rotate-6 scale-105"></div>
+<div class="w-full h-full rounded-full overflow-hidden border-4 border-surface shadow-paper relative z-10">
+<img alt="Chuta" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg8ql1SSDQ8yQElyrgpXz5kfVQpIfe4ZvCnEET3qd03MnCWPHmzwiYo2qHiK67rToFMha2bl77auitYd34Q2ehkLlwiDS46YV5tl1p6k0ySV9lVt4bVgJsCZNfIVVryOMabm3TUhEM4xbsGvcPTAyKgSHU53BPIIV0dn0-wznqnzjwB91-AlBAzsHsvtcAE8I6yNZmJB-9Jr9O-XLmWmpHkLrljB6bAvs_Gy-FOox7TXY9Xp0m_Clc68SXWCDgEQ6VIgOPEivNYCA"/>
+</div>
+<div class="absolute -bottom-4 -right-4 bg-white px-4 py-1 rounded-lg border border-surface shadow-sm z-20 transform -rotate-3">
+<span class="font-hand text-terracotta text-lg">ชูตา (Owner)</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<span class="text-6xl text-sage/40 font-serif leading-none">“</span>
+<h3 class="font-hand text-2xl md:text-3xl text-text-main leading-relaxed -mt-6 mb-6">
+                            ความสุขของฉันคือการได้เห็นทุกคนทานขนมที่ฉันตั้งใจทำ ทุกขั้นตอนตั้งแต่เลี้ยงยีสต์จนถึงนำเข้าเตาอบ คือความรักที่ฉันอยากส่งต่อ
+                        </h3>
+<div class="flex items-center justify-center md:justify-start gap-2">
+<div class="h-px bg-text-muted/30 w-12"></div>
+<p class="font-body text-text-muted italic">อบด้วยใจทุกวัน</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 px-4 bg-terracotta text-white relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="max-w-2xl mx-auto text-center relative z-10">
+<span class="material-symbols-outlined text-5xl mb-4 animate-bounce">mail</span>
+<h2 class="font-hand text-3xl md:text-4xl mb-4">ไม่พลาดข่าวสารจากเตา</h2>
+<p class="font-body text-white/90 mb-8">รับข่าวสารเมนูพิเศษและโปรโมชั่นก่อนใคร ส่งตรงถึงอีเมลคุณ</p>
+<form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+<input class="flex-1 px-6 py-3 rounded-full text-text-main border-none focus:ring-2 focus:ring-sage focus:outline-none shadow-lg placeholder:text-text-muted/70 font-body" placeholder="อีเมลของคุณ" type="email"/>
+<button class="px-8 py-3 bg-sage hover:bg-[#7A9187] text-white font-bold font-hand rounded-full shadow-lg transition-colors duration-200" type="button">
+                            ติดตาม
+                        </button>
+</form>
+</div>
+</section>
+</main>
+<footer class="bg-background-dark text-surface pt-16 pb-8 px-4 border-t border-text-main/10">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4 text-terracotta">
+<span class="material-symbols-outlined text-3xl">bakery_dining</span>
+<span class="font-hand text-2xl text-surface">Chuta's Bakery</span>
+</div>
+<p class="font-body text-sm text-surface/60 leading-relaxed mb-6">
+                        ร้านขนมปังโฮมเมดเล็กๆ ที่อบด้วยใจและความรัก ในบรรยากาศอบอุ่นเหมือนทานที่บ้าน
+                    </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface" href="#">
+<span class="font-bold text-xs">FB</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface" href="#">
+<span class="font-bold text-xs">IG</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface" href="#">
+<span class="font-bold text-xs">LN</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-hand text-xl text-terracotta mb-6">เมนูแนะนำ</h4>
+<ul class="space-y-3 font-body text-sm text-surface/80">
+<li><a class="hover:text-white transition-colors" href="#">ขนมปังซาวโดว์</a></li>
+<li><a class="hover:text-white transition-colors" href="#">ครัวซองต์เนยสด</a></li>
+<li><a class="hover:text-white transition-colors" href="#">สโคนแครนเบอร์รี่</a></li>
+<li><a class="hover:text-white transition-colors" href="#">เบเกิลธัญพืช</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-hand text-xl text-terracotta mb-6">เกี่ยวกับเรา</h4>
+<ul class="space-y-3 font-body text-sm text-surface/80">
+<li><a class="hover:text-white transition-colors" href="#">เรื่องราวของเรา</a></li>
+<li><a class="hover:text-white transition-colors" href="#">คำถามที่พบบ่อย</a></li>
+<li><a class="hover:text-white transition-colors" href="#">การจัดส่งสินค้า</a></li>
+<li><a class="hover:text-white transition-colors" href="#">ติดต่อเรา</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-hand text-xl text-terracotta mb-6">เวลาทำการ</h4>
+<ul class="space-y-3 font-body text-sm text-surface/80">
+<li class="flex justify-between">
+<span>จันทร์ - ศุกร์:</span>
+<span>07:00 - 18:00</span>
+</li>
+<li class="flex justify-between">
+<span>เสาร์ - อาทิตย์:</span>
+<span>08:00 - 19:00</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto border-t border-surface/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body text-xs text-surface/40">© 2023 Chuta's Bakery. สงวนลิขสิทธิ์.</p>
+<div class="flex gap-6 font-body text-xs text-surface/40">
+<a class="hover:text-surface" href="#">นโยบายความเป็นส่วนตัว</a>
+<a class="hover:text-surface" href="#">เงื่อนไขการใช้บริการ</a>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>

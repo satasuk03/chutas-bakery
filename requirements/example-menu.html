@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Pantry - Cozy Homemade</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&amp;family=Quicksand:wght@400;500;600;700&amp;family=Spline+Sans:wght@300;400;500;600;700&amp;family=Mali:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ef4734", 
+                        "terracotta": "#C86B5D", 
+                        "background-light": "#F9F6F0", 
+                        "background-dark": "#221210",
+                        "surface": "#EFECE6", 
+                        "text-main": "#4A4238", 
+                        "text-muted": "#8C867D", 
+                        "sage": "#8DA399", 
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"],
+                        "hand": ["Mali", "cursive", "Gochi Hand"], // Changed to Mali for better Thai handwriting support
+                        "body": ["Quicksand", "sans-serif"],
+                    },
+                    boxShadow: {
+                        "paper": "4px 4px 0px 0px #E6DCCD",
+                        "paper-hover": "6px 6px 0px 0px #DBCAB8",
+                    },
+                    backgroundImage: {
+                        "noise": "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                },
+            },
+        }
+    </script>
+<style>.clip-torn-paper {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 95% 95%, 90% 90%, 85% 95%, 80% 90%, 75% 95%, 70% 90%, 65% 95%, 60% 90%, 55% 95%, 50% 90%, 45% 95%, 40% 90%, 35% 95%, 30% 90%, 25% 95%, 20% 90%, 15% 95%, 10% 90%, 5% 95%, 0% 90%);
+        }.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.group:hover .tooltip-ingredients {
+            opacity: 1;
+            transform: translateY(0) rotate(1deg);
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-body text-text-main relative overflow-x-hidden selection:bg-terracotta/30">
+<div class="fixed inset-0 pointer-events-none z-50 bg-noise mix-blend-multiply opacity-50"></div>
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-40 w-full bg-background-light/95 backdrop-blur-sm border-b border-[#E6DCCD] px-4 py-3 shadow-sm transition-all duration-300">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-terracotta flex items-center justify-center">
+<span class="material-symbols-outlined !text-3xl">bakery_dining</span>
+</div>
+<h1 class="font-hand text-2xl md:text-3xl text-text-main leading-none mt-1">Cozy Homemade</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide" href="#">หน้าแรก</a>
+<a class="font-body font-bold text-terracotta underline decoration-2 decoration-sage/50 underline-offset-4 text-base tracking-wide" href="#">ตู้กับข้าว</a>
+<a class="font-body font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide" href="#">เรื่องราวของเรา</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative group flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2">
+<span class="material-symbols-outlined text-terracotta text-xl group-hover:scale-110 transition-transform">shopping_basket</span>
+<span class="font-bold text-sm text-text-main">ตะกร้า (2)</span>
+</button>
+<button class="md:hidden p-2 text-text-main">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 max-w-[1280px] w-full mx-auto px-4 md:px-8 py-8 flex flex-col md:flex-row gap-8">
+<aside class="w-full md:w-64 flex-shrink-0">
+<div class="sticky top-24">
+<h2 class="font-hand text-2xl text-text-main mb-6 px-2 rotate-[-1deg]">ตู้กับข้าว</h2>
+<div class="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible no-scrollbar pb-4 md:pb-0">
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-3 rounded-xl bg-sage/20 border border-sage/30 text-text-main w-auto md:w-full transition-all">
+<span class="material-symbols-outlined text-sage" style="font-variation-settings: 'FILL' 1;">bakery_dining</span>
+<span class="font-bold font-hand text-lg mt-1">ขนมปังอบใหม่</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface text-text-muted hover:text-text-main w-auto md:w-full transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">cookie</span>
+<span class="font-semibold text-base font-hand">ขนมหวาน</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface text-text-muted hover:text-text-main w-auto md:w-full transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">breakfast_dining</span>
+<span class="font-semibold text-base font-hand">อบเช้านี้</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-surface text-text-muted hover:text-text-main w-auto md:w-full transition-all group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">local_cafe</span>
+<span class="font-semibold text-base font-hand">ของติดครัว</span>
+</button>
+</div>
+<div class="mt-8 hidden md:block bg-text-main text-[#F9F6F0] p-5 rounded-lg shadow-paper rotate-1 relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-[#E6DCCD] rounded-full opacity-50 blur-sm"></div>
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#F0F0F0] rounded-full shadow-inner border border-gray-300"></div> 
+<h3 class="font-hand text-xl text-sage mb-2">โน้ตจากคนทำขนม</h3>
+<p class="font-body text-sm leading-relaxed opacity-90">
+                            "ซาวโดวจ์มีตารางเวลาของมันเอง ถ้าหมดแล้ว ลองโฟกาเซียดูสิ เพิ่งออกจากเตาร้อนๆ เลย!"
+                        </p>
+<p class="text-right font-hand mt-2 text-lg text-sage">- ชูตา</p>
+</div>
+</div>
+</aside>
+<main class="flex-1">
+<div class="flex items-end justify-between mb-8 border-b-2 border-dashed border-[#E6DCCD] pb-4">
+<div>
+<h2 class="font-hand text-4xl text-terracotta mb-1">ขนมปังอบใหม่</h2>
+<p class="font-body text-text-muted text-sm">อบใหม่เช้านี้ ทานตอนอุ่นๆ อร่อยที่สุด</p>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-xs font-bold text-text-muted bg-surface px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>รอบถัดไป: 14:00 น.</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+<article class="group relative flex flex-col bg-white rounded-2xl border-2 border-surface shadow-paper hover:shadow-paper-hover transition-all duration-300 overflow-visible">
+<div class="relative h-48 w-full p-3">
+<div class="w-full h-full overflow-hidden rounded-xl">
+<img alt="Rustic loaf of sourdough bread on a wooden board" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Rustic loaf of sourdough bread on a wooden board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY-xYIfdk2DAQgyFxrlxQLdDF3ic7V3KdOPNXyWkMWcDUQjLxldf3tESmtcetOJOtMOBmrLoz4XcjGoD_fjW7bbi6xEDTqJbLrZlMytDrbdN-hN1Ti8-s1qM8odTM8BRxKVUxRj7HU112Xtf3lc8n4ZhM_PbZ5X1SzexRQpMxCmaktOx5gdO94tstn6Y0ZeJHmd_e_vWjSA_DpLSYK_YPhGQSpWLWl5jGdXHbJLNOYLeXRmo56ow5IkV76teKXOqZJEznk9wfjC8k"/>
+</div>
+<div class="absolute top-5 right-5 bg-background-light/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-surface">
+<span class="text-[10px] font-bold text-sage uppercase tracking-wider">เจ</span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-1 flex flex-col flex-1 relative">
+<div class="relative w-fit">
+<h3 class="font-hand text-2xl text-text-main cursor-help decoration-sage/30 underline decoration-dashed underline-offset-4 mb-1">คันทรี ไวท์</h3>
+<div class="tooltip-ingredients absolute bottom-full left-0 mb-2 w-48 bg-[#fffdf5] text-text-main p-3 rounded-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-20 border border-gray-100 clip-torn-paper origin-bottom-left rotate-0">
+<p class="font-hand text-terracotta text-lg leading-none mb-2 border-b border-gray-200 pb-1">ส่วนผสม</p>
+<ul class="text-xs font-body space-y-1 list-disc list-inside opacity-80">
+<li>แป้งออร์แกนิค King Arthur</li>
+<li>น้ำกรองสะอาด</li>
+<li>เกลือทะเล</li>
+</ul>
+</div>
+</div>
+<p class="font-body text-sm text-text-muted mb-4 line-clamp-2">ขนมปังซิกเนเจอร์ของเรา เปลือกกรอบ เนื้อในโปร่งเบา มีรสเปรี้ยวอ่อนๆ</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-body font-bold text-lg text-text-main">฿280</span>
+<div class="relative h-10 w-32">
+<button class="absolute inset-0 w-full h-full bg-surface text-text-main rounded-full font-bold text-sm flex items-center justify-center gap-1 group-hover:opacity-0 transition-opacity duration-200 px-2">
+                                        เพิ่มลงตะกร้า
+                                    </button>
+<div class="absolute inset-0 w-full h-full bg-terracotta text-white rounded-full flex items-center justify-between px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md transform translate-y-2 group-hover:translate-y-0">
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold text-sm">1</span>
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-white rounded-2xl border-2 border-surface shadow-paper hover:shadow-paper-hover transition-all duration-300 overflow-visible">
+<div class="absolute -top-3 -right-3 z-10 rotate-12 bg-white/90 shadow-sm border-2 border-primary text-primary font-hand font-bold text-sm px-3 py-1 rounded-lg transform scale-100 animate-pulse">
+                            เหลือแค่ 2 ชิ้น!
+                        </div>
+<div class="relative h-48 w-full p-3">
+<div class="w-full h-full overflow-hidden rounded-xl">
+<img alt="Twisted cinnamon knots glazed with sugar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Twisted cinnamon knots glazed with sugar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCloHt_xnnl-x1iLaklWdmoV-_o4jBL5yadt2YO3i3j1p7RckKedIOAiAQPZXO1SBpofpg7UYGb9ik8RD9t2Xf6qYpD4F3U1EdZ87qGQAaCsJHFtKldCLeAJodK5y2YPlXBl-QhF7CEp5jqjuDx6s7_zH9Ly3ozDn4XI9Af7UWXvIpHytrAhwJofxX-VQf1X9B0t3aNPbnfFtCgw4RjXJczzkhooGTKzavHjqN2SSd15xYyLyN_3DBJoBLasNlKjNQrWpkKCSAVfAs"/>
+</div>
+<div class="absolute top-5 right-5 bg-background-light/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-surface">
+<span class="text-[10px] font-bold text-sage uppercase tracking-wider">มังสวิรัติ</span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-1 flex flex-col flex-1 relative">
+<div class="relative w-fit">
+<h3 class="font-hand text-2xl text-text-main cursor-help decoration-sage/30 underline decoration-dashed underline-offset-4 mb-1">ซินนามอน น็อต</h3>
+<div class="tooltip-ingredients absolute bottom-full left-0 mb-2 w-48 bg-[#fffdf5] text-text-main p-3 rounded-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-20 border border-gray-100 clip-torn-paper origin-bottom-left rotate-0">
+<p class="font-hand text-terracotta text-lg leading-none mb-2 border-b border-gray-200 pb-1">ส่วนผสม</p>
+<ul class="text-xs font-body space-y-1 list-disc list-inside opacity-80">
+<li>แป้งบริยอชสูตรทางร้าน</li>
+<li>อบเชยซีลอน</li>
+<li>เคลือบเนยไหม้</li>
+</ul>
+</div>
+</div>
+<p class="font-body text-sm text-text-muted mb-4 line-clamp-2">แป้งบริยอชนุ่มๆ พันเกลียวกับน้ำตาลอบเชย เคลือบน้ำตาลตอนอุ่นๆ</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-body font-bold text-lg text-text-main">฿150</span>
+<div class="relative h-10 w-32">
+<button class="absolute inset-0 w-full h-full bg-surface text-text-main rounded-full font-bold text-sm flex items-center justify-center gap-1 group-hover:opacity-0 transition-opacity duration-200 px-2">
+                                        เพิ่มลงตะกร้า
+                                    </button>
+<div class="absolute inset-0 w-full h-full bg-terracotta text-white rounded-full flex items-center justify-between px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md transform translate-y-2 group-hover:translate-y-0">
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold text-sm">1</span>
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-white rounded-2xl border-2 border-surface shadow-paper hover:shadow-paper-hover transition-all duration-300 overflow-visible">
+<div class="relative h-48 w-full p-3">
+<div class="w-full h-full overflow-hidden rounded-xl">
+<img alt="Slice of dense walnut and cranberry bread" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Slice of dense walnut and cranberry bread" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg8ql1SSDQ8yQElyrgpXz5kfVQpIfe4ZvCnEET3qd03MnCWPHmzwiYo2qHiK67rToFMha2bl77auitYd34Q2ehkLlwiDS46YV5tl1p6k0ySV9lVt4bVgJsCZNfIVVryOMabm3TUhEM4xbsGvcPTAyKgSHU53BPIIV0dn0-wznqnzjwB91-AlBAzsHsvtcAE8I6yNZmJB-9Jr9O-XLmWmpHkLrljB6bAvs_Gy-FOox7TXY9Xp0m_Clc68SXWCDgEQ6VIgOPEivNYCA"/>
+</div>
+<div class="absolute top-5 right-5 bg-background-light/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-surface">
+<span class="text-[10px] font-bold text-terracotta uppercase tracking-wider">มีถั่ว</span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-1 flex flex-col flex-1 relative">
+<div class="relative w-fit">
+<h3 class="font-hand text-2xl text-text-main cursor-help decoration-sage/30 underline decoration-dashed underline-offset-4 mb-1">วอลนัท &amp; แครนเบอร์รี่</h3>
+<div class="tooltip-ingredients absolute bottom-full left-0 mb-2 w-48 bg-[#fffdf5] text-text-main p-3 rounded-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-20 border border-gray-100 clip-torn-paper origin-bottom-left rotate-0">
+<p class="font-hand text-terracotta text-lg leading-none mb-2 border-b border-gray-200 pb-1">ส่วนผสม</p>
+<ul class="text-xs font-body space-y-1 list-disc list-inside opacity-80">
+<li>แป้งโฮลวีท</li>
+<li>วอลนัทอบ</li>
+<li>แครนเบอร์รี่อบแห้ง</li>
+</ul>
+</div>
+</div>
+<p class="font-body text-sm text-text-muted mb-4 line-clamp-2">ขนมปังเนื้อแน่น อุดมด้วยวอลนัทอบและแครนเบอร์รี่เปรี้ยวหวาน</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-body font-bold text-lg text-text-main">฿320</span>
+<div class="relative h-10 w-32">
+<button class="absolute inset-0 w-full h-full bg-surface text-text-main rounded-full font-bold text-sm flex items-center justify-center gap-1 group-hover:opacity-0 transition-opacity duration-200 px-2">
+                                        เพิ่มลงตะกร้า
+                                    </button>
+<div class="absolute inset-0 w-full h-full bg-terracotta text-white rounded-full flex items-center justify-between px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md transform translate-y-2 group-hover:translate-y-0">
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold text-sm">1</span>
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<article class="group relative flex flex-col bg-white rounded-2xl border-2 border-surface shadow-paper hover:shadow-paper-hover transition-all duration-300 overflow-visible">
+<div class="relative h-48 w-full p-3">
+<div class="w-full h-full overflow-hidden rounded-xl">
+<img alt="Golden focaccia bread with rosemary and sea salt" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden focaccia bread with rosemary and sea salt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA50JwcL_SEHHOrILyngFLra1xOCG80O-yUv5bV4M0IkhTYLqGtwJ7w4VyP9Pw_Jdwi4Rz9CLISTl7v8P2ecQIpDavV9TqOpaB1Csk9CvrJtEH10vLmHmOeIolfmLDrVhlM24LzpRC4fTKf_ZsGsT_2LALTt9SF3-LS6epY1inH0GqF0Lxyon3_wDpL3RGNmIgN4-_WzfCAZAFWhQ6b6HEcKlQMi5ojdAW5Y4bi3KmbrfuqOTjno2qkdObzewhiIkAtqxFUMcdaXi4"/>
+</div>
+<div class="absolute top-5 right-5 bg-background-light/90 backdrop-blur-sm px-2 py-1 rounded-md shadow-sm border border-surface">
+<span class="text-[10px] font-bold text-sage uppercase tracking-wider">เจ</span>
+</div>
+</div>
+<div class="px-5 pb-5 pt-1 flex flex-col flex-1 relative">
+<div class="relative w-fit">
+<h3 class="font-hand text-2xl text-text-main cursor-help decoration-sage/30 underline decoration-dashed underline-offset-4 mb-1">โรสแมรี่ โฟกาเซีย</h3>
+<div class="tooltip-ingredients absolute bottom-full left-0 mb-2 w-48 bg-[#fffdf5] text-text-main p-3 rounded-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-20 border border-gray-100 clip-torn-paper origin-bottom-left rotate-0">
+<p class="font-hand text-terracotta text-lg leading-none mb-2 border-b border-gray-200 pb-1">ส่วนผสม</p>
+<ul class="text-xs font-body space-y-1 list-disc list-inside opacity-80">
+<li>แป้งอิตาเลียน 00</li>
+<li>โรสแมรี่สด</li>
+<li>เกลือมัลดอน</li>
+</ul>
+</div>
+</div>
+<p class="font-body text-sm text-text-muted mb-4 line-clamp-2">กดหลุมด้วยน้ำมันมะกอกเอ็กซ์ตร้าเวอร์จิ้น โรยหน้าด้วยโรสแมรี่สดจากสวน</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-body font-bold text-lg text-text-main">฿220</span>
+<div class="relative h-10 w-32">
+<button class="absolute inset-0 w-full h-full bg-surface text-text-main rounded-full font-bold text-sm flex items-center justify-center gap-1 group-hover:opacity-0 transition-opacity duration-200 px-2">
+                                        เพิ่มลงตะกร้า
+                                    </button>
+<div class="absolute inset-0 w-full h-full bg-terracotta text-white rounded-full flex items-center justify-between px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md transform translate-y-2 group-hover:translate-y-0">
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">remove</span>
+</button>
+<span class="font-bold text-sm">1</span>
+<button class="size-8 flex items-center justify-center hover:bg-white/20 rounded-full transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div class="hidden flex-col items-center justify-center col-span-1 sm:col-span-2 lg:col-span-3 min-h-[300px] text-center p-8 bg-surface/30 rounded-3xl border-2 border-dashed border-[#E6DCCD]">
+<span class="material-symbols-outlined text-6xl text-text-muted/40 mb-4">sentiment_dissatisfied</span>
+<h3 class="font-hand text-2xl text-text-muted mb-2">ตู้กับข้าวว่างเปล่า!</h3>
+<p class="text-text-muted text-sm max-w-md">วันนี้สินค้าหมวดนี้หมดเกลี้ยงแล้ว แวะมาดูใหม่พรุ่งนี้เช้านะ!</p>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<button class="flex items-center gap-2 font-hand text-xl text-text-main hover:text-terracotta transition-colors px-6 py-2 rounded-full border border-transparent hover:border-surface hover:bg-white hover:shadow-paper">
+<span>ดูขนมปังเพิ่มเติม</span>
+<span class="material-symbols-outlined text-lg animate-bounce mt-1">arrow_downward</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>
