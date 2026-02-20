@@ -12,7 +12,7 @@ export default function ValuesSection() {
         <Wheat className="text-sage size-14 mx-auto mb-4" />
 
         <h2 className="font-hand text-3xl md:text-4xl text-text-main mb-6">
-          เราเชื่อว่าของดีต้องตั้งใจทำ
+          เราเชื่อว่าของดีต้องตั้งใจทำ ❤️
         </h2>
 
         {/* Decorative divider */}

@@ -2,7 +2,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
 import ValuesSection from "@/components/sections/ValuesSection";
-import ProductShowcase from "@/components/sections/ProductShowcase";
+import CalendarSection from "@/components/sections/Calendar";
 import FounderSection from "@/components/sections/FounderSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 
@@ -13,7 +13,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <ValuesSection />
-        <ProductShowcase />
+        <CalendarSection />
         <FounderSection />
         {/* <NewsletterSection /> */}
       </main>
