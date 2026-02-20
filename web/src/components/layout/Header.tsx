@@ -1,7 +1,7 @@
 "use client";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Croissant, Menu, ShoppingBasket } from "lucide-react";
+import { Croissant, Menu, Phone, ShoppingBasket } from "lucide-react";
 
 export default function Header() {
   return (
@@ -39,9 +39,12 @@ export default function Header() {
 
         {/* Right side actions */}
         <div className="flex items-center gap-3">
-          <button className="hidden md:flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2">
-            <ShoppingBasket className="text-terracotta size-5" />
-            <span className="font-bold text-sm text-text-main">ตะกร้า (0)</span>
+          <button
+            className="hidden md:flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2"
+            onClick={() => (window.location.href = "tel:0645492982")}
+          >
+            <Phone className="text-terracotta size-5" />
+            <span className="font-bold text-sm text-text-main">โทรสั่งเลย</span>
           </button>
 
           {/* Mobile hamburger */}
@@ -55,23 +58,33 @@ export default function Header() {
               <div className="flex flex-col gap-6 mt-10 px-4">
                 <div className="flex items-center gap-2 mb-4">
                   <Croissant className="text-terracotta size-6" />
-                  <span className="font-hand text-2xl text-text-main">Chuta&apos;s Bakery</span>
+                  <span className="font-hand text-2xl text-text-main">
+                    Chuta&apos;s Bakery
+                  </span>
                 </div>
                 <nav className="flex flex-col gap-5">
                   <a className="font-hand text-2xl text-terracotta" href="#">
                     หน้าแรก
                   </a>
-                  <a className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors" href="#">
+                  <a
+                    className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors"
+                    href="#"
+                  >
                     เมนู
                   </a>
-                  <a className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors" href="#">
+                  <a
+                    className="font-hand text-2xl text-text-main hover:text-terracotta transition-colors"
+                    href="#"
+                  >
                     เรื่องราวของเรา
                   </a>
                 </nav>
                 <div className="pt-4 border-t border-surface">
                   <button className="flex items-center gap-2 bg-white border-2 border-surface shadow-paper rounded-xl px-4 py-2 w-full justify-center">
                     <ShoppingBasket className="text-terracotta size-5" />
-                    <span className="font-bold text-sm text-text-main">ตะกร้า (0)</span>
+                    <span className="font-bold text-sm text-text-main">
+                      ตะกร้า (0)
+                    </span>
                   </button>
                 </div>
               </div>

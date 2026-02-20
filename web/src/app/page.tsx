@@ -15,7 +15,7 @@ export default function Home() {
         <ValuesSection />
         <ProductShowcase />
         <FounderSection />
-        <NewsletterSection />
+        {/* <NewsletterSection /> */}
       </main>
       <Footer />
     </>

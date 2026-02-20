@@ -8,29 +8,31 @@ export default function Footer() {
         <div className="col-span-1">
           <div className="flex items-center gap-2 mb-4 text-terracotta">
             <Croissant className="size-7" />
-            <span className="font-hand text-2xl text-surface">Chuta&apos;s Bakery</span>
+            <span className="font-hand text-2xl text-surface">
+              Chuta&apos;s Bakery
+            </span>
           </div>
           <p className="font-body text-sm text-surface/60 leading-relaxed mb-6">
-            ร้านขนมปังโฮมเมดเล็กๆ ที่อบด้วยใจและความรัก ในบรรยากาศอบอุ่นเหมือนทานที่บ้าน
+            ร้านเล็กๆ ที่ทำขนมด้วยความรัก ซาลาเปา ฮวกก้วย ซิ่วท้อ
+            <br />
+            สั่งขนมโทร 064-549-2982
           </p>
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://www.facebook.com/chutasbakery"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface"
             >
               <span className="font-bold text-xs">FB</span>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/chutasbakery"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface"
             >
               <span className="font-bold text-xs">IG</span>
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 rounded-full bg-surface/10 flex items-center justify-center hover:bg-terracotta transition-colors text-surface"
-            >
-              <span className="font-bold text-xs">LN</span>
             </a>
           </div>
         </div>
@@ -41,22 +43,17 @@ export default function Footer() {
           <ul className="space-y-3 font-body text-sm text-surface/80">
             <li>
               <a href="#" className="hover:text-white transition-colors">
-                ขนมปังซาวโดว์
+                ซาลาเปา
               </a>
             </li>
             <li>
               <a href="#" className="hover:text-white transition-colors">
-                ครัวซองต์เนยสด
+                ฮวกก้วย/ฮวกเปา
               </a>
             </li>
             <li>
               <a href="#" className="hover:text-white transition-colors">
-                สโคนแครนเบอร์รี่
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white transition-colors">
-                เบเกิลธัญพืช
+                ซิ่วท้อ
               </a>
             </li>
           </ul>
@@ -64,7 +61,9 @@ export default function Footer() {
 
         {/* About links */}
         <div>
-          <h4 className="font-hand text-xl text-terracotta mb-6">เกี่ยวกับเรา</h4>
+          <h4 className="font-hand text-xl text-terracotta mb-6">
+            เกี่ยวกับเรา
+          </h4>
           <ul className="space-y-3 font-body text-sm text-surface/80">
             <li>
               <a href="#" className="hover:text-white transition-colors">
@@ -95,11 +94,11 @@ export default function Footer() {
           <ul className="space-y-3 font-body text-sm text-surface/80">
             <li className="flex justify-between gap-4">
               <span>จันทร์ - ศุกร์:</span>
-              <span>07:00 - 18:00</span>
+              <span>6:30 - 18:00</span>
             </li>
             <li className="flex justify-between gap-4">
               <span>เสาร์ - อาทิตย์:</span>
-              <span>08:00 - 19:00</span>
+              <span>6:30 - 18:00</span>
             </li>
           </ul>
         </div>
@@ -108,16 +107,8 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="max-w-[1280px] mx-auto border-t border-surface/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="font-body text-xs text-surface/40">
-          © 2024 Chuta&apos;s Bakery. สงวนลิขสิทธิ์.
+          © 2026 Chuta&apos;s Bakery.
         </p>
-        <div className="flex gap-6 font-body text-xs text-surface/40">
-          <a href="#" className="hover:text-surface transition-colors">
-            นโยบายความเป็นส่วนตัว
-          </a>
-          <a href="#" className="hover:text-surface transition-colors">
-            เงื่อนไขการใช้บริการ
-          </a>
-        </div>
       </div>
     </footer>
   );
