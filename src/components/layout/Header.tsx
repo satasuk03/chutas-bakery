@@ -1,7 +1,7 @@
 "use client";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Croissant, Menu, Phone, ShoppingBasket } from "lucide-react";
+import { Croissant, Menu, Phone } from "lucide-react";
 
 export default function Header() {
   return (
@@ -80,10 +80,13 @@ export default function Header() {
                   </a>
                 </nav>
                 <div className="pt-4 border-t border-surface">
-                  <button className="flex items-center gap-2 bg-white border-2 border-surface shadow-paper rounded-xl px-4 py-2 w-full justify-center">
-                    <ShoppingBasket className="text-terracotta size-5" />
+                  <button
+                    className="flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2 w-full justify-center"
+                    onClick={() => (window.location.href = "tel:0645492982")}
+                  >
+                    <Phone className="text-terracotta size-5" />
                     <span className="font-bold text-sm text-text-main">
-                      ตะกร้า (0)
+                      โทรสั่งเลย
                     </span>
                   </button>
                 </div>
