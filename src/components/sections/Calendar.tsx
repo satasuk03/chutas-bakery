@@ -97,13 +97,15 @@ export default function CalendarSection() {
 
   const [activeIdx, setActiveIdx] = useState(defaultIdx);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const stripRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToCard = (idx: number, behavior: ScrollBehavior = "smooth") => {
-    cardRefs.current[idx]?.scrollIntoView({
-      behavior,
-      block: "nearest",
-      inline: "center",
-    });
+    const strip = stripRef.current;
+    const card = cardRefs.current[idx];
+    if (!strip || !card) return;
+    const stripCenter = strip.offsetWidth / 2;
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    strip.scrollTo({ left: cardCenter - stripCenter, behavior });
   };
 
   useEffect(() => {
@@ -128,6 +130,7 @@ export default function CalendarSection() {
       <div className="relative">
         {/* Carousel strip */}
         <div
+          ref={stripRef}
           className="flex gap-5 overflow-x-auto snap-x snap-mandatory py-10 [&::-webkit-scrollbar]:hidden"
           style={{
             paddingInline: "calc(50vw - 7rem)",
