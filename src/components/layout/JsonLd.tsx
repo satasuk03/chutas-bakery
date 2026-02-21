@@ -14,7 +14,7 @@ export default function JsonLd() {
     alternateName: "ชูตาเบเกอรี่",
     description:
       "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
-    url: "https://fromchutas.com",
+    url: "https://fromchuta.com",
     telephone: "+66-64-549-2982",
     priceRange: "฿฿",
     servesCuisine: [
@@ -57,7 +57,7 @@ export default function JsonLd() {
       "https://www.facebook.com/chutasbakery",
       "https://www.instagram.com/chutasbakery",
     ],
-    image: "https://fromchutas.com/og-image.jpg", // TODO: real image
+    image: "https://fromchuta.com/og-image.jpg", // TODO: real image
     hasMap: "https://maps.app.goo.gl/j3jvUV4n1swc7HJm6",
   };
 

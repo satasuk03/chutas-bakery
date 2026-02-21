@@ -21,7 +21,7 @@ const sarabun = Sarabun({
   weight: ["400", "500", "600"],
 });
 
-const SITE_URL = "https://fromchutas.com";
+const SITE_URL = "https://fromchuta.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
