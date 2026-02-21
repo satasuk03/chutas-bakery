@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Mali, Quicksand, Sarabun } from "next/font/google";
+import { Mali, Prompt, Sarabun } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/layout/JsonLd";
 
@@ -9,9 +9,9 @@ const mali = Mali({
   weight: ["400", "500", "600", "700"],
 });
 
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
-  subsets: ["latin"],
+const prompt = Prompt({
+  variable: "--font-prompt",
+  subsets: ["thai", "latin"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -103,7 +103,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`${mali.variable} ${quicksand.variable} ${sarabun.variable} font-body antialiased bg-background-light text-text-main overflow-x-hidden`}
+        className={`${mali.variable} ${prompt.variable} ${sarabun.variable} font-body antialiased bg-background-light text-text-main overflow-x-hidden`}
       >
         <JsonLd />
         {children}

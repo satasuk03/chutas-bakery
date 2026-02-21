@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import menuData from "@/data/menu-items.json";
-import type { MenuData } from "@/types/menu";
+import type { MenuData, MenuItem } from "@/types/menu";
 import MenuProductCard from "./MenuProductCard";
+import MenuProductDetail from "./MenuProductDetail";
 
 const { categories, items } = menuData as MenuData;
 
 export default function MenuSection() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const filteredItems =
     activeCategory === "all"
@@ -41,7 +43,11 @@ export default function MenuSection() {
         {filteredItems.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredItems.map((item) => (
-              <MenuProductCard key={item.id} item={item} />
+              <MenuProductCard
+                key={item.id}
+                item={item}
+                onDetailClick={setSelectedItem}
+              />
             ))}
           </div>
         ) : (
@@ -55,6 +61,11 @@ export default function MenuSection() {
           </div>
         )}
       </div>
+
+      <MenuProductDetail
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+      />
     </section>
   );
 }

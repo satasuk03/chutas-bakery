@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Cookie, Coffee, Wheat, ChevronLeft, ChevronRight } from "lucide-react";
+import calendarData from "@/data/calendar-events.json";
 
 const thaiMonths = [
   "มกราคม",
@@ -18,70 +19,17 @@ const thaiMonths = [
   "ธันวาคม",
 ];
 
-const events: {
-  title: string;
-  gradient: string;
-  icon: React.ElementType;
-  href: string;
-  date: Date;
-}[] = [
-  {
-    title: "วันตรุษจีน",
-    gradient: "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
-    icon: Wheat,
-    href: "#",
-    date: new Date(2026, 1, 17),
-  },
-  {
-    title: "วันไหว้ทีกงแซ",
-    gradient: "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
-    icon: Wheat,
-    href: "#",
-    date: new Date(2026, 1, 25),
-  },
-  {
-    title: "วันจับโหงว",
-    gradient: "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
-    icon: Cookie,
-    href: "#",
-    date: new Date(2026, 2, 3),
-  },
-  {
-    title: "วันชิวอิก",
-    gradient: "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
-    icon: Coffee,
-    href: "#",
-    date: new Date(2026, 2, 19),
-  },
-  {
-    title: "วันจับโหงว",
-    gradient: "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
-    icon: Coffee,
-    href: "#",
-    date: new Date(2026, 3, 2),
-  },
-  {
-    title: "วันเช็งเม้ง",
-    gradient: "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
-    icon: Wheat,
-    href: "#",
-    date: new Date(2026, 3, 5),
-  },
-  {
-    title: "วันประสูติพระโพธิสัตว์กวนอิม",
-    gradient: "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
-    icon: Cookie,
-    href: "#",
-    date: new Date(2026, 3, 6),
-  },
-  {
-    title: "วันชิวอิก",
-    gradient: "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
-    icon: Coffee,
-    href: "#",
-    date: new Date(2026, 3, 17),
-  },
-];
+const iconMap: Record<string, React.ElementType> = {
+  cookie: Cookie,
+  coffee: Coffee,
+  wheat: Wheat,
+};
+
+const events = calendarData.events.map((e) => ({
+  ...e,
+  icon: iconMap[e.icon] ?? Wheat,
+  date: new Date(e.date),
+}));
 
 export default function CalendarSection() {
   const today = new Date();

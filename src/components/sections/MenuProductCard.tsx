@@ -40,7 +40,13 @@ function getTapeColor(id: string) {
   return tapeColors[Math.abs(hash) % tapeColors.length];
 }
 
-export default function MenuProductCard({ item }: { item: MenuItem }) {
+export default function MenuProductCard({
+  item,
+  onDetailClick,
+}: {
+  item: MenuItem;
+  onDetailClick: (item: MenuItem) => void;
+}) {
   const badge = item.badge ? badgeConfig[item.badge] : null;
   const BadgeIcon = badge?.icon;
   const tapeColor = getTapeColor(item.id);
@@ -128,7 +134,10 @@ export default function MenuProductCard({ item }: { item: MenuItem }) {
               </>
             )}
           </span>
-          <button className="flex items-center gap-1 bg-white border-2 border-surface text-text-main px-3 py-1 text-sm font-bold font-body rounded-full shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all">
+          <button
+            onClick={() => onDetailClick(item)}
+            className="flex items-center gap-1 bg-white border-2 border-surface text-text-main px-3 py-1 text-sm font-bold font-body rounded-full shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all"
+          >
             <span>ดูรายละเอียด</span>
             <ArrowRight className="size-3.5" />
           </button>

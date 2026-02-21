@@ -1,0 +1,60 @@
+{
+  "events": [
+    {
+      "title": "วันตรุษจีน",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-02-17"
+    },
+    {
+      "title": "วันไหว้ทีกงแซ",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-02-25"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-03-03"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-03-19"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-04-02"
+    },
+    {
+      "title": "วันเช็งเม้ง",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-04-05"
+    },
+    {
+      "title": "วันประสูติพระโพธิสัตว์กวนอิม",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-04-06"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-04-17"
+    }
+  ]
+}

@@ -34,14 +34,16 @@ export default function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
             <a
-              href="#menu"
+              href="/menu"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-terracotta px-8 py-3.5 font-hand font-bold text-lg text-white shadow-lg hover:bg-terracotta/90 hover:shadow-terracotta/30 hover:-translate-y-0.5 transition-all"
             >
               <span>ดูรายการขนม</span>
               <ArrowRight className="size-5" />
             </a>
             <a
-              href="https://m.me/chutasbakery"
+              href="https://facebook.com/chutasbakery/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-surface bg-white px-8 py-3.5 font-hand font-bold text-lg text-text-main hover:bg-warm-beige hover:-translate-y-0.5 transition-all shadow-sm"
             >
               ติดต่อสอบถาม

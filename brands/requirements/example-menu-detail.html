@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chuta's Bakery - Product Detail</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e00606",
+                        "background-light": "#ffffff",
+                        "background-dark": "#230f0f",
+                        "surface": "#f7f7f7",
+                        "ink": "#0f0f0f",
+                        "line": "#e5e5e5",
+                        "muted": "#999999",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "sc": ["Noto Sans SC", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px", // Brutalist default
+                        "sm": "2px",
+                        "lg": "0px", 
+                        "xl": "0px",
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for brutalist feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0f0f0f; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e00606; 
+        }
+
+        /* Hide scrollbar for gallery but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-ink antialiased h-screen overflow-hidden relative">
+<!-- Background Context (Blurred out shop content to simulate overlay context) -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-line p-[1px]">
+<!-- Mock Grid Items to simulate background -->
+<div class="bg-background-light h-full w-full"></div>
+<div class="bg-background-light h-full w-full"></div>
+<div class="bg-background-light h-full w-full"></div>
+<div class="bg-background-light h-full w-full"></div>
+</div>
+<!-- Overlay Backdrop -->
+<div class="fixed inset-0 bg-ink/20 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+<!-- Product Detail Modal -->
+<div class="fixed top-0 right-0 h-full w-full md:w-[50vw] max-w-[800px] bg-background-light z-50 shadow-2xl flex flex-col transform transition-transform duration-500 ease-in-out border-l border-ink">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-4 border-b border-line shrink-0 bg-background-light z-10">
+<div class="flex items-center gap-3">
+<span class="font-mono text-sm tracking-wider text-muted">ITEM 042</span>
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+</div>
+<button class="group p-2 hover:bg-surface transition-colors duration-200">
+<span class="material-symbols-outlined text-3xl font-light group-hover:text-primary transition-colors">close</span>
+</button>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden relative">
+<!-- Main Gallery -->
+<div class="relative w-full aspect-square md:aspect-[4/3] bg-surface group">
+<img alt="Close up of matcha lava cookie with melting center" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwRfKiPHqDYg0zEN97GYbrfxBhHSyEIErDfLCXx48NIUWVvIdwnPF2YhaLYkehgD4bbdcmMsSvjwWtT5Y-t7XYsJa7l6mhVL5ZWTMZCmbZdKSHdAYawvejhZQ0Dydx2ujrUOfKouPLsEF8ThYtvM_hbY2QJ-_SlLnU9OlAkeHUFk_5G2jZzBQrAlPqHYApvqOZ0Z_4uE7Gtv3Dbms06TcpOPLdJ48Xh-VtzuHEwNcI4FPm6o8xOuRUy4uVvICI3BSsZCubWWsbavQ"/>
+<!-- Gallery Navigation Overlay -->
+<div class="absolute inset-x-0 bottom-6 flex justify-center gap-2">
+<button class="w-2 h-2 bg-primary rounded-full ring-2 ring-background-light"></button>
+<button class="w-2 h-2 bg-ink/20 hover:bg-ink/50 rounded-full transition-colors backdrop-blur-sm"></button>
+<button class="w-2 h-2 bg-ink/20 hover:bg-ink/50 rounded-full transition-colors backdrop-blur-sm"></button>
+</div>
+<!-- Hover Arrows -->
+<button class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background-light/80 hover:bg-primary hover:text-white transition-colors opacity-0 group-hover:opacity-100 backdrop-blur-md">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background-light/80 hover:bg-primary hover:text-white transition-colors opacity-0 group-hover:opacity-100 backdrop-blur-md">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<!-- Content Grid -->
+<div class="p-6 md:p-10 space-y-12">
+<!-- Title Block -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div>
+<span class="block text-primary text-sm font-mono mb-1">宇治抹茶</span>
+<h2 class="font-display text-4xl md:text-5xl font-bold tracking-tight uppercase leading-[0.9]">Matcha Lava<br/>Cookie</h2>
+</div>
+<div class="font-mono text-xl md:text-2xl mt-1">$4.50</div>
+</div>
+<p class="text-muted mt-4 font-light text-lg leading-relaxed max-w-md">
+                        A crisp exterior yielding to a molten core of ceremonial grade Uji matcha and white chocolate ganache. Engineered for maximum texture contrast.
+                    </p>
+</div>
+<!-- Technical Specs Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 border-t border-line pt-8">
+<!-- Flavor Profile Radar -->
+<div class="flex flex-col gap-4">
+<h3 class="font-mono text-xs uppercase tracking-widest text-muted border-l-2 border-primary pl-2">Flavor Profile</h3>
+<div class="relative w-full aspect-square max-w-[200px] mx-auto">
+<!-- SVG Radar Chart -->
+<svg class="w-full h-full overflow-visible" viewbox="0 0 100 100">
+<!-- Grid Lines -->
+<polygon fill="none" points="50,10 90,50 50,90 10,50" stroke="#e5e5e5" stroke-width="1"></polygon>
+<polygon fill="none" points="50,25 75,50 50,75 25,50" stroke="#e5e5e5" stroke-width="1"></polygon>
+<line stroke="#e5e5e5" stroke-dasharray="2,2" stroke-width="1" x1="50" x2="50" y1="10" y2="90"></line>
+<line stroke="#e5e5e5" stroke-dasharray="2,2" stroke-width="1" x1="10" x2="90" y1="50" y2="50"></line>
+<!-- Labels -->
+<text class="text-[8px] font-mono fill-muted" text-anchor="middle" x="50" y="5">SWEET</text>
+<text class="text-[8px] font-mono fill-muted" text-anchor="start" x="95" y="52">TEMP</text>
+<text class="text-[8px] font-mono fill-muted" text-anchor="middle" x="50" y="98">SALTY</text>
+<text class="text-[8px] font-mono fill-muted" text-anchor="end" x="5" y="52">TEXTURE</text>
+<!-- Data Shape (Sweet: High, Temp: High, Salty: Low, Texture: Med) -->
+<polygon fill="rgba(224, 6, 6, 0.1)" points="50,20 85,50 50,80 30,50" stroke="#e00606" stroke-width="2"></polygon>
+<!-- Data Points -->
+<circle cx="50" cy="20" fill="#e00606" r="2"></circle>
+<circle cx="85" cy="50" fill="#e00606" r="2"></circle>
+<circle cx="50" cy="80" fill="#e00606" r="2"></circle>
+<circle cx="30" cy="50" fill="#e00606" r="2"></circle>
+</svg>
+</div>
+</div>
+<!-- Ingredients List -->
+<div class="flex flex-col gap-6">
+<div class="space-y-3">
+<h3 class="font-mono text-xs uppercase tracking-widest text-muted border-l-2 border-primary pl-2">Composition</h3>
+<ul class="font-mono text-xs space-y-2 text-ink">
+<li class="flex justify-between border-b border-line pb-1">
+<span>Base</span>
+<span>French Butter Cookie</span>
+</li>
+<li class="flex justify-between border-b border-line pb-1">
+<span>Filling</span>
+<span>Uji Matcha Ganache</span>
+</li>
+<li class="flex justify-between border-b border-line pb-1">
+<span>Accent</span>
+<span>Maldon Sea Salt</span>
+</li>
+<li class="flex justify-between border-b border-line pb-1">
+<span>Weight</span>
+<span>85g</span>
+</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h3 class="font-mono text-xs uppercase tracking-widest text-muted border-l-2 border-primary pl-2">Allergens</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 border border-ink text-xs font-mono uppercase bg-surface">Dairy</span>
+<span class="px-2 py-1 border border-ink text-xs font-mono uppercase bg-surface">Gluten</span>
+<span class="px-2 py-1 border border-ink text-xs font-mono uppercase bg-surface">Egg</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Images / Cross Section -->
+<div class="grid grid-cols-2 gap-4 border-t border-line pt-8">
+<div class="flex flex-col gap-2">
+<div class="aspect-square bg-surface w-full overflow-hidden relative group">
+<img alt="Cross section of matcha cookie showing texture" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf31N68Z-JO6N43NnJ4EsUWWXsFbtx1iydG431p4Rkv193fgyXsQ5zcmZMkvSRrAbqEKBQ-UZN30l_zqQ_e2ziYT2rP6GuFqrUjKsgDFZ0v-X-BSBQK3EZAl1_mli1JJ1k7QexS1VzuKb4T7OHeNH_vepbzGMPfrM29gKIFMf7rm9MrToSiUO7PPEs3Oj7nHFQbAhiLi51OTcpkJrv5-7cPViA7Omzy0ufWzNTnaerUIlIoyIWjJAWvjRcwxFwdXRbRJOdCGcGFp4"/>
+<div class="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors"></div>
+</div>
+<span class="font-mono text-xs text-muted">FIG 01. CROSS-SECTION</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="aspect-square bg-surface w-full overflow-hidden relative group">
+<img alt="Minimalist packaging box" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfSBc9oI9A7rYGbdD06olijh_UGV6kuN8xVtAGaPerlWt3RQs3V4so4itVmn0qpZbAgKnuwWt6cQaZR5M995raMF3_rPNX2B75oUAhaJ0h6f1WvCa6GKDv3yNIXLovPSRm5M3EsUnyrJbKuEbygh_MvqWGFsVcVygTehUPvajQKnxGgsBvmPHnI2IVuWyvVkb7GIpx_VBLY0QHt86ekULs8Z3ba47z7ihFL2YLOVz7H-VunKVAIAA4sYbg8BshBajA9QMpKJwtCF8"/>
+<div class="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors"></div>
+</div>
+<span class="font-mono text-xs text-muted">FIG 02. PACKAGING</span>
+</div>
+</div>
+<!-- Bottom Spacer for Sticky Footer -->
+<div class="h-24"></div>
+</div>
+</div>
+<!-- Sticky Footer Action Bar -->
+<div class="shrink-0 border-t border-ink bg-background-light p-4 md:px-6 md:py-5 z-20">
+<div class="flex flex-col md:flex-row gap-4 items-stretch">
+<!-- Stepper -->
+<div class="flex items-center border border-ink h-14 shrink-0">
+<button class="w-14 h-full flex items-center justify-center hover:bg-surface active:bg-ink active:text-white transition-colors border-r border-line">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<div class="w-16 h-full flex items-center justify-center font-mono text-lg font-medium">
+                        1
+                    </div>
+<button class="w-14 h-full flex items-center justify-center hover:bg-surface active:bg-ink active:text-white transition-colors border-l border-line">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<!-- CTA Button -->
+<button class="flex-1 h-14 bg-ink text-white hover:bg-primary active:bg-red-700 transition-all duration-200 flex items-center justify-between px-6 group relative overflow-hidden">
+<span class="font-display font-bold tracking-wide uppercase z-10">Add to Order</span>
+<span class="font-mono z-10 group-hover:translate-x-1 transition-transform">$4.50</span>
+<!-- Flash effect overlay -->
+<div class="absolute inset-0 bg-primary translate-y-full group-active:translate-y-0 transition-transform duration-75"></div>
+</button>
+</div>
+</div>
+</div>
+</body></html>

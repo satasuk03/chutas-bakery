@@ -19,6 +19,7 @@ export interface MenuItem {
   unit?: string;
   variants?: PriceVariant[];
   flavors?: string[];
+  longDescription?: string;
 }
 
 export interface MenuCategory {

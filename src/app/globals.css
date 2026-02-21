@@ -62,7 +62,7 @@
 
   /* ── Font Families ── */
   --font-hand: var(--font-mali), cursive;
-  --font-body: var(--font-quicksand), sans-serif;
+  --font-body: var(--font-prompt), sans-serif;
   --font-display: var(--font-sarabun), sans-serif;
 
   /* ── Custom Shadows ── */

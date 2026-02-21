@@ -37,7 +37,7 @@ Single-page marketing site using Next.js App Router:
 Custom theme tokens defined in `src/app/globals.css`:
 
 - **Brand colors:** burgundy `#800020`, cream `#FFFDD0`, gold `#D4AF37`, terracotta `#C86B5D`
-- **Fonts:** `--font-hand` (Mali, decorative), `--font-body` (Quicksand), `--font-display` (Sarabun, Thai)
+- **Fonts:** `--font-hand` (Mali, decorative), `--font-body` (Prompt, Thai+Latin), `--font-display` (Sarabun, Thai)
 - **Path alias:** `@/*` maps to `src/*`
 
 ## Brand Context
