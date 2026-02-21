@@ -6,7 +6,6 @@ export default function HeroSection() {
     <section className="relative flex items-center pUy-24 md:py-16 overflow-hidden px-4">
       {/* Background blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-      <div className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-sage/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
 
       <div className="mx-auto max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
         {/* Text Content */}
