@@ -6,7 +6,7 @@ import { FadeIn } from "@/components/ui/fade-in";
 
 export default function HeroSection() {
   return (
-    <section className="relative flex items-center pUy-24 md:py-16 overflow-hidden px-4">
+    <section className="relative flex items-center py-24 md:py-16 overflow-hidden px-4">
       {/* Background blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 

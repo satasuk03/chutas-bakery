@@ -4,7 +4,7 @@ import { useRef } from "react";
 import {
   motion,
   useReducedMotion,
-  type Variant,
+  useInView,
 } from "framer-motion";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
@@ -32,6 +32,7 @@ export function FadeIn({
 }) {
   const prefersReduced = useReducedMotion();
   const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   if (prefersReduced) {
     return <div className={className}>{children}</div>;
@@ -39,21 +40,11 @@ export function FadeIn({
 
   const { x, y } = offsets[direction];
 
-  const hidden: Variant = { opacity: 0, x, y };
-  const visible: Variant = {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    transition: { duration, delay, ease: "easeOut" },
-  };
-
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={{ hidden, visible }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x, y }}
+      transition={{ duration, delay, ease: "easeOut" }}
       className={className}
     >
       {children}

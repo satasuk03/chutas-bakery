@@ -15,7 +15,10 @@ export default function Footer() {
           <p className="font-body text-sm text-surface/60 leading-relaxed mb-6">
             ร้านเล็กๆ ที่ทำขนมด้วยความรัก ซาลาเปา ฮวกก้วย ซิ่วท้อ
             <br />
-            สั่งขนมโทร 064-549-2982
+            สั่งขนมโทร{" "}
+            <a href="tel:0645492982" className="underline hover:text-white transition-colors">
+              064-549-2982
+            </a>
           </p>
           <div className="flex gap-4">
             <a

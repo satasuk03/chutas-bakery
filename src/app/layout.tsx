@@ -83,6 +83,10 @@ export const metadata: Metadata = {
     },
   },
 
+  formatDetection: {
+    telephone: false,
+  },
+
   robots: {
     index: true,
     follow: true,
