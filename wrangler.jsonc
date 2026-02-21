@@ -2,6 +2,7 @@
   "name": "chutas-bakery",
   "compatibility_date": "2026-02-20",
   "assets": {
-    "directory": "./out"
+    "directory": "./out",
+    "not_found_handling": "404-page"
   }
 }
