@@ -27,6 +27,9 @@ export default function MenuHeroSection() {
           <p className="font-body text-xl text-text-main/80 leading-relaxed max-w-2xl mx-auto">
             เพราะเราอยากส่งต่อความอร่อยแบบโฮมเมดถึงมือคุณ
           </p>
+          <p className="font-body text-sm text-text-main/80 leading-relaxed max-w-2xl mx-auto">
+            มีบริการจัดส่งคิดตามระยะทาง หรือสามารถมารับเองได้ที่ร้านค่า
+          </p>
         </FadeIn>
       </div>
     </section>

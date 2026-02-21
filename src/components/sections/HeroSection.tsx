@@ -1,10 +1,29 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { ArrowRight, CheckCircle, Heart, Truck, Flower2 } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 
+const heroImages = [
+  { src: "/peach-hero-crop.webp", alt: "ขนมมงคลโฮมเมดจาก Chuta's Bakery" },
+  { src: "/menu/bao-basket.webp", alt: "ซาลาเปาในตะกร้า จาก Chuta's Bakery" },
+  { src: "/menu/peach-bao.webp", alt: "ซิ่วท้อ จาก Chuta's Bakery" },
+  { src: "/menu/fa-gao-small-bao.webp", alt: "ฮวกก้วยเล็ก จาก Chuta's Bakery" },
+  { src: "/menu/fa-gao-bao.webp", alt: "ฮวกก้วยใหญ่ จาก Chuta's Bakery" },
+];
+
 export default function HeroSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 3000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
   return (
     <section className="relative flex items-center py-24 md:py-16 overflow-hidden px-4">
       {/* Background blobs */}
@@ -91,13 +110,18 @@ export default function HeroSection() {
 
               {/* Photo */}
               <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl border-8 border-white rotate-3 hover:rotate-0 transition-transform duration-700 z-10">
-                <Image
-                  src="/peach-hero-crop.webp"
-                  alt="ขนมมงคลโฮมเมดจาก Chuta's Bakery"
-                  fill
-                  priority
-                  className="object-cover"
-                />
+                {heroImages.map((img, i) => (
+                  <Image
+                    key={img.src}
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    priority={i === 0}
+                    className={`object-cover transition-opacity duration-1000 ${
+                      i === currentIndex ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-cream/20 to-transparent mix-blend-overlay" />
               </div>
 

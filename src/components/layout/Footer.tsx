@@ -1,4 +1,5 @@
 import { Croissant } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -16,7 +17,10 @@ export default function Footer() {
             ร้านเล็กๆ ที่ทำขนมด้วยความรัก ซาลาเปา ฮวกก้วย ซิ่วท้อ
             <br />
             สั่งขนมโทร{" "}
-            <a href="tel:0645492982" className="underline hover:text-white transition-colors">
+            <a
+              href="tel:0645492982"
+              className="underline hover:text-white transition-colors"
+            >
               064-549-2982
             </a>
           </p>
@@ -69,9 +73,12 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3 font-body text-sm text-surface/80">
             <li>
-              <a href="/story" className="hover:text-white transition-colors">
+              <Link
+                href="/story"
+                className="hover:text-white transition-colors"
+              >
                 เรื่องราวของเรา
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#" className="hover:text-white transition-colors">
