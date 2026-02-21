@@ -58,7 +58,7 @@ export const metadata: Metadata = {
       "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย",
     images: [
       {
-        url: "/og-image.jpg", // TODO: add a 1200×630 photo of your best product
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Chuta's Bakery — ขนมไหว้เจ้าโฮมเมดทำสดด้วยมือทุกวัน",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     title: "Chuta's Bakery — ฮวกเปา ซาลาเปา ขนมไหว้เจ้าโฮมเมด",
     description:
       "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.webp"],
   },
 
   // Canonical URL (prevents duplicate-content penalty)

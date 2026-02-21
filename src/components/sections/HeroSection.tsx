@@ -42,7 +42,7 @@ export default function HeroSection() {
               <ArrowRight className="size-5" />
             </a>
             <a
-              href="#contact"
+              href="https://m.me/chutasbakery"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-surface bg-white px-8 py-3.5 font-hand font-bold text-lg text-text-main hover:bg-warm-beige hover:-translate-y-0.5 transition-all shadow-sm"
             >
               ติดต่อสอบถาม
@@ -67,7 +67,7 @@ export default function HeroSection() {
         </div>
 
         {/* Image */}
-        <div className="order-1 md:order-2 relative flex justify-center">
+        <div className="order-1 md:order-2 relative flex justify-center px-6 md:px-0">
           <div className="relative w-full max-w-md aspect-4/5 md:aspect-square">
             {/* Pulsing background */}
             <div className="absolute inset-0 bg-terracotta/15 rounded-full scale-90 animate-pulse" />
