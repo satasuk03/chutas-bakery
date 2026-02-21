@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle, Heart, Truck, Flower2 } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center py-16 md:py-24 overflow-hidden px-4">
+    <section className="relative flex items-center pUy-24 md:py-16 overflow-hidden px-4">
       {/* Background blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
       <div className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] bg-sage/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />

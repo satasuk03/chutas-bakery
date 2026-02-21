@@ -1,0 +1,90 @@
+{
+  "categories": [
+    { "id": "all", "label": "ทั้งหมด" },
+    { "id": "huaykuay", "label": "ฮวกเปา/ฮวกก้วย" },
+    { "id": "siutao", "label": "ซิ่วท้อ/ซาลาเปา" },
+    { "id": "special", "label": "เมนูพิเศษ" }
+  ],
+  "items": [
+    {
+      "id": "huakpao",
+      "nameTh": "ฮวกเปา (ฮวกก้วย)",
+      "nameEn": "Huat Kueh",
+      "descriptionTh": "ขนมฮวกก้วยนึ่งสด เนื้อนุ่มฟู สำหรับไหว้เจ้า",
+      "category": "huaykuay",
+      "image": "/menu/fa-gao-bao.webp",
+      "badge": "popular",
+      "rotation": -1,
+      "images": ["/menu/fa-gao-small-bao.webp"],
+      "variants": [
+        { "label": "ใบเล็ก", "price": 20 },
+        { "label": "7 นิ้ว", "price": 130 },
+        { "label": "9 นิ้ว", "price": 250 },
+        { "label": "10 นิ้ว", "price": 350 },
+        { "label": "12-13 นิ้ว", "price": 450 },
+        { "label": "14 นิ้ว", "price": 550 }
+      ]
+    },
+    {
+      "id": "siutao-salapao",
+      "nameTh": "ซิ่วท้อ / ซาลาเปา",
+      "nameEn": "Longevity Peach Bun / Salapao",
+      "descriptionTh": "ซิ่วท้อขนมมงคลรูปลูกท้อ และซาลาเปาไส้หวาน",
+      "category": "siutao",
+      "image": "/menu/peach-bao.webp",
+      "badge": "recommended",
+      "rotation": 1,
+      "price": 25,
+      "unit": "ใบ",
+      "flavors": ["ถั่วทอง", "เผือก", "งา", "มะพร้าว"]
+    },
+    {
+      "id": "saoping",
+      "nameTh": "เซาปิ่ง",
+      "nameEn": "Sao Ping",
+      "descriptionTh": "ขนมเซาปิ่งแป้งกรอบนอกนุ่มใน ไส้หวานมัน",
+      "category": "special",
+      "image": "/menu/sao-bing.webp",
+      "rotation": 2,
+      "price": 25,
+      "unit": "ใบ",
+      "flavors": ["ถั่วทอง", "เผือก", "งา", "มะพร้าว"]
+    },
+    {
+      "id": "salapao-moosap",
+      "nameTh": "ซาลาเปาหมูสับ",
+      "nameEn": "Minced Pork Bun",
+      "descriptionTh": "ซาลาเปาไส้หมูสับ สูตรพิเศษ",
+      "category": "special",
+      "image": "/menu/bbq-and-pork-bun.webp",
+      "badge": "hot",
+      "rotation": -2,
+      "price": 28,
+      "unit": "ใบ"
+    },
+    {
+      "id": "salapao-moodaeng",
+      "nameTh": "ซาลาเปาหมูแดง",
+      "nameEn": "BBQ Pork Bun",
+      "descriptionTh": "ซาลาเปาไส้หมูแดงหวานนุ่ม สูตรพิเศษ",
+      "category": "special",
+      "image": "/menu/bbq-and-pork-bun.webp",
+      "badge": "hot",
+      "rotation": 1,
+      "price": 28,
+      "unit": "ใบ"
+    },
+    {
+      "id": "salapao-cream",
+      "nameTh": "ซาลาเปา/ซิ่วท้อ ไส้ครีม",
+      "nameEn": "Cream Bun",
+      "descriptionTh": "ซาลาเปาไส้ครีมนุ่มละมุน สูตรพิเศษ",
+      "category": "special",
+      "image": "/menu/cream-bun.webp",
+      "badge": "hot",
+      "rotation": -1,
+      "price": 28,
+      "unit": "ใบ"
+    }
+  ]
+}
