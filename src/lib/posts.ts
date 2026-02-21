@@ -5,33 +5,37 @@ import type { Post, PostFrontmatter } from "@/types/post";
 
 const postsDirectory = path.join(process.cwd(), "src/data/posts");
 
-export function getAllPosts(): Post[] {
+function readAllPosts(): Post[] {
   if (!fs.existsSync(postsDirectory)) return [];
 
   const files = fs.readdirSync(postsDirectory).filter((f) => f.endsWith(".mdx"));
 
-  const posts = files.map((filename) => {
-    const slug = filename.replace(/\.mdx$/, "");
+  return files.map((filename) => {
     const filePath = path.join(postsDirectory, filename);
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content } = matter(fileContents);
+    const frontmatter = data as PostFrontmatter;
 
     return {
-      slug,
-      frontmatter: data as PostFrontmatter,
+      slug: frontmatter.slug,
+      frontmatter,
       content,
     };
   });
+}
 
-  return posts.filter((p) => !p.frontmatter.archive).sort((a, b) => {
-    const aPinned = a.frontmatter.pinned ? 1 : 0;
-    const bPinned = b.frontmatter.pinned ? 1 : 0;
-    if (bPinned !== aPinned) return bPinned - aPinned;
-    return (
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime()
-    );
-  });
+export function getAllPosts(): Post[] {
+  return readAllPosts()
+    .filter((p) => !p.frontmatter.archive)
+    .sort((a, b) => {
+      const aPinned = a.frontmatter.pinned ? 1 : 0;
+      const bPinned = b.frontmatter.pinned ? 1 : 0;
+      if (bPinned !== aPinned) return bPinned - aPinned;
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
+    });
 }
 
 export function getAllTags(): string[] {
@@ -46,24 +50,9 @@ export function getAllTags(): string[] {
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
-  const filePath = path.join(postsDirectory, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) return undefined;
-
-  const fileContents = fs.readFileSync(filePath, "utf8");
-  const { data, content } = matter(fileContents);
-
-  return {
-    slug,
-    frontmatter: data as PostFrontmatter,
-    content,
-  };
+  return readAllPosts().find((p) => p.slug === slug);
 }
 
 export function getAllPostSlugs(): string[] {
-  if (!fs.existsSync(postsDirectory)) return [];
-
-  return fs
-    .readdirSync(postsDirectory)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""));
+  return getAllPosts().map((p) => p.slug);
 }

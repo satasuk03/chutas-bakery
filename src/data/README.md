@@ -24,6 +24,7 @@ Example: `2026-02-20_1430_our-bakery-story.mdx`
 | Field        | Type       | Required | Description                                      |
 | ------------ | ---------- | -------- | ------------------------------------------------ |
 | `title`      | `string`   | Yes      | Post title                                       |
+| `slug`       | `string`   | Yes      | URL slug (e.g. `tee-kong-seh-2026` → `/story/tee-kong-seh-2026`) |
 | `date`       | `string`   | Yes      | Publication date (`YYYY-MM-DD`)                  |
 | `coverImage` | `string`   | Yes      | Path to cover image (e.g. `/images/cover.jpg`)   |
 | `excerpt`    | `string`   | Yes      | Short description shown on the card              |
@@ -37,6 +38,7 @@ Example: `2026-02-20_1430_our-bakery-story.mdx`
 ```yaml
 ---
 title: "จากเยาวราช สู่มือของทุกคน"
+slug: "our-bakery-story"
 date: "2026-02-20"
 coverImage: "/images/story-cover.jpg"
 excerpt: "ย้อนกลับไปเมื่อปี 2540..."
