@@ -4,7 +4,6 @@
  * This is what powers Google's Knowledge Panel, star ratings in search
  * results, and "bakery near me" / Google Maps visibility.
  *
- * TODO: fill in your real address, phone, GPS coordinates, and social URLs.
  */
 export default function JsonLd() {
   const schema = {
@@ -57,7 +56,7 @@ export default function JsonLd() {
       "https://www.facebook.com/chutasbakery",
       "https://www.instagram.com/chutasbakery",
     ],
-    image: "https://fromchuta.com/og-image.jpg", // TODO: real image
+    image: "https://fromchuta.com/og-image.webp",
     hasMap: "https://maps.app.goo.gl/j3jvUV4n1swc7HJm6",
   };
 
