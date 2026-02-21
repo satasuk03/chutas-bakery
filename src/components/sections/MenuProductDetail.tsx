@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Phone } from "lucide-react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { Phone } from "lucide-react";
 import {
   Sheet,
   SheetContent,
   SheetTitle,
 } from "@/components/ui/sheet";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import type { MenuItem } from "@/types/menu";
 
 function FacebookIcon({ className }: { className?: string }) {
@@ -29,26 +37,35 @@ export default function MenuProductDetail({
   item: MenuItem | null;
   onClose: () => void;
 }) {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [imageIndex, setImageIndex] = useState(0);
   const lastItemRef = useRef<MenuItem | null>(null);
   if (item) lastItemRef.current = item;
   const displayItem = item ?? lastItemRef.current;
 
-  // Reset image index when item changes
+  // Track the selected slide index
+  const onSelect = useCallback(() => {
+    if (!carouselApi) return;
+    setImageIndex(carouselApi.selectedScrollSnap());
+  }, [carouselApi]);
+
   useEffect(() => {
-    setImageIndex(0);
-  }, [item?.id]);
+    if (!carouselApi) return;
+    onSelect();
+    carouselApi.on("select", onSelect);
+    return () => { carouselApi.off("select", onSelect); };
+  }, [carouselApi, onSelect]);
+
+  // Reset to first slide when item changes
+  useEffect(() => {
+    if (carouselApi) carouselApi.scrollTo(0, true);
+  }, [item?.id, carouselApi]);
 
   if (!displayItem) return null;
 
   // Combine main image with additional images
   const allImages = [displayItem.image, ...(displayItem.images ?? [])];
   const hasMultipleImages = allImages.length > 1;
-
-  const prevImage = () =>
-    setImageIndex((i) => (i === 0 ? allImages.length - 1 : i - 1));
-  const nextImage = () =>
-    setImageIndex((i) => (i === allImages.length - 1 ? 0 : i + 1));
 
   return (
     <Sheet open={!!item} onOpenChange={(open) => !open && onClose()}>
@@ -83,36 +100,37 @@ export default function MenuProductDetail({
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
-          {/* Image gallery */}
-          <div className="relative aspect-square bg-warm-beige group">
-            <img
-              src={allImages[imageIndex]}
-              alt={displayItem.nameTh}
-              className="w-full h-full object-cover"
-            />
+          {/* Image carousel */}
+          <Carousel
+            opts={{ loop: true }}
+            setApi={setCarouselApi}
+            className="relative bg-warm-beige group"
+          >
+            <CarouselContent className="ml-0">
+              {allImages.map((src, i) => (
+                <CarouselItem key={i} className="pl-0">
+                  <div className="aspect-square">
+                    <img
+                      src={src}
+                      alt={`${displayItem.nameTh} ${i + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
 
             {hasMultipleImages && (
               <>
-                {/* Arrows */}
-                <button
-                  onClick={prevImage}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-paper opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <ChevronLeft className="size-5 text-text-main" />
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full bg-white/80 hover:bg-white shadow-paper opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <ChevronRight className="size-5 text-text-main" />
-                </button>
+                <CarouselPrevious className="left-3 size-9 bg-white/80 hover:bg-white border-0 shadow-paper opacity-0 group-hover:opacity-100 transition-opacity" />
+                <CarouselNext className="right-3 size-9 bg-white/80 hover:bg-white border-0 shadow-paper opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 {/* Dots */}
                 <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2">
                   {allImages.map((_, i) => (
                     <button
                       key={i}
-                      onClick={() => setImageIndex(i)}
+                      onClick={() => carouselApi?.scrollTo(i)}
                       className={`w-2.5 h-2.5 rounded-full transition-colors ${
                         i === imageIndex
                           ? "bg-terracotta ring-2 ring-white"
@@ -123,7 +141,7 @@ export default function MenuProductDetail({
                 </div>
               </>
             )}
-          </div>
+          </Carousel>
 
           {/* Product info */}
           <div className="p-5 space-y-4">
