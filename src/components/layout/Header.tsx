@@ -17,12 +17,12 @@ export default function Header() {
     <header className="sticky top-0 z-40 w-full bg-background-light/95 backdrop-blur-sm border-b border-surface px-4 py-3 shadow-sm transition-all duration-300">
       <div className="max-w-[1280px] mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3">
           <Croissant className="text-terracotta size-7" />
           <span className="font-hand text-2xl md:text-3xl text-text-main leading-none mt-1">
             Chuta&apos;s Bakery
           </span>
-        </div>
+        </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -67,12 +67,12 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-background-light w-72">
               <div className="flex flex-col gap-6 mt-10 px-4">
-                <div className="flex items-center gap-2 mb-4">
+                <a href="/" className="flex items-center gap-2 mb-4">
                   <Croissant className="text-terracotta size-6" />
                   <span className="font-hand text-2xl text-text-main">
                     Chuta&apos;s Bakery
                   </span>
-                </div>
+                </a>
                 <nav className="flex flex-col gap-5">
                   {navItems.map((item) => {
                     const isActive =

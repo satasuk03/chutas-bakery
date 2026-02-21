@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import {
   Sheet,
@@ -30,16 +30,19 @@ export default function MenuProductDetail({
   onClose: () => void;
 }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const lastItemRef = useRef<MenuItem | null>(null);
+  if (item) lastItemRef.current = item;
+  const displayItem = item ?? lastItemRef.current;
 
   // Reset image index when item changes
   useEffect(() => {
     setImageIndex(0);
   }, [item?.id]);
 
-  if (!item) return null;
+  if (!displayItem) return null;
 
   // Combine main image with additional images
-  const allImages = [item.image, ...(item.images ?? [])];
+  const allImages = [displayItem.image, ...(displayItem.images ?? [])];
   const hasMultipleImages = allImages.length > 1;
 
   const prevImage = () =>
@@ -57,7 +60,7 @@ export default function MenuProductDetail({
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-surface shrink-0">
           <SheetTitle className="font-hand text-xl text-text-main">
-            {item.nameTh}
+            {displayItem.nameTh}
           </SheetTitle>
           <button
             onClick={onClose}
@@ -84,7 +87,7 @@ export default function MenuProductDetail({
           <div className="relative aspect-square bg-warm-beige group">
             <img
               src={allImages[imageIndex]}
-              alt={item.nameTh}
+              alt={displayItem.nameTh}
               className="w-full h-full object-cover"
             />
 
@@ -126,31 +129,31 @@ export default function MenuProductDetail({
           <div className="p-5 space-y-4">
             <div>
               <h3 className="font-hand text-3xl text-text-main leading-tight">
-                {item.nameTh}
+                {displayItem.nameTh}
               </h3>
               <p className="font-body text-sm text-terracotta mt-0.5">
-                {item.nameEn}
+                {displayItem.nameEn}
               </p>
             </div>
 
             <p className="font-body text-sm text-text-muted italic">
-              &ldquo;{item.descriptionTh}&rdquo;
+              &ldquo;{displayItem.descriptionTh}&rdquo;
             </p>
 
-            {item.longDescription && (
+            {displayItem.longDescription && (
               <p className="font-body text-sm text-text-main leading-relaxed">
-                {item.longDescription}
+                {displayItem.longDescription}
               </p>
             )}
 
             {/* Flavors */}
-            {item.flavors && item.flavors.length > 0 && (
+            {displayItem.flavors && displayItem.flavors.length > 0 && (
               <div>
                 <p className="font-body text-xs text-text-muted mb-2">
                   รสชาติ
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {item.flavors.map((flavor) => (
+                  {displayItem.flavors.map((flavor) => (
                     <span
                       key={flavor}
                       className="font-body text-xs bg-warm-beige text-text-main px-3 py-1 rounded-full border border-surface"
@@ -165,9 +168,9 @@ export default function MenuProductDetail({
             {/* Pricing */}
             <div>
               <p className="font-body text-xs text-text-muted mb-2">ราคา</p>
-              {item.variants ? (
+              {displayItem.variants ? (
                 <div className="border border-surface rounded-sm overflow-hidden">
-                  {item.variants.map((variant, i) => (
+                  {displayItem.variants.map((variant, i) => (
                     <div
                       key={variant.label}
                       className={`flex items-center justify-between px-4 py-2.5 font-body text-sm ${
@@ -183,9 +186,9 @@ export default function MenuProductDetail({
                 </div>
               ) : (
                 <p className="font-hand text-3xl text-text-main">
-                  ฿{item.price}
+                  ฿{displayItem.price}
                   <span className="text-base font-body text-text-muted ml-1">
-                    /{item.unit}
+                    /{displayItem.unit}
                   </span>
                 </p>
               )}

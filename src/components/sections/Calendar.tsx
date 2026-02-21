@@ -4,6 +4,16 @@ import { useRef, useEffect, useState } from "react";
 import { Cookie, Coffee, Wheat, ChevronLeft, ChevronRight } from "lucide-react";
 import calendarData from "@/data/calendar-events.json";
 
+const thaiDays = [
+  "อาทิตย์",
+  "จันทร์",
+  "อังคาร",
+  "พุธ",
+  "พฤหัสบดี",
+  "ศุกร์",
+  "เสาร์",
+];
+
 const thaiMonths = [
   "มกราคม",
   "กุมภาพันธ์",
@@ -104,8 +114,8 @@ export default function CalendarSection() {
                 <a
                   href={event.href}
                   onClick={(e) => {
+                    e.preventDefault();
                     if (!isActive) {
-                      e.preventDefault();
                       goTo(i);
                     }
                   }}
@@ -147,8 +157,11 @@ export default function CalendarSection() {
                       <p className="font-display font-bold text-5xl text-text-main leading-none">
                         {d.getDate()}
                       </p>
-                      <p className="font-body text-xs text-text-muted mt-1 mb-3">
+                      <p className="font-body text-xs text-text-muted mt-1">
                         {thaiMonths[d.getMonth()]}
+                      </p>
+                      <p className="font-body text-xs text-text-muted mb-3">
+                        วัน{thaiDays[d.getDay()]}
                       </p>
                       <div className="w-8 h-px bg-surface mx-auto mb-3" />
                       <Icon className="text-terracotta size-7 mx-auto mb-2" />
