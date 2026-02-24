@@ -24,14 +24,15 @@ export default function HeroSection() {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [nextSlide]);
+
   return (
-    <section className="relative flex items-center py-24 md:py-16 overflow-hidden px-4">
+    <section className="relative flex items-center pt-8 pb-12 md:py-16 overflow-hidden px-4">
       {/* Background blobs */}
       <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
 
-      <div className="mx-auto max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="mx-auto max-w-5xl w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
         {/* Text Content */}
-        <div className="order-2 md:order-1 flex flex-col gap-6 text-center md:text-left">
+        <div className="order-2 md:order-1 flex flex-col gap-5 md:gap-6 text-center md:text-left">
           {/* Badge */}
           <FadeIn delay={0}>
             <div className="inline-flex w-fit mx-auto md:mx-0 items-center gap-2 rounded-full border border-terracotta/25 bg-terracotta/8 px-4 py-1.5 font-hand text-sm text-terracotta">
@@ -63,7 +64,7 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <FadeIn delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-1">
               <a
                 href="/menu"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-terracotta px-8 py-3.5 font-hand font-bold text-lg text-white shadow-lg hover:bg-terracotta/90 hover:shadow-terracotta/30 hover:-translate-y-0.5 transition-all"
@@ -84,7 +85,7 @@ export default function HeroSection() {
 
           {/* Trust badges */}
           <FadeIn delay={0.5}>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-5 pt-4 text-sm font-body text-text-muted">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-sm font-body text-text-muted">
               <div className="flex items-center gap-1.5">
                 <CheckCircle className="size-4 text-terracotta" />
                 <span>วัตถุดิบพรีเมียม</span>
@@ -103,8 +104,9 @@ export default function HeroSection() {
 
         {/* Image */}
         <FadeIn direction="left" delay={0.2} className="order-1 md:order-2">
-          <div className="relative flex justify-center px-6 md:px-0">
-            <div className="relative w-full max-w-md aspect-4/5 md:aspect-square">
+          <div className="flex flex-col items-center px-6 md:px-0 gap-4">
+            {/* Image container */}
+            <div className="relative w-full max-w-sm md:max-w-md aspect-square">
               {/* Pulsing background */}
               <div className="absolute inset-0 bg-terracotta/15 rounded-full scale-90 animate-pulse" />
 
@@ -125,13 +127,13 @@ export default function HeroSection() {
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-cream/20 to-transparent mix-blend-overlay" />
               </div>
 
-              {/* Floating badge */}
-              <div className="absolute -bottom-6 -left-6 md:-bottom-4 md:-left-10 z-20 animate-[float_6s_ease-in-out_infinite]">
-                <div className="bg-terracotta text-white p-5 rounded-full w-24 h-24 flex flex-col items-center justify-center text-center shadow-xl border-4 border-dashed border-white/30">
-                  <span className="font-hand font-bold text-xl leading-none">
+              {/* Floating badge — anchored to bottom-left of image frame */}
+              <div className="absolute -bottom-4 -left-4 md:-bottom-4 md:-left-10 z-20 animate-[float_6s_ease-in-out_infinite]">
+                <div className="bg-terracotta text-white p-4 rounded-full w-20 h-20 md:w-24 md:h-24 flex flex-col items-center justify-center text-center shadow-xl border-4 border-dashed border-white/30">
+                  <span className="font-hand font-bold text-lg md:text-xl leading-none">
                     100%
                   </span>
-                  <span className="font-body text-[10px] mt-0.5 leading-tight">
+                  <span className="font-body text-[9px] md:text-[10px] mt-0.5 leading-tight">
                     Homemade
                   </span>
                 </div>
@@ -139,8 +141,24 @@ export default function HeroSection() {
 
               {/* Decorative flower icon */}
               <div className="absolute -top-4 right-8 z-20">
-                <Flower2 className="size-12 text-terracotta drop-shadow-lg rotate-12 opacity-80" />
+                <Flower2 className="size-10 md:size-12 text-terracotta drop-shadow-lg rotate-12 opacity-80" />
               </div>
+            </div>
+
+            {/* Carousel dots — outside the image container, no overlap */}
+            <div className="flex justify-center gap-1.5 pt-2">
+              {heroImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  aria-label={`ดูภาพที่ ${i + 1}`}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === currentIndex
+                      ? "w-5 h-2 bg-terracotta"
+                      : "w-2 h-2 bg-terracotta/30 hover:bg-terracotta/60"
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </FadeIn>

@@ -4,9 +4,9 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-background-dark text-surface pt-16 pb-8 px-4 border-t border-text-main/10">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12">
         {/* Brand column */}
-        <div className="col-span-1">
+        <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2 mb-4 text-terracotta">
             <Croissant className="size-7" />
             <span className="font-hand text-2xl text-surface">
@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
 
         {/* Operating hours */}
-        <div>
+        <div className="col-span-2 sm:col-span-1">
           <h4 className="font-hand text-xl text-terracotta mb-6">เวลาทำการ</h4>
           <ul className="space-y-3 font-body text-sm text-surface/80">
             <li className="flex justify-between gap-4">

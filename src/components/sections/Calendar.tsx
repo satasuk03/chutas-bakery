@@ -77,7 +77,7 @@ export default function CalendarSection() {
   };
 
   return (
-    <section className="py-20">
+    <section className="py-14 md:py-20">
       <div className="px-4 max-w-[1280px] mx-auto text-center mb-12">
         <h2 className="font-hand text-3xl md:text-4xl text-text-main mb-2">
           🏮 ปฏิทินวันไหว้ 🏮
