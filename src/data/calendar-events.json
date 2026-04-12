@@ -55,6 +55,139 @@
       "icon": "coffee",
       "href": "#",
       "date": "2026-04-17"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-05-01"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-05-17"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-05-31"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-06-15"
+    },
+    {
+      "title": "วันไหว้บ๊ะจ่าง",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-06-19"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-06-29"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-07-14"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-07-28"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-08-13"
+    },
+    {
+      "title": "วันสารทจีน",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-08-27"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-09-11"
+    },
+    {
+      "title": "วันไหว้พระจันทร์",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-09-25"
+    },
+    {
+      "title": "เทศกาลกินเจ",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-10-10"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-10-24"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-11-09"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-11-23"
+    },
+    {
+      "title": "วันชิวอิก",
+      "gradient": "from-[#EBF0EE] via-[#AECFC5] to-[#8DA399]/60",
+      "icon": "coffee",
+      "href": "#",
+      "date": "2026-12-09"
+    },
+    {
+      "title": "วันไหว้ขนมบัวลอย",
+      "gradient": "from-[#F5EFE6] via-[#E8C99A] to-[#D4AF37]/60",
+      "icon": "wheat",
+      "href": "#",
+      "date": "2026-12-22"
+    },
+    {
+      "title": "วันจับโหงว",
+      "gradient": "from-[#F9EDE8] via-[#E8B4A8] to-[#C86B5D]/60",
+      "icon": "cookie",
+      "href": "#",
+      "date": "2026-12-23"
     }
   ]
 }
