@@ -174,7 +174,7 @@ export default function HeroSection() {
               width={1000}
               height={1826}
               sizes="(min-width: 768px) 300px, 190px"
-              className="block h-auto w-full"
+              className="block h-auto w-full scale-x-[-1]"
             />
 
             {/* 香港包子 — the shop's other sign, stamped at her feet */}
