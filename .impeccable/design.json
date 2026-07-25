@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-25T00:00:00.000Z",
+  "title": "Design System: Chuta's Bakery",
+  "extensions": {
+    "northStar": "A Yaowarat shopfront in ชาด–ทองรมควัน (vermillion + smoked brass) — cream-white paper as the dominant ground, enamel plates framed in brass and keylined in red screwed onto it, vermillion seals stamped last, and a deep-lacquer-red sign bar across the top. Revision 2 of the 2026-07-25 rebrand: teal and pine are out of the palette entirely.",
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Press Paper",
+        "canonical": "#faf5ea",
+        "spec": true,
+        "note": "The dominant page ground, ~56%. Section bands, the body, and the inverted CTA plate on lacquer/umber. ink on paper is 15.30:1.",
+        "tonalRamp": ["#fdf9f1", "#faf5ea", "#f2e7d2", "#e6d5b4", "#c9b48a"]
+      },
+      "vermillion": {
+        "role": "primary",
+        "displayName": "Seal Vermillion",
+        "canonical": "#b8281a",
+        "spec": true,
+        "note": "The brand red, ~20%. Actions, prices, seals, the meaning line, and the keyline of the brass double rule. Never a ground for prose and never behind food. paper on vermillion is 5.75:1.",
+        "tonalRamp": ["#fbe6e3", "#ef9a92", "#d4483a", "#b8281a", "#8d1e13", "#6f140d"]
+      },
+      "brass": {
+        "role": "secondary",
+        "displayName": "Smoked Brass",
+        "canonical": "#a8843c",
+        "spec": true,
+        "note": "ORNAMENT ONLY, ~14%. Hairlines, frames, keylines, rules, rails, the lattice, and --border. NEVER CARRIES TEXT on any ground: 3.20 on paper, 2.84 on cream, 3.32 on cream-bright, 2.14 on lacquer, 4.36 on umber. The 3.20/3.32 figures are the trap — a rendered audit applying WCAG's large-text allowance will pass brass display type that is still unreadable for a 50-year-old customer. Use brass-text for words on light grounds.",
+        "tonalRamp": ["#f4ead4", "#d9bd83", "#a8843c", "#7a5f26", "#4d3b16"]
+      },
+      "brass-text": {
+        "role": "secondary",
+        "displayName": "Brass, as a word",
+        "canonical": "#7a5f26",
+        "spec": false,
+        "note": "Derived. Brass when it must be text on a light ground: dates, tags, field labels, small metadata. 5.53 on paper, 4.91 on cream, 5.73 on cream-bright. Does NOT rescue brass on umber (2.53) or lacquer (1.24) — there, text is paper or cream. Also used as a badge ground with a paper label (5.53)."
+      },
+      "lacquer": {
+        "role": "tertiary",
+        "displayName": "Lacquer Red",
+        "canonical": "#a81a10",
+        "spec": true,
+        "note": "The navbar/header ground and NOTHING else. As a section ground it would blow the ~20% red budget and put a vermillion CTA on a red field. paper 6.85, cream 6.08; ink 2.23, vermillion 1.19 and brass 2.14 all fail.",
+        "tonalRamp": ["#a81a10", "#6f140d"]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Warm Cream",
+        "canonical": "#f2e7d2",
+        "spec": true,
+        "note": "Secondary surface, ~10%. Plates, cards, and every surface a food photo sits on. One step down from paper so a plate reads as an object on it.",
+        "tonalRamp": ["#fdf9f1", "#f2e7d2", "#e2cfa8", "#c9b083"]
+      },
+      "umber": {
+        "role": "neutral",
+        "displayName": "Ink Umber",
+        "canonical": "#2e2419",
+        "spec": false,
+        "note": "Derived. The dark band ground — footer and values board — and the hard offset in every shadow. Text on it is paper (13.97) or cream (12.39) only.",
+        "tonalRamp": ["#4b3b2a", "#2e2419", "#241d16"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Warm Ink",
+        "canonical": "#241d16",
+        "spec": false,
+        "note": "Derived. Body and heading text on every light ground: 15.30 on paper, 13.58 on cream, 15.84 on cream-bright. Also the leading tone of the focus ring on light grounds."
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and page titles. Prompt 700. The home H1 runs in ink on paper with no plate behind it — 15.30:1 is what makes that legal." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings. Prompt 600, usually vermillion on a cream sign plate (5.11)." },
+      "title": { "displayName": "Title", "purpose": "Card and product names. Prompt 700, ink." },
+      "body": { "displayName": "Body", "purpose": "Prose only. Sarabun 400 at 17px minimum — the primary customer is 43–58." },
+      "label": { "displayName": "Label", "purpose": "Buttons, nav, metadata. Prompt 600/700. brass-text is the smallest legal brass-flavoured label on a light ground." },
+      "seal": { "displayName": "Seal", "purpose": "Chinese characters on seals and sign plates only. Self-hosted 15-glyph Noto Sans SC subset, 3.7 KB." }
+    },
+    "shadows": [
+      { "name": "plate", "value": "3px 3px 0 0 #2e2419, 0 6px 18px rgba(46,36,25,0.18)", "purpose": "An enamel plate screwed to the paper wall. Hard offset is the plate's thickness; soft blur is the room. The offset is umber — the darkest ink on the sheet." },
+      { "name": "plate-lifted", "value": "5px 5px 0 0 #2e2419, 0 12px 28px rgba(46,36,25,0.24)", "purpose": "Hover state of a plate." },
+      { "name": "sign", "value": "2px 2px 0 0 #2e2419, 0 4px 14px rgba(46,36,25,0.20)", "purpose": "Smaller plates, buttons, menu cards." },
+      { "name": "seal", "value": "inset 0 2px 5px rgba(46,36,25,0.28)", "purpose": "A stamped seal sits INTO the paper, not above it." }
+    ],
+    "motion": [
+      { "name": "press", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "duration": "520ms", "purpose": "A plate arriving on the page." },
+      { "name": "stamp", "value": "cubic-bezier(0.12, 0.8, 0.15, 1)", "duration": "180ms", "purpose": "Seal presses down: scale 1.12 to 1, once, on first reveal. A stamp stops dead — an overshoot curve reads as rubber." },
+      { "name": "sway", "value": "ease-in-out", "duration": "7s", "purpose": "A hanging sign moves because it is on hooks." }
+    ],
+    "breakpoints": { "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px" },
+    "textures": [
+      {
+        "name": "press-paper / press-cream",
+        "purpose": "The two reading surfaces. Paper tooth ONLY, no dot grid — a halftone screen under 17px Thai body copy is noise. Applied as background-image on the element itself, never a pseudo-element, because a ::after overlay opens a stacking context that fights absolutely-positioned children (the mascot, the seals).",
+        "opacity": "tooth 16-18%"
+      },
+      {
+        "name": "press-lacquer / press-umber",
+        "purpose": "The two saturated fields. Dot grid kept — it is what stops them looking like flat CSS next to the printed mascot cutout. Umber's dots are a light brass dust laid on rather than a dark dot multiplied in, because a multiplied dark dot vanishes on a ground that dark.",
+        "opacity": "dots ~16-30% at 3px pitch; tooth ~30%"
+      }
+    ],
+    "rules": [
+      "BRASS NEVER CARRIES TEXT, on any ground. It is hairlines, frames, keylines, rules, rails and --border. 3.20 on paper and 3.32 on cream-bright are the trap: a rendered contrast audit applying the WCAG large-text allowance passes brass display type that is still unreadable for the 43-58 audience. Words that must look brass use brass-text (5.53 on paper). The gate is a grep for `text-brass` without `-text`, not the audit.",
+      "On lacquer and umber, text is paper or cream ONLY — never ink, never vermillion, never brass, never brass-text.",
+      "On paper, cream and cream-bright, text is ink, vermillion, vermillion-deep or brass-text.",
+      "lacquer #a81a10 is the header ground and nothing else. As a section ground it blows the red budget and collides with the vermillion CTA.",
+      "Food always sits on cream with a cream-bright inner field. Red and dark grounds never touch a food photo.",
+      "A CTA on lacquer or umber inverts: paper plate, vermillion text, brass border. A vermillion button on a red bar is red-on-red.",
+      "The first viewport must name the products. The home H1 is ซาลาเปา / ฮวกก้วย · ซิ่วท้อ and three real product photographs sit above the fold at both breakpoints.",
+      "The header height is measured off the rendered output, not derived: 60px at phone width, 68px from md up. MenuSection's sticky filter bar offsets against those numbers.",
+      "No text uses opacity to become secondary. Hierarchy is size and weight.",
+      "Corners are 2-4px. The radius scale itself is redefined so a stray rounded-2xl cannot betray the world.",
+      "Icons are the brand's own marks — seals, sign plates, lattice. Functional glyphs (chevron, close, menu, phone, arrow) may stay.",
+      "Chinese characters are decorative in a Thai page: aria-hidden, with a Thai label in adjacent text.",
+      "The Latin wordmark is an image. Its typeface is unidentified, and lockup.webp has a teal ground baked in — it must never sit on a paper ground."
+    ],
+    "dos": [
+      "Apply the brass double rule (2px brass frame + 1px vermillion keyline inset 4px) to plates, sign plates and photo mats — via `.frame-brass`, or the `Frame` component on anything focusable.",
+      "Put every food photo on a cream mat with a cream-bright field and a vermillion keyline.",
+      "Grain every ground with press-*, and keep the dot grid off the reading surfaces.",
+      "Alternate grounds as full-bleed bands: paper, umber, paper, cream, paper, umber.",
+      "Use the registration offset on display type — it is the world's native device, not a drop shadow.",
+      "Give the 楚塔 seal a solid paper keyline whenever it sits on lacquer."
+    ],
+    "donts": [
+      "Never set a word in brass. Never put brass-text on umber or lacquer.",
+      "No lacquer as a section ground, and no vermillion button on the lacquer bar.",
+      "No rounded-2xl, pill-shaped rectangles, or blurred colour blobs.",
+      "No lucide Croissant, Wheat, Leaf, Sparkles, Flower2, Cookie, Coffee — the previous brand's voice.",
+      "No glass, backdrop-filter, or gradient mesh — and no gradients at all; the ink-foot band gradient left with teal.",
+      "No `.frame-brass` on a focusable element — :focus-visible owns the outline and replaces the keyline.",
+      "Don't swap the value tagline and the poster's product list, and don't put either in a ความหมายมงคล slot.",
+      "Don't lead the first viewport with the mascot and the shop's name — that is the owner review this revision answers."
+    ],
+    "openQuestions": [
+      "The Latin wordmark's typeface is unidentified and unlicensed, and lockup.webp still carries revision 1's baked-in teal ground — a re-export on a paper ground is wanted.",
+      "Simplified (铺) vs traditional (舖) for a Yaowarat/Teochew audience.",
+      "brands/BRAND.md §13 still describes the original cream-led identity; this colour direction was confirmed for the website only. Revision 2 lands closer to §13's cream-and-red than revision 1 did, so the two may now be reconcilable — worth asking the owner.",
+      "menu-items.json records an auspicious meaning for ฮวกก้วย and ซิ่วท้อ only, so the มงคล section can honestly carry three cards and no more until the owner supplies meanings for ซาลาเปา, เซาปิ่ง and the savoury bao.",
+      "siutao and salapao-sweet share peach-bao.webp in the data; a distinct ซาลาเปาไส้หวาน photograph would let the มงคล section read its images straight from the data."
+    ]
+  }
+}

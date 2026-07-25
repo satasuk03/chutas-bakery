@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Phone } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { Phone, X } from "lucide-react";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import {
   Carousel,
   CarouselContent,
@@ -16,15 +13,18 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import type { MenuItem } from "@/types/menu";
+import { Seal, productSeal } from "@/components/brand/Seal";
 
+/**
+ * Product detail. A sheet, not a modal — the reader is comparing against the
+ * grid behind it, so it slides in beside the list rather than replacing it.
+ *
+ * The price table is the point of this panel: variant rows banded in cream so
+ * a 43–58 year-old reader can scan sizes and prices without hunting.
+ */
 function FacebookIcon({ className }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z" />
     </svg>
   );
@@ -39,11 +39,18 @@ export default function MenuProductDetail({
 }) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [imageIndex, setImageIndex] = useState(0);
-  const lastItemRef = useRef<MenuItem | null>(null);
-  if (item) lastItemRef.current = item;
-  const displayItem = item ?? lastItemRef.current;
 
-  // Track the selected slide index
+  /**
+   * The sheet animates out, so its content has to survive `item` going null
+   * for the length of the exit transition. The previous build did this by
+   * writing to a ref during render, which is what `react-hooks/refs` flags 28
+   * times on this file. Holding the last item in state does the same job
+   * without reading a ref mid-render.
+   */
+  const [lastItem, setLastItem] = useState<MenuItem | null>(null);
+  if (item && item !== lastItem) setLastItem(item); // derive-from-props, no effect
+  const displayItem = item ?? lastItem;
+
   const onSelect = useCallback(() => {
     if (!carouselApi) return;
     setImageIndex(carouselApi.selectedScrollSnap());
@@ -53,128 +60,136 @@ export default function MenuProductDetail({
     if (!carouselApi) return;
     onSelect();
     carouselApi.on("select", onSelect);
-    return () => { carouselApi.off("select", onSelect); };
+    return () => {
+      carouselApi.off("select", onSelect);
+    };
   }, [carouselApi, onSelect]);
 
-  // Reset to first slide when item changes
   useEffect(() => {
     if (carouselApi) carouselApi.scrollTo(0, true);
   }, [item?.id, carouselApi]);
 
   if (!displayItem) return null;
 
-  // Combine main image with additional images
   const allImages = [displayItem.image, ...(displayItem.images ?? [])];
   const hasMultipleImages = allImages.length > 1;
+  const seal = productSeal(displayItem.id, displayItem.category);
 
   return (
     <Sheet open={!!item} onOpenChange={(open) => !open && onClose()}>
       <SheetContent
         side="right"
         showCloseButton={false}
-        className="w-full sm:w-[50vw] sm:max-w-[600px] p-0 gap-0 flex flex-col"
+        className="press-cream flex w-full flex-col gap-0 border-l-2 border-brass p-0 sm:w-[52vw] sm:max-w-[620px]"
       >
-        {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-surface shrink-0">
-          <SheetTitle className="font-hand text-xl text-text-main">
+        <div className="press-umber flex shrink-0 items-center justify-between gap-3 border-b-2 border-brass px-5 py-3.5">
+          <SheetTitle className="font-display text-[19px] font-bold text-paper">
             {displayItem.nameTh}
           </SheetTitle>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-warm-beige transition-colors"
+            aria-label="ปิด"
+            className="inline-flex size-11 shrink-0 items-center justify-center border-2 border-brass text-paper transition-colors hover:bg-vermillion"
           >
-            <svg
-              className="size-5 text-text-muted"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
+            <X className="size-5" aria-hidden />
           </button>
         </div>
 
-        {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
-          {/* Image carousel */}
-          <Carousel
-            opts={{ loop: true }}
-            setApi={setCarouselApi}
-            className="relative bg-warm-beige group"
-          >
-            <CarouselContent className="ml-0">
-              {allImages.map((src, i) => (
-                <CarouselItem key={i} className="pl-0">
-                  <div className="aspect-square">
-                    <img
-                      src={src}
-                      alt={`${displayItem.nameTh} ${i + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-
-            {hasMultipleImages && (
-              <>
-                <CarouselPrevious className="left-3 size-9 bg-white/80 hover:bg-white border-0 shadow-paper opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CarouselNext className="right-3 size-9 bg-white/80 hover:bg-white border-0 shadow-paper opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                {/* Dots */}
-                <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2">
-                  {allImages.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => carouselApi?.scrollTo(i)}
-                      className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                        i === imageIndex
-                          ? "bg-terracotta ring-2 ring-white"
-                          : "bg-white/60 hover:bg-white/90"
-                      }`}
-                    />
+          {/* Photo on a cream mat — food never touches a saturated ground. */}
+          <div className="px-4 pt-4">
+            <div className="relative">
+              <Carousel
+                opts={{ loop: true }}
+                setApi={setCarouselApi}
+                className="group relative border-2 border-brass bg-cream-bright p-2 shadow-plate"
+              >
+                <CarouselContent className="ml-0">
+                  {allImages.map((src, i) => (
+                    <CarouselItem key={i} className="pl-0">
+                      <div className="relative aspect-square overflow-hidden border-[1.5px] border-vermillion">
+                        <Image
+                          src={src}
+                          alt={`${displayItem.nameTh} ${i + 1}`}
+                          fill
+                          sizes="(min-width: 640px) 580px, 92vw"
+                          className="object-cover"
+                        />
+                      </div>
+                    </CarouselItem>
                   ))}
-                </div>
-              </>
-            )}
-          </Carousel>
+                </CarouselContent>
 
-          {/* Product info */}
-          <div className="p-5 space-y-4">
+                {hasMultipleImages && (
+                  <>
+                    <CarouselPrevious className="press-paper left-4 size-11 border-2 border-brass shadow-sign" />
+                    <CarouselNext className="press-paper right-4 size-11 border-2 border-brass shadow-sign" />
+                    <div className="absolute inset-x-0 bottom-5 flex justify-center gap-1.5">
+                      {allImages.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => carouselApi?.scrollTo(i)}
+                          aria-label={`ดูภาพที่ ${i + 1}`}
+                          className={
+                            i === imageIndex
+                              ? "h-2.5 w-6 border border-paper bg-vermillion"
+                              : "size-2.5 border border-brass bg-paper"
+                          }
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </Carousel>
+              <Seal
+                glyph={seal.glyph}
+                label={seal.label}
+                className={
+                  seal.glyph.length > 1
+                    ? "absolute -top-3 -right-3 z-10 size-14 text-[17px]"
+                    : "absolute -top-3 -right-3 z-10 size-14 text-[26px]"
+                }
+              />
+            </div>
+          </div>
+
+          <div className="space-y-5 px-5 py-6">
             <div>
-              <h3 className="font-hand text-3xl text-text-main leading-tight">
+              <h3 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink">
                 {displayItem.nameTh}
               </h3>
-              <p className="font-body text-sm text-terracotta mt-0.5">
+              <p className="mt-0.5 font-display text-[15px] font-semibold text-vermillion">
                 {displayItem.nameEn}
               </p>
             </div>
 
-            <p className="font-body text-sm text-text-muted italic">
-              &ldquo;{displayItem.descriptionTh}&rdquo;
+            <p className="border-l-2 border-vermillion pl-4 font-display text-[19px] leading-snug font-semibold text-ink">
+              {displayItem.descriptionTh}
             </p>
 
             {displayItem.longDescription && (
-              <p className="font-body text-sm text-text-main leading-relaxed">
-                {displayItem.longDescription}
-              </p>
+              <div className="max-w-[62ch] space-y-3">
+                {displayItem.longDescription
+                  .split("\n")
+                  .filter(Boolean)
+                  .map((para, i) => (
+                    <p key={i} className="font-body text-ink">
+                      {para}
+                    </p>
+                  ))}
+              </div>
             )}
 
-            {/* Flavors */}
             {displayItem.flavors && displayItem.flavors.length > 0 && (
               <div>
-                <p className="font-body text-xs text-text-muted mb-2">
+                <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
                   รสชาติ
-                </p>
+                </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {displayItem.flavors.map((flavor) => (
                     <span
                       key={flavor}
-                      className="font-body text-xs bg-warm-beige text-text-main px-3 py-1 rounded-full border border-surface"
+                      className="border-2 border-brass px-3 py-1 font-display text-[15px] font-semibold text-brass-text"
                     >
                       {flavor}
                     </span>
@@ -183,29 +198,30 @@ export default function MenuProductDetail({
               </div>
             )}
 
-            {/* Pricing */}
             <div>
-              <p className="font-body text-xs text-text-muted mb-2">ราคา</p>
+              <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
+                ราคา
+              </h4>
               {displayItem.variants ? (
-                <div className="border border-surface rounded-sm overflow-hidden">
+                <div className="border-2 border-brass shadow-sign">
                   {displayItem.variants.map((variant, i) => (
                     <div
                       key={variant.label}
-                      className={`flex items-center justify-between px-4 py-2.5 font-body text-sm ${
-                        i % 2 === 0 ? "bg-warm-beige/50" : "bg-white"
-                      }`}
+                      className={`flex items-center justify-between gap-4 px-4 py-3 ${
+                        i > 0 ? "border-t border-brass" : ""
+                      } ${i % 2 === 1 ? "bg-cream-bright" : ""}`}
                     >
-                      <span className="text-text-main">{variant.label}</span>
-                      <span className="font-bold text-text-main">
+                      <span className="font-body text-ink">{variant.label}</span>
+                      <span className="font-display text-[19px] font-bold text-vermillion">
                         ฿{variant.price}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="font-hand text-3xl text-text-main">
+                <p className="font-display text-[26px] leading-none font-bold text-vermillion">
                   ฿{displayItem.price}
-                  <span className="text-base font-body text-text-muted ml-1">
+                  <span className="ml-1 text-[17px] font-semibold text-ink">
                     /{displayItem.unit}
                   </span>
                 </p>
@@ -214,26 +230,28 @@ export default function MenuProductDetail({
           </div>
         </div>
 
-        {/* Sticky footer */}
-        <div className="shrink-0 border-t border-surface bg-white px-5 py-4">
-          <div className="flex items-center justify-between">
-            <span className="font-hand text-xl text-text-main">สั่งสินค้า</span>
-            <div className="flex items-center gap-3">
+        <div className="press-umber shrink-0 border-t-2 border-brass px-5 py-4">
+          <div className="flex items-center justify-between gap-4">
+            <span className="font-display text-[17px] font-bold text-paper">
+              สั่งขนมชิ้นนี้
+            </span>
+            <div className="flex items-center gap-2.5">
               <a
                 href="https://m.me/chutasbakery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-terracotta text-white hover:bg-burgundy shadow-paper flex items-center justify-center transition-colors"
+                className="inline-flex size-12 items-center justify-center border-2 border-brass bg-vermillion text-paper shadow-sign transition-colors hover:bg-vermillion-deep"
                 aria-label="สั่งผ่าน Facebook Messenger"
               >
                 <FacebookIcon className="size-6" />
               </a>
               <a
                 href="tel:+66645492982"
-                className="w-12 h-12 rounded-full bg-terracotta text-white hover:bg-burgundy shadow-paper flex items-center justify-center transition-colors"
+                className="inline-flex min-h-12 items-center gap-2 border-2 border-brass bg-vermillion px-4 text-paper shadow-sign transition-colors hover:bg-vermillion-deep"
                 aria-label="โทรสั่งสินค้า"
               >
-                <Phone className="size-5" />
+                <Phone className="size-5" aria-hidden />
+                <span className="font-display text-[15px] font-bold">โทรสั่ง</span>
               </a>
             </div>
           </div>

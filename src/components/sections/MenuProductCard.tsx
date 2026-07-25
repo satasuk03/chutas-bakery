@@ -1,44 +1,33 @@
-import { ArrowRight, Flame, Sparkles, Star, ThumbsUp } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import type { MenuItem } from "@/types/menu";
+import { Seal, productSeal } from "@/components/brand/Seal";
 
+/**
+ * A product is a print pasted on a cream board.
+ *
+ * Two devices from the previous brand are gone deliberately: the washi-tape
+ * strip at the top (a scrapbook gesture — this world is a print shop, where
+ * things are squared up, not taped on) and the random ±1° rotation. What
+ * replaces them is the product's own Chinese seal, stamped over the corner of
+ * the photo — 发糕 for ฮวกก้วย, 寿桃 for ซิ่วท้อ, 包子 for ซาลาเปา.
+ *
+ * The cream mat is the binding rule, not a style choice: food never sits on a
+ * saturated ground, and red and dark grounds never touch a bao
+ * (PRODUCT.md → Brand Commitments).
+ *
+ * Badge grounds, all with paper labels and all measured: vermillion 5.75,
+ * vermillion-deep 8.30, umber 13.97, brass-text 5.53. `brass-text` appears as
+ * a *ground* here rather than as a word — the smoked-brass badge is the one
+ * place this palette gets to show brass at label size without brass ever
+ * carrying the label itself.
+ */
 const badgeConfig = {
-  popular: {
-    label: "ยอดนิยม",
-    className: "bg-terracotta text-white",
-    icon: Star,
-  },
-  new: {
-    label: "ใหม่!",
-    className: "bg-sage text-white",
-    icon: Sparkles,
-  },
-  hot: {
-    label: "HOT!",
-    className: "bg-burgundy text-white",
-    icon: Flame,
-  },
-  recommended: {
-    label: "แม่แนะนำ",
-    className: "bg-gold text-white",
-    icon: ThumbsUp,
-  },
+  popular: { label: "ยอดนิยม", className: "bg-vermillion text-paper" },
+  new: { label: "ใหม่!", className: "bg-umber text-paper" },
+  hot: { label: "ขายดี!", className: "bg-vermillion-deep text-paper" },
+  recommended: { label: "แม่แนะนำ", className: "bg-brass-text text-paper" },
 };
-
-const tapeColors = [
-  "bg-terracotta/20",
-  "bg-sage/30",
-  "bg-gold/25",
-  "bg-terracotta/15",
-  "bg-sage/20",
-];
-
-function getTapeColor(id: string) {
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = id.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return tapeColors[Math.abs(hash) % tapeColors.length];
-}
 
 export default function MenuProductCard({
   item,
@@ -48,65 +37,59 @@ export default function MenuProductCard({
   onDetailClick: (item: MenuItem) => void;
 }) {
   const badge = item.badge ? badgeConfig[item.badge] : null;
-  const BadgeIcon = badge?.icon;
-  const tapeColor = getTapeColor(item.id);
+  const seal = productSeal(item.id, item.category);
 
-  const rotateClass =
-    item.rotation === 1
-      ? "rotate-1"
-      : item.rotation === -1
-        ? "-rotate-1"
-        : item.rotation === 2
-          ? "rotate-2"
-          : item.rotation === -2
-            ? "-rotate-2"
-            : "";
+  const prices = item.variants?.map((v) => v.price);
+  const lo = prices ? Math.min(...prices) : undefined;
+  const hi = prices ? Math.max(...prices) : undefined;
 
   return (
-    <article
-      className={`group relative bg-white p-3 pb-6 border border-surface shadow-paper transform ${rotateClass} hover:rotate-0 hover:scale-105 hover:shadow-paper-hover transition-all duration-300 rounded-sm`}
-    >
-      {/* Tape decoration */}
-      <div
-        className={`absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 ${tapeColor} rotate-2 z-20 mask-torn-paper`}
-      />
+    <article className="press-cream group flex h-full flex-col border-2 border-brass p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
+      <div className="relative">
+        <div className="relative aspect-square w-full overflow-hidden border-[1.5px] border-vermillion bg-cream-bright">
+          <Image
+            src={item.image}
+            alt={item.nameTh}
+            fill
+            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          />
+          {badge && (
+            <span
+              className={`absolute top-0 left-0 px-2.5 py-1 font-display text-[13px] font-bold ${badge.className}`}
+            >
+              {badge.label}
+            </span>
+          )}
+        </div>
 
-      {/* Image */}
-      <div className="relative aspect-square overflow-hidden mb-3 border border-surface rounded-sm bg-warm-beige">
-        <img
-          alt={item.nameTh}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          src={item.image}
+        {/* the product's own mark, stamped over the corner of the print */}
+        <Seal
+          glyph={seal.glyph}
+          label={seal.label}
+          className={
+            seal.glyph.length > 1
+              ? "absolute -top-3 -right-3 size-12 text-[15px]"
+              : "absolute -top-3 -right-3 size-12 text-[21px]"
+          }
         />
-
-        {/* Badge */}
-        {badge && BadgeIcon && (
-          <div
-            className={`absolute top-2 left-2 ${badge.className} text-xs font-bold px-2 py-1 rounded-full shadow-sm z-10 flex items-center gap-1`}
-          >
-            <BadgeIcon className="size-3" />
-            <span className="font-body">{badge.label}</span>
-          </div>
-        )}
       </div>
 
-      {/* Content */}
-      <div className="text-center px-1">
-        <h3 className="font-hand text-2xl text-text-main leading-tight mb-0.5">
+      <div className="flex flex-1 flex-col pt-3.5">
+        <h3 className="font-display text-[21px] leading-tight font-bold text-ink">
           {item.nameTh}
         </h3>
-        <p className="font-body text-sm text-terracotta mb-2">{item.nameEn}</p>
-        <p className="font-body text-sm text-text-muted italic mb-3">
-          &ldquo;{item.descriptionTh}&rdquo;
+        <p className="mt-0.5 font-display text-[15px] font-semibold text-vermillion">
+          {item.nameEn}
         </p>
+        <p className="mt-2 font-body text-ink">{item.descriptionTh}</p>
 
-        {/* Flavors */}
         {item.flavors && (
-          <div className="flex flex-wrap justify-center gap-1.5 mb-3">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {item.flavors.map((flavor) => (
               <span
                 key={flavor}
-                className="font-body text-xs bg-warm-beige text-text-main px-2 py-0.5 rounded-full border border-surface"
+                className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
               >
                 {flavor}
               </span>
@@ -114,21 +97,18 @@ export default function MenuProductCard({
           </div>
         )}
 
-        {/* Pricing */}
-        <div className="flex items-center justify-between border-t border-dashed border-surface pt-3">
-          <span className="font-hand text-2xl font-bold text-text-main">
-            {item.variants ? (
+        <div className="mt-auto flex items-end justify-between gap-3 border-t-2 border-brass pt-3.5">
+          <span className="font-display text-[26px] leading-none font-bold text-vermillion">
+            {prices ? (
               <>
-                ฿{Math.min(...item.variants.map((v) => v.price))}
-                <span className="text-base font-normal text-text-muted">
-                  -
-                </span>
-                {Math.max(...item.variants.map((v) => v.price))}
+                ฿{lo}
+                <span className="font-normal text-ink">–</span>
+                {hi}
               </>
             ) : (
               <>
                 ฿{item.price}
-                <span className="text-base font-normal text-text-muted">
+                <span className="text-[17px] font-semibold text-ink">
                   /{item.unit}
                 </span>
               </>
@@ -136,10 +116,10 @@ export default function MenuProductCard({
           </span>
           <button
             onClick={() => onDetailClick(item)}
-            className="flex items-center gap-1 bg-white border-2 border-surface text-text-main px-3 py-1 text-sm font-bold font-body rounded-full shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all"
+            className="press-paper inline-flex min-h-11 shrink-0 items-center gap-1.5 border-2 border-brass px-3 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
-            <span>ดูรายละเอียด</span>
-            <ArrowRight className="size-3.5" />
+            ดูรายละเอียด
+            <ArrowRight className="size-4" aria-hidden />
           </button>
         </div>
       </div>

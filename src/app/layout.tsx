@@ -1,24 +1,32 @@
 import type { Metadata } from "next";
-import { Mali, Prompt, Sarabun } from "next/font/google";
+import { Prompt, Sarabun } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/layout/JsonLd";
 
-const mali = Mali({
-  variable: "--font-mali",
-  subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
+/**
+ * Two Thai families, each with one job (DESIGN.md → Typography).
+ *
+ * Prompt is owner-specified for Thai headlines and carries all display, title,
+ * label, and navigation type. Sarabun is inherited from the previous build and
+ * kept for body copy: a workhorse that stays legible at 17px for the primary
+ * customer, aged 43–58.
+ *
+ * Mali — the previous brand's script face — is gone. Chinese seal glyphs are
+ * self-hosted as a 15-glyph subset; see globals.css.
+ *
+ * The Latin wordmark is deliberately absent from this stack: its typeface is
+ * unidentified, so it ships as the delivered image instead (see Wordmark.tsx).
+ */
 const prompt = Prompt({
   variable: "--font-prompt",
   subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
   subsets: ["thai", "latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const SITE_URL = "https://fromchuta.com";
@@ -107,7 +115,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`${mali.variable} ${prompt.variable} ${sarabun.variable} font-body antialiased bg-background-light text-text-main overflow-x-hidden`}
+        className={`${prompt.variable} ${sarabun.variable} press-paper font-body text-ink antialiased overflow-x-hidden`}
       >
         <JsonLd />
         {children}

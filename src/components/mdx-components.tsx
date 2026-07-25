@@ -1,74 +1,79 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 
+/**
+ * Article typography. This is the site's only Read surface, so comprehension
+ * outranks expression: ink on cream at 13.58:1, a 68ch measure, and more
+ * space above a heading than below it. Prompt sets headings, Sarabun prose.
+ *
+ * The `hr` is the one place ornament is allowed — a vermillion rule with the
+ * brand's cross mark, standing in for the printer's fleuron.
+ */
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
     <h1
-      className="font-hand text-3xl md:text-4xl text-text-main mb-6 mt-10 first:mt-0"
+      className="mt-12 mb-5 font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink first:mt-0"
       {...props}
     />
   ),
   h2: (props) => (
     <h2
-      className="font-hand text-2xl md:text-3xl text-text-main mb-4 mt-8"
+      className="mt-11 mb-4 font-display text-[clamp(1.4rem,3.2vw,1.85rem)] leading-tight font-bold text-ink first:mt-0"
       {...props}
     />
   ),
   h3: (props) => (
     <h3
-      className="font-hand text-xl md:text-2xl text-text-main mb-3 mt-6"
+      className="mt-9 mb-3 font-display text-[21px] leading-snug font-bold text-brass-text"
       {...props}
     />
   ),
   p: (props) => (
-    <p
-      className="font-body text-base text-text-main/90 leading-relaxed mb-4"
-      {...props}
-    />
+    <p className="mb-5 max-w-[68ch] font-body text-ink" {...props} />
   ),
   a: (props) => (
     <a
-      className="text-terracotta underline decoration-terracotta/30 underline-offset-2 hover:decoration-terracotta transition-colors"
+      className="font-semibold text-vermillion underline decoration-2 decoration-vermillion/60 underline-offset-2 transition-colors hover:decoration-vermillion"
       {...props}
     />
   ),
   blockquote: (props) => (
     <blockquote
-      className="border-l-4 border-terracotta/40 pl-5 my-6 italic text-text-muted font-body"
+      className="my-7 border-l-[3px] border-vermillion pl-5 font-display text-[19px] leading-relaxed font-semibold text-ink"
       {...props}
     />
   ),
   hr: () => (
-    <div className="flex items-center justify-center gap-3 my-10">
-      <div className="w-12 h-px bg-terracotta/30" />
-      <div className="w-2 h-2 rounded-full bg-terracotta/40" />
-      <div className="w-12 h-px bg-terracotta/30" />
+    <div className="my-11 flex items-center justify-center gap-3" role="presentation">
+      <span aria-hidden className="h-[2px] w-14 bg-vermillion" />
+      <span aria-hidden className="font-display text-[15px] font-bold text-vermillion">
+        ✚
+      </span>
+      <span aria-hidden className="h-[2px] w-14 bg-vermillion" />
     </div>
   ),
   ul: (props) => (
     <ul
-      className="font-body text-text-main/90 list-disc pl-6 mb-4 space-y-1"
+      className="mb-5 max-w-[68ch] list-disc space-y-1.5 pl-6 font-body text-ink marker:text-vermillion"
       {...props}
     />
   ),
   ol: (props) => (
     <ol
-      className="font-body text-text-main/90 list-decimal pl-6 mb-4 space-y-1"
+      className="mb-5 max-w-[68ch] list-decimal space-y-1.5 pl-6 font-body text-ink marker:font-bold marker:text-vermillion"
       {...props}
     />
   ),
-  strong: (props) => (
-    <strong className="font-bold text-text-main" {...props} />
-  ),
-  em: (props) => <em className="text-terracotta/80" {...props} />,
+  strong: (props) => <strong className="font-bold text-ink" {...props} />,
+  em: (props) => <em className="font-semibold text-brass-text not-italic" {...props} />,
   img: (props) => (
-    <span className="block my-6">
+    <span className="press-cream my-7 block border-2 border-brass p-2 shadow-plate">
       <Image
         src={props.src || ""}
         alt={props.alt || ""}
         width={800}
         height={450}
-        className="w-full rounded-sm border border-surface shadow-paper"
+        className="w-full border-[1.5px] border-vermillion"
       />
     </span>
   ),

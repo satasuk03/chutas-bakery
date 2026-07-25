@@ -20,52 +20,72 @@ export default function StoryContent({
       ? posts
       : posts.filter((p) => p.frontmatter.tags?.includes(activeTag));
 
+  const tags = [
+    { id: "all", label: "ทั้งหมด" },
+    ...allTags.map((t) => ({ id: t, label: t })),
+  ];
+
   return (
-    <section className="py-16 px-4 bg-background-light">
-      <div className="max-w-[1280px] mx-auto">
-        {/* Tag filter bar */}
+    <section className="press-paper px-4 py-[clamp(48px,7vw,80px)] md:px-6">
+      <div className="mx-auto max-w-[1200px]">
         {allTags.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {[{ id: "all", label: "ทั้งหมด" }, ...allTags.map((t) => ({ id: t, label: t }))].map(
-              (tag) => (
+          <div className="mb-10 flex flex-wrap justify-center gap-2.5">
+            {tags.map((tag) => {
+              const active = activeTag === tag.id;
+              return (
                 <button
                   key={tag.id}
                   onClick={() => setActiveTag(tag.id)}
-                  className={`relative font-body font-semibold px-5 py-2 rounded-full text-sm transition-colors ${
-                    activeTag === tag.id
-                      ? "text-white"
-                      : "bg-white text-text-main border border-surface shadow-paper hover:shadow-paper-hover hover:border-terracotta/30"
+                  aria-pressed={active}
+                  className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[15px] font-bold transition-colors ${
+                    active
+                      ? "border-brass bg-vermillion text-paper"
+                      : "press-cream border-brass text-ink shadow-sign hover:shadow-sign-lifted"
                   }`}
                 >
-                  {activeTag === tag.id && (
+                  {active && (
                     <motion.span
-                      layoutId="active-tag-pill"
-                      className="absolute inset-0 bg-terracotta rounded-full shadow-paper"
-                      transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                      layoutId="active-tag-plate"
+                      className="absolute inset-0 bg-vermillion shadow-sign"
+                      transition={{
+                        type: "spring",
+                        bounce: 0.12,
+                        duration: 0.45,
+                      }}
                     />
                   )}
                   <span className="relative z-10">{tag.label}</span>
                 </button>
-              )
-            )}
+              );
+            })}
           </div>
         )}
 
-        {/* Post grid */}
         {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-8">
+          /* Only one story is published today. A three-column grid holding a
+             single card reads as a broken page, so the track count follows the
+             content instead of the breakpoint. */
+          <div
+            className={
+              filteredPosts.length === 1
+                ? "mx-auto grid max-w-sm grid-cols-1 gap-6"
+                : filteredPosts.length === 2
+                  ? "mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2"
+                  : "grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7"
+            }
+          >
             <AnimatePresence mode="popLayout">
               {filteredPosts.map((post, index) => (
                 <motion.div
                   key={post.slug}
                   layout={!prefersReduced}
-                  initial={prefersReduced ? false : { opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={prefersReduced ? undefined : { opacity: 0, scale: 0.9 }}
+                  initial={prefersReduced ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={prefersReduced ? undefined : { opacity: 0, y: 14 }}
                   transition={{
-                    opacity: { duration: 0.3 },
-                    scale: { duration: 0.3 },
-                    layout: { duration: 0.4, ease: "easeOut" },
+                    duration: 0.34,
+                    ease: [0.16, 1, 0.3, 1],
+                    layout: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
                   }}
                 >
                   <StoryPostCard post={post} index={index} />
@@ -74,10 +94,16 @@ export default function StoryContent({
             </AnimatePresence>
           </div>
         ) : (
-          <div className="text-center py-20">
-            <p className="font-hand text-2xl text-text-muted">
+          <div className="press-umber mx-auto max-w-md border-2 border-brass px-6 py-12 text-center shadow-plate">
+            <p className="font-display text-[21px] font-bold text-paper">
               ยังไม่มีเรื่องราวในหมวดนี้
             </p>
+            <button
+              onClick={() => setActiveTag("all")}
+              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[15px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            >
+              ดูเรื่องราวทั้งหมด
+            </button>
           </div>
         )}
       </div>

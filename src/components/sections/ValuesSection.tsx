@@ -1,21 +1,34 @@
-"use client";
-
-import { Wheat, Heart, Leaf, Clock } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { HangingSign } from "@/components/brand/SignPlate";
 
+/**
+ * Three principles as one sign board, not three cards.
+ *
+ * A grid of identical icon-heading-text cards was the previous build's page
+ * structure and is the single most templated arrangement available. Here the
+ * three values are columns of one continuous board divided by brass rules —
+ * one object screwed to the wall, the way a shop lists what it stands for.
+ *
+ * Ground is cream, not umber. This started as the page's dark band, and the
+ * owner's review (2026-07-25) rejected it: the full-width dark field read as
+ * heavy. Depth now comes from a value step instead of a colour change — the
+ * section sits on cream and the board is lifted to paper, so the board still
+ * reads as one object screwed to the wall, carried by its brass frame and hard
+ * offset rather than by a dark ground. Ink on paper is 15.30:1.
+ */
 const values = [
   {
-    icon: Heart,
+    seal: "มือ",
     title: "ทำด้วยมือทุกชิ้น",
     desc: "ทุกชิ้นผ่านมือแม่ ไม่ใช้เครื่องจักร ด้วยความรักและความตั้งใจที่ส่งผ่านรสชาติ",
   },
   {
-    icon: Clock,
+    seal: "สด",
     title: "สดใหม่ทุกวัน",
     desc: "ทำใหม่ทุกเช้าตั้งแต่ตีสี่ วัตถุดิบสดคุณภาพดี ไม่ค้างคืน ไม่แช่แข็ง",
   },
   {
-    icon: Leaf,
+    seal: "ปลอด",
     title: "ไม่ใส่สารกันเสีย",
     desc: "เพราะเราเชื่อว่าขนมดีต้องมาจากธรรมชาติ สะอาด ปลอดภัย อร่อยได้แบบโฮมเมด",
   },
@@ -23,52 +36,51 @@ const values = [
 
 export default function ValuesSection() {
   return (
-    <section className="py-14 md:py-20 px-4 bg-warm-beige relative overflow-hidden">
-      {/* Decorative background element */}
-      <div className="absolute -right-20 top-20 text-terracotta/5 rotate-12 pointer-events-none select-none">
-        <Wheat className="size-[300px]" />
-      </div>
+    <section className="press-cream px-4 py-[clamp(56px,9vw,112px)] md:px-6">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="flex flex-col items-center text-center">
+          <FadeIn>
+            <HangingSign>
+              <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-vermillion">
+                เราเชื่อว่าของดีต้องตั้งใจทำ
+              </h2>
+            </HangingSign>
+          </FadeIn>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <FadeIn>
-          <Wheat className="text-sage size-14 mx-auto mb-4" />
-        </FadeIn>
-
-        <FadeIn delay={0.1}>
-          <h2 className="font-hand text-3xl md:text-4xl text-text-main mb-6">
-            เราเชื่อว่าของดีต้องตั้งใจทำ ❤️
-          </h2>
-        </FadeIn>
-
-        {/* Decorative divider */}
-        <div className="w-24 h-1 bg-terracotta/30 mx-auto mb-8 rounded-full" />
-
-        <FadeIn delay={0.2}>
-          <p className="font-body text-xl text-text-main/80 leading-relaxed max-w-2xl mx-auto">
-            ทำด้วยมือ สดใหม่ทุกวัน ไม่ใส่สารกันเสีย เพราะขนมทุกชิ้นควรมีความหมาย
-            และส่งต่อความโชคดี
-          </p>
-        </FadeIn>
-
-        {/* Value cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mt-10 md:mt-12">
-          {values.map((v, i) => {
-            const Icon = v.icon;
-            return (
-              <FadeIn key={v.title} delay={0.3 + i * 0.1}>
-                <div className="bg-white rounded-2xl p-4 md:p-6 shadow-paper border border-surface hover:shadow-paper-hover hover:-translate-y-1 transition-all duration-300 flex sm:flex-col items-start sm:items-center gap-4 sm:gap-0 text-left sm:text-center">
-                  <div className="w-11 h-11 shrink-0 rounded-full bg-terracotta/10 flex items-center justify-center sm:mx-auto sm:mb-4">
-                    <Icon className="size-5 text-terracotta" />
-                  </div>
-                  <div>
-                    <h3 className="font-hand text-lg md:text-xl text-text-main mb-0.5 sm:mb-2">{v.title}</h3>
-                    <p className="font-body text-sm text-text-muted leading-relaxed">{v.desc}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
+          <FadeIn delay={0.08}>
+            <p className="mx-auto mt-10 max-w-[54ch] font-body text-ink">
+              ทำด้วยมือ สดใหม่ทุกวัน ไม่ใส่สารกันเสีย
+              เพราะขนมทุกชิ้นควรมีความหมาย และส่งต่อความโชคดี
+            </p>
+          </FadeIn>
         </div>
+
+        {/* One board, three columns. */}
+        <FadeIn delay={0.16}>
+          <div className="press-paper mt-12 grid grid-cols-1 border-2 border-brass shadow-plate md:mt-14 md:grid-cols-3">
+            {values.map((v, i) => (
+              <div
+                key={v.title}
+                className={
+                  i === 0
+                    ? "px-6 py-7 md:px-7"
+                    : "border-t-2 border-brass px-6 py-7 md:border-t-0 md:border-l-2 md:px-7"
+                }
+              >
+                <span
+                  aria-hidden
+                  className="mb-4 inline-flex size-14 items-center justify-center rounded-full border-2 border-brass bg-vermillion font-display text-[15px] leading-none font-bold text-paper shadow-seal"
+                >
+                  {v.seal}
+                </span>
+                <h3 className="font-display text-[19px] leading-snug font-bold text-ink md:text-[21px]">
+                  {v.title}
+                </h3>
+                <p className="mt-2 font-body text-ink">{v.desc}</p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

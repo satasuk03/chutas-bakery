@@ -1,30 +1,31 @@
-"use client";
-
-import { BookOpen } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { HangingSign } from "@/components/brand/SignPlate";
+import { Seal } from "@/components/brand/Seal";
 
 export default function StoryHero() {
   return (
-    <section className="py-16 px-4 relative overflow-hidden bg-warm-beige">
-      <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+    <section className="press-cream relative overflow-hidden px-4 py-[clamp(48px,7vw,88px)] md:px-6">
+      <div className="mx-auto flex max-w-[900px] flex-col items-center text-center">
         <FadeIn>
-          <BookOpen className="text-sage size-14 mx-auto mb-4" />
+          <HangingSign sway>
+            <h1 className="font-display text-[clamp(1.85rem,5vw,3rem)] leading-none font-bold text-vermillion">
+              เรื่องราวของเรา
+            </h1>
+          </HangingSign>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <h1 className="font-hand text-4xl md:text-5xl text-text-main mb-6">
-            เรื่องราวของเรา
-          </h1>
-        </FadeIn>
-
-        <div className="w-24 h-1 bg-terracotta/30 mx-auto mb-8 rounded-full" />
-
-        <FadeIn delay={0.2}>
-          <p className="font-body text-xl text-text-main/80 leading-relaxed max-w-2xl mx-auto">
+          <p className="press-paper frame-brass mt-10 inline-block max-w-[46ch] px-6 py-4 font-body text-ink shadow-plate">
             เรื่องเล่า ความตั้งใจ และเบื้องหลังขนมทุกชิ้นจากครัวของเรา
           </p>
+        </FadeIn>
+
+        <FadeIn delay={0.18}>
+          <Seal
+            glyph="福"
+            label="ฮก — โชคลาภ"
+            className="mt-8 size-14 text-[26px]"
+          />
         </FadeIn>
       </div>
     </section>
