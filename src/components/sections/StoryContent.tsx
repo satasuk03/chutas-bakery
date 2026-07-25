@@ -26,7 +26,7 @@ export default function StoryContent({
   ];
 
   return (
-    <section className="press-cream px-4 py-[clamp(48px,7vw,80px)] md:px-6">
+    <section className="press-paper px-4 py-[clamp(48px,7vw,80px)] md:px-6">
       <div className="mx-auto max-w-[1200px]">
         {allTags.length > 0 && (
           <div className="mb-10 flex flex-wrap justify-center gap-2.5">
@@ -39,8 +39,8 @@ export default function StoryContent({
                   aria-pressed={active}
                   className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[15px] font-bold transition-colors ${
                     active
-                      ? "border-pine-deep bg-vermillion text-cream"
-                      : "press-cream border-pine text-ink shadow-sign hover:shadow-sign-lifted"
+                      ? "border-brass bg-vermillion text-paper"
+                      : "press-cream border-brass text-ink shadow-sign hover:shadow-sign-lifted"
                   }`}
                 >
                   {active && (
@@ -94,13 +94,13 @@ export default function StoryContent({
             </AnimatePresence>
           </div>
         ) : (
-          <div className="press-pine mx-auto max-w-md border-2 border-pine-deep px-6 py-12 text-center shadow-plate">
-            <p className="font-display text-[21px] font-bold text-cream">
+          <div className="press-umber mx-auto max-w-md border-2 border-brass px-6 py-12 text-center shadow-plate">
+            <p className="font-display text-[21px] font-bold text-paper">
               ยังไม่มีเรื่องราวในหมวดนี้
             </p>
             <button
               onClick={() => setActiveTag("all")}
-              className="mt-5 inline-flex min-h-11 items-center border-2 border-cream/80 bg-vermillion px-5 py-2.5 font-display text-[15px] font-bold text-cream shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[15px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             >
               ดูเรื่องราวทั้งหมด
             </button>

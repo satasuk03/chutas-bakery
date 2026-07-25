@@ -6,9 +6,14 @@ import { HangingSign } from "@/components/brand/SignPlate";
  *
  * A grid of identical icon-heading-text cards was the previous build's page
  * structure and is the single most templated arrangement available. Here the
- * three values are columns of one continuous pine board divided by vermillion
- * rules — one object screwed to the wall, the way a shop lists what it stands
- * for. Cream on pine is 4.61:1, so the copy stays readable at body size.
+ * three values are columns of one continuous board divided by brass rules —
+ * one object screwed to the wall, the way a shop lists what it stands for.
+ *
+ * This is the page's first dark band. Paper on umber is 13.97:1 and cream on
+ * umber is 12.39:1, so the copy is comfortably readable at body size, and the
+ * band is what keeps a cream-white page from draining out. On umber, text is
+ * only ever paper or cream — brass-text is 2.53 here and brass is not a text
+ * colour on any ground.
  */
 const values = [
   {
@@ -30,19 +35,19 @@ const values = [
 
 export default function ValuesSection() {
   return (
-    <section className="press-cream px-4 py-[clamp(56px,9vw,112px)] md:px-6">
+    <section className="press-umber px-4 py-[clamp(56px,9vw,112px)] md:px-6">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex flex-col items-center text-center">
           <FadeIn>
-            <HangingSign tone="pine">
-              <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-cream">
+            <HangingSign>
+              <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-vermillion">
                 เราเชื่อว่าของดีต้องตั้งใจทำ
               </h2>
             </HangingSign>
           </FadeIn>
 
           <FadeIn delay={0.08}>
-            <p className="mx-auto mt-10 max-w-[54ch] font-body text-ink">
+            <p className="mx-auto mt-10 max-w-[54ch] font-body text-paper">
               ทำด้วยมือ สดใหม่ทุกวัน ไม่ใส่สารกันเสีย
               เพราะขนมทุกชิ้นควรมีความหมาย และส่งต่อความโชคดี
             </p>
@@ -51,23 +56,23 @@ export default function ValuesSection() {
 
         {/* One board, three columns. */}
         <FadeIn delay={0.16}>
-          <div className="press-pine mt-12 grid grid-cols-1 border-2 border-pine-deep shadow-plate md:mt-14 md:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 border-2 border-brass shadow-plate md:mt-14 md:grid-cols-3">
             {values.map((v, i) => (
               <div
                 key={v.title}
                 className={
                   i === 0
                     ? "px-6 py-7 md:px-7"
-                    : "border-t-2 border-vermillion/70 px-6 py-7 md:border-t-0 md:border-l-2 md:px-7"
+                    : "border-t-2 border-brass px-6 py-7 md:border-t-0 md:border-l-2 md:px-7"
                 }
               >
                 <span
                   aria-hidden
-                  className="mb-4 inline-flex size-14 items-center justify-center rounded-full border-2 border-vermillion bg-cream font-display text-[15px] leading-none font-bold text-vermillion shadow-seal"
+                  className="mb-4 inline-flex size-14 items-center justify-center rounded-full border-2 border-paper bg-vermillion font-display text-[15px] leading-none font-bold text-paper shadow-seal"
                 >
                   {v.seal}
                 </span>
-                <h3 className="font-display text-[19px] leading-snug font-bold text-cream md:text-[21px]">
+                <h3 className="font-display text-[19px] leading-snug font-bold text-paper md:text-[21px]">
                   {v.title}
                 </h3>
                 <p className="mt-2 font-body text-cream">{v.desc}</p>

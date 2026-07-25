@@ -16,7 +16,10 @@ import { Seal } from "@/components/brand/Seal";
  *
  * Past dates are NOT dimmed with opacity: the primary customer is 43–58 and
  * faded text is the first thing to fail for that reader. A past tag switches
- * its date from vermillion to pine and carries a "ผ่านมาแล้ว" stamp instead.
+ * its date from vermillion to `brass-text` and carries a "ผ่านมาแล้ว" stamp
+ * instead. brass-text, not brass: brass is 3.20:1 on paper and would slip
+ * past a large-text check while still being unreadable, which is exactly the
+ * failure this palette forbids. brass-text on paper is 5.53:1.
  */
 const thaiDays = [
   "อาทิตย์",
@@ -92,7 +95,7 @@ export default function CalendarSection() {
   };
 
   return (
-    <section className="press-teal relative overflow-hidden py-[clamp(56px,9vw,112px)]">
+    <section className="press-cream relative overflow-hidden py-[clamp(56px,9vw,112px)]">
       <div className="mx-auto mb-4 flex max-w-[1200px] flex-col items-center px-4 text-center md:px-6">
         <HangingSign>
           <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-vermillion">
@@ -108,7 +111,7 @@ export default function CalendarSection() {
         {/* the rail the tags hang from */}
         <div
           aria-hidden
-          className="pointer-events-none absolute top-[62px] right-0 left-0 h-[3px] bg-pine-deep"
+          className="pointer-events-none absolute top-[62px] right-0 left-0 h-[3px] bg-brass"
         />
 
         <div
@@ -145,16 +148,16 @@ export default function CalendarSection() {
                     aria-hidden
                     className="flex w-14 justify-between transition-transform duration-500"
                   >
-                    <span className="h-5 w-[3px] bg-pine-deep" />
-                    <span className="h-5 w-[3px] bg-pine-deep" />
+                    <span className="h-5 w-[3px] bg-brass" />
+                    <span className="h-5 w-[3px] bg-brass" />
                   </span>
 
                   {/* the tag */}
                   <div
-                    className={`press-cream relative w-full px-5 pt-6 pb-7 transition-all duration-500 ${
+                    className={`press-paper relative w-full px-5 pt-6 pb-7 transition-all duration-500 ${
                       isActive
                         ? "scale-[1.04] border-[3px] border-vermillion shadow-plate-lifted"
-                        : "scale-[0.96] border-2 border-pine shadow-plate group-hover:scale-100"
+                        : "frame-brass scale-[0.96] shadow-plate group-hover:scale-100"
                     }`}
                   >
                     {isActive && (
@@ -170,7 +173,7 @@ export default function CalendarSection() {
 
                     <p
                       className={`text-center font-display text-[3.5rem] leading-none font-bold ${
-                        isPast ? "text-pine" : "text-vermillion"
+                        isPast ? "text-brass-text" : "text-vermillion"
                       }`}
                     >
                       {d.getDate()}
@@ -193,7 +196,7 @@ export default function CalendarSection() {
 
                     <p
                       className={`mt-3 text-center font-display text-[13px] font-bold ${
-                        isPast ? "text-pine" : "text-vermillion"
+                        isPast ? "text-brass-text" : "text-vermillion"
                       }`}
                     >
                       {isPast ? "ผ่านมาแล้ว" : isToday ? "วันนี้!" : "ถัดไป"}
@@ -209,7 +212,7 @@ export default function CalendarSection() {
           onClick={() => goTo(activeIdx - 1)}
           disabled={activeIdx === 0}
           aria-label="ย้อนกลับ"
-          className="press-cream absolute top-1/2 left-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-pine shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-pine/40 md:left-6"
+          className="press-paper absolute top-1/2 left-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-brass shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-brass-text md:left-6"
         >
           <ChevronLeft className="size-6 text-ink" aria-hidden />
         </button>
@@ -217,7 +220,7 @@ export default function CalendarSection() {
           onClick={() => goTo(activeIdx + 1)}
           disabled={activeIdx === events.length - 1}
           aria-label="ถัดไป"
-          className="press-cream absolute top-1/2 right-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-pine shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-pine/40 md:right-6"
+          className="press-paper absolute top-1/2 right-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-brass shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-brass-text md:right-6"
         >
           <ChevronRight className="size-6 text-ink" aria-hidden />
         </button>
@@ -225,16 +228,16 @@ export default function CalendarSection() {
 
       {/* 27 dots is 27 things to aim at. A counter and a progress rule read
           faster, and the arrows already do the stepping. */}
-      {/* On a cream plate, not loose on the teal: vermillion on teal is
-          1.88:1, and this counter is information, not ornament. */}
+      {/* On a paper plate rather than loose on the cream band — the counter
+          is information, and a plate is how this world presents information. */}
       <div className="mx-auto mt-2 w-fit px-4">
-        <div className="press-cream flex flex-col items-center gap-2 border-2 border-pine px-5 py-3 shadow-plate">
+        <div className="press-paper frame-brass flex flex-col items-center gap-2 px-5 py-3 shadow-plate">
           <p className="font-display text-[15px] font-bold text-ink">
             <span className="text-vermillion">{activeIdx + 1}</span> /{" "}
             {events.length} วันไหว้ในปีนี้
           </p>
           <div
-            className="h-2 w-[180px] border-2 border-pine-deep"
+            className="h-2 w-[180px] border-2 border-brass"
             role="presentation"
           >
             <div

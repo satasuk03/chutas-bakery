@@ -12,23 +12,35 @@
  *   <BrandMark /> a derived horizontal mark for the header, Thai-first —
  *                 correct for a site whose lang is th and whose customers
  *                 read Thai.
+ *
+ * `/brand/lockup.webp` has a teal ground baked into the file, and teal left
+ * the palette in the 2026-07-25 colour revision. It must therefore never be
+ * dropped straight onto a paper ground — if it is used at all it goes inside
+ * a framed plate, which reads the teal as the print's own paper rather than
+ * as a stray patch of a retired brand colour. The header uses `BrandMark`.
  */
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Header / footer mark: 楚塔 seal + Thai wordmark. No Latin, by design. */
+/**
+ * Header / footer mark: 楚塔 seal + Thai wordmark. No Latin, by design.
+ *
+ * The seal keeps a vermillion ground and gains a solid `paper` keyline: on
+ * the lacquer navbar, vermillion is 1.19:1 against the ground and the seal
+ * would dissolve into the bar without it. Paper on lacquer is 6.85:1.
+ */
 export function BrandMark({
   className,
-  tone = "cream",
+  tone = "paper",
 }: {
   className?: string;
-  tone?: "cream" | "ink";
+  tone?: "paper" | "ink";
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <span
         aria-hidden
-        className="inline-flex size-9 items-center justify-center border-[1.5px] border-cream/70 bg-vermillion font-seal text-[15px] leading-none tracking-[-0.08em] text-cream shadow-sign"
+        className="inline-flex size-9 items-center justify-center border-2 border-paper bg-vermillion font-seal text-[15px] leading-none tracking-[-0.08em] text-paper shadow-sign"
         style={{ fontWeight: 700 }}
       >
         楚塔
@@ -36,7 +48,7 @@ export function BrandMark({
       <span
         className={cn(
           "font-display text-[19px] leading-none font-bold tracking-[-0.01em] md:text-[21px]",
-          tone === "cream" ? "text-cream" : "text-ink",
+          tone === "paper" ? "text-paper" : "text-ink",
         )}
       >
         ชุตา เบเกอรี่

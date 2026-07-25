@@ -56,12 +56,12 @@ export default async function StoryPostPage({
   return (
     <>
       <Header />
-      <main className="press-teal">
-        {/* Cover print, matted on cream and hung on the teal wall rather than
-            bled full-width — food and process photos never touch the ground. */}
+      <main className="press-paper">
+        {/* Cover print, matted on cream and hung on the paper wall rather than
+            bled full-width — a photo in this world always sits on a mat. */}
         <section className="px-4 pt-8 md:px-6 md:pt-12">
-          <div className="press-cream mx-auto max-w-3xl border-2 border-pine p-2.5 shadow-plate">
-            <div className="relative aspect-[16/9] w-full overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright">
+          <div className="press-cream mx-auto max-w-3xl border-2 border-brass p-2.5 shadow-plate">
+            <div className="relative aspect-[16/9] w-full overflow-hidden border-[1.5px] border-vermillion bg-cream-bright">
               <Image
                 src={post.frontmatter.coverImage}
                 alt={post.frontmatter.title}
@@ -76,18 +76,18 @@ export default async function StoryPostPage({
 
         {/* Article plate */}
         <section className="relative z-10 px-4 pt-6 pb-[clamp(56px,9vw,112px)] md:px-6">
-          <article className="press-cream mx-auto max-w-3xl border-2 border-pine p-6 shadow-plate md:p-10">
-            <header className="mb-9 border-b-2 border-pine pb-6">
+          <article className="press-cream mx-auto max-w-3xl border-2 border-brass p-6 shadow-plate md:p-10">
+            <header className="mb-9 border-b-2 border-brass pb-6">
               <h1 className="font-display text-[clamp(1.85rem,5vw,3rem)] leading-tight font-bold text-ink">
                 {post.frontmatter.title}
               </h1>
 
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <span className="font-display text-[15px] font-semibold text-pine">
+                <span className="font-display text-[15px] font-semibold text-brass-text">
                   {formatDate(post.frontmatter.date)}
                 </span>
                 {post.frontmatter.author && (
-                  <span className="font-display text-[15px] font-semibold text-pine">
+                  <span className="font-display text-[15px] font-semibold text-brass-text">
                     เขียนโดย {post.frontmatter.author}
                   </span>
                 )}
@@ -98,7 +98,7 @@ export default async function StoryPostPage({
                   {post.frontmatter.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="border border-pine px-2 py-0.5 font-display text-[13px] font-semibold text-pine"
+                      className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
                     >
                       {tag}
                     </span>
@@ -111,10 +111,10 @@ export default async function StoryPostPage({
               <MDXRemote source={post.content} components={mdxComponents} />
             </div>
 
-            <div className="mt-12 border-t-2 border-pine pt-6">
+            <div className="mt-12 border-t-2 border-brass pt-6">
               <Link
                 href="/story"
-                className="press-cream inline-flex min-h-11 items-center gap-2 border-2 border-pine px-4 py-2.5 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                className="press-paper inline-flex min-h-11 items-center gap-2 border-2 border-brass px-4 py-2.5 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               >
                 <ArrowLeft className="size-4" aria-hidden />
                 กลับไปเรื่องราวทั้งหมด

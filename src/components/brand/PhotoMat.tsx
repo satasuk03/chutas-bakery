@@ -2,13 +2,18 @@
  * PhotoMat — the one correct way to show food in this world.
  *
  * BRAND.md §13 forbids photographing or placing food on a saturated ground
- * because it swallows pastry color, and the redesign made teal the primary
- * ground. Resolved 2026-07-25: food always sits on cream, and teal is the
- * world *around* the photo. The mat also means the existing photos — all shot
- * on light and wood backgrounds — work as delivered, with no reshoot.
+ * because it swallows pastry colour. Reconfirmed in the 2026-07-25 colour
+ * revision: food always sits on `cream` with a `cream-bright` inner field,
+ * and red and dark grounds never touch a food photo. Vermillion is now a
+ * fifth of the page, which makes this rule more load-bearing, not less. The
+ * mat also means the existing photos — all shot on light and wood
+ * backgrounds — work as delivered, with no reshoot.
  *
- * Structurally it is a print pasted onto a board: cream board, vermillion
- * keyline, photo inset on the brighter cream so pale bao lift off it.
+ * Structurally it is the auspicious enamel-plate build: 2px brass outer
+ * frame, cream board, then the print itself keylined in vermillion on the
+ * brighter cream so pale bao lift off the mat. That brass-outside /
+ * vermillion-inside pair is the same double rule as `frame-brass`, with the
+ * mat's own padding as the gap — so the photo needs no third line.
  */
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -38,13 +43,13 @@ export function PhotoMat({
   return (
     <figure
       className={cn(
-        "press-cream border-2 border-pine p-2.5 shadow-plate",
+        "press-cream border-2 border-brass p-2.5 shadow-plate",
         className,
       )}
     >
       <div
         className={cn(
-          "relative w-full overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright",
+          "relative w-full overflow-hidden border-[1.5px] border-vermillion bg-cream-bright",
           aspect,
         )}
       >

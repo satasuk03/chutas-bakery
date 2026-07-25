@@ -16,10 +16,10 @@ export default function NewsletterSection() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="press-pine px-4 py-[clamp(56px,9vw,112px)] text-cream md:px-6">
+    <section className="press-umber px-4 py-[clamp(56px,9vw,112px)] text-paper md:px-6">
       <div className="mx-auto max-w-[640px]">
         <div className="relative">
-          <div className="press-cream border-2 border-pine-deep px-6 py-8 shadow-plate md:px-10">
+          <div className="press-cream frame-brass px-6 py-8 shadow-plate md:px-10">
             <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink">
               ไม่พลาดข่าวขนมตามเทศกาล
             </h2>
@@ -61,11 +61,11 @@ export default function NewsletterSection() {
                   placeholder="อีเมลของคุณ"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 flex-1 rounded-none border-2 border-pine bg-cream-bright font-body text-ink placeholder:text-pine"
+                  className="h-12 flex-1 rounded-none border-2 border-brass bg-cream-bright font-body text-ink placeholder:text-brass-text"
                 />
                 <button
                   type="submit"
-                  className="inline-flex min-h-12 items-center justify-center border-2 border-cream/80 bg-vermillion px-6 font-display text-[17px] font-bold whitespace-nowrap text-cream shadow-sign transition-[transform,box-shadow,background-color] hover:bg-vermillion-deep active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                  className="inline-flex min-h-12 items-center justify-center border-2 border-brass bg-vermillion px-6 font-display text-[17px] font-bold whitespace-nowrap text-paper shadow-sign transition-[transform,box-shadow,background-color] hover:bg-vermillion-deep active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
                 >
                   ติดตาม
                 </button>

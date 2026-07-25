@@ -3,8 +3,8 @@ import Image from "next/image";
 
 /**
  * Article typography. This is the site's only Read surface, so comprehension
- * outranks expression: ink on cream at 11:1, a 68ch measure, and more space
- * above a heading than below it. Prompt sets the headings, Sarabun the prose.
+ * outranks expression: ink on cream at 13.58:1, a 68ch measure, and more
+ * space above a heading than below it. Prompt sets headings, Sarabun prose.
  *
  * The `hr` is the one place ornament is allowed — a vermillion rule with the
  * brand's cross mark, standing in for the printer's fleuron.
@@ -24,7 +24,7 @@ export const mdxComponents: MDXComponents = {
   ),
   h3: (props) => (
     <h3
-      className="mt-9 mb-3 font-display text-[21px] leading-snug font-bold text-pine"
+      className="mt-9 mb-3 font-display text-[21px] leading-snug font-bold text-brass-text"
       {...props}
     />
   ),
@@ -33,7 +33,7 @@ export const mdxComponents: MDXComponents = {
   ),
   a: (props) => (
     <a
-      className="font-semibold text-vermillion underline decoration-2 decoration-vermillion/40 underline-offset-2 transition-colors hover:decoration-vermillion"
+      className="font-semibold text-vermillion underline decoration-2 decoration-vermillion/60 underline-offset-2 transition-colors hover:decoration-vermillion"
       {...props}
     />
   ),
@@ -65,15 +65,15 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   strong: (props) => <strong className="font-bold text-ink" {...props} />,
-  em: (props) => <em className="font-semibold text-pine not-italic" {...props} />,
+  em: (props) => <em className="font-semibold text-brass-text not-italic" {...props} />,
   img: (props) => (
-    <span className="press-cream my-7 block border-2 border-pine p-2 shadow-plate">
+    <span className="press-cream my-7 block border-2 border-brass p-2 shadow-plate">
       <Image
         src={props.src || ""}
         alt={props.alt || ""}
         width={800}
         height={450}
-        className="w-full border-[1.5px] border-vermillion/70"
+        className="w-full border-[1.5px] border-vermillion"
       />
     </span>
   ),

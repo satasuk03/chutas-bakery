@@ -13,13 +13,20 @@ import { Seal, productSeal } from "@/components/brand/Seal";
  * the photo — 发糕 for ฮวกก้วย, 寿桃 for ซิ่วท้อ, 包子 for ซาลาเปา.
  *
  * The cream mat is the binding rule, not a style choice: food never sits on a
- * saturated ground (PRODUCT.md → Brand Commitments).
+ * saturated ground, and red and dark grounds never touch a bao
+ * (PRODUCT.md → Brand Commitments).
+ *
+ * Badge grounds, all with paper labels and all measured: vermillion 5.75,
+ * vermillion-deep 8.30, umber 13.97, brass-text 5.53. `brass-text` appears as
+ * a *ground* here rather than as a word — the smoked-brass badge is the one
+ * place this palette gets to show brass at label size without brass ever
+ * carrying the label itself.
  */
 const badgeConfig = {
-  popular: { label: "ยอดนิยม", className: "bg-vermillion text-cream" },
-  new: { label: "ใหม่!", className: "bg-pine text-cream" },
-  hot: { label: "ขายดี!", className: "bg-vermillion-deep text-cream" },
-  recommended: { label: "แม่แนะนำ", className: "bg-pine-deep text-cream" },
+  popular: { label: "ยอดนิยม", className: "bg-vermillion text-paper" },
+  new: { label: "ใหม่!", className: "bg-umber text-paper" },
+  hot: { label: "ขายดี!", className: "bg-vermillion-deep text-paper" },
+  recommended: { label: "แม่แนะนำ", className: "bg-brass-text text-paper" },
 };
 
 export default function MenuProductCard({
@@ -37,9 +44,9 @@ export default function MenuProductCard({
   const hi = prices ? Math.max(...prices) : undefined;
 
   return (
-    <article className="press-cream group flex h-full flex-col border-2 border-pine p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
+    <article className="press-cream group flex h-full flex-col border-2 border-brass p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
       <div className="relative">
-        <div className="relative aspect-square w-full overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright">
+        <div className="relative aspect-square w-full overflow-hidden border-[1.5px] border-vermillion bg-cream-bright">
           <Image
             src={item.image}
             alt={item.nameTh}
@@ -82,7 +89,7 @@ export default function MenuProductCard({
             {item.flavors.map((flavor) => (
               <span
                 key={flavor}
-                className="border border-pine px-2 py-0.5 font-display text-[13px] font-semibold text-pine"
+                className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
               >
                 {flavor}
               </span>
@@ -90,7 +97,7 @@ export default function MenuProductCard({
           </div>
         )}
 
-        <div className="mt-auto flex items-end justify-between gap-3 border-t-2 border-pine pt-3.5">
+        <div className="mt-auto flex items-end justify-between gap-3 border-t-2 border-brass pt-3.5">
           <span className="font-display text-[26px] leading-none font-bold text-vermillion">
             {prices ? (
               <>
@@ -109,7 +116,7 @@ export default function MenuProductCard({
           </span>
           <button
             onClick={() => onDetailClick(item)}
-            className="press-cream inline-flex min-h-11 shrink-0 items-center gap-1.5 border-2 border-pine px-3 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            className="press-paper inline-flex min-h-11 shrink-0 items-center gap-1.5 border-2 border-brass px-3 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             ดูรายละเอียด
             <ArrowRight className="size-4" aria-hidden />

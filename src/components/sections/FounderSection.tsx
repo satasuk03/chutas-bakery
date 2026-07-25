@@ -9,20 +9,20 @@ import { LatticeRule } from "@/components/brand/Lattice";
  * No photograph of the owner exists in the asset set and PRODUCT.md forbids
  * inventing one, so the mascot appears here as what she is — the brand's
  * illustrated character, labelled as such — and the quote carries the section.
- * Ink on cream is 11:1, which is why the pull quote can run this large without
- * a plate behind it.
+ * Ink on paper is 15.30:1, which is why the pull quote can run this large
+ * without a plate behind it.
  */
 export default function FounderSection() {
   return (
-    <section className="press-cream relative overflow-hidden">
-      <LatticeRule height={20} className="text-pine" />
+    <section className="press-paper relative overflow-hidden">
+      <LatticeRule height={20} />
 
       <div className="mx-auto max-w-[1100px] px-4 py-[clamp(56px,9vw,112px)] md:px-6">
         <div className="grid items-center gap-10 md:grid-cols-[260px_1fr] md:gap-14">
           {/* The mascot, framed as a seal. */}
           <FadeIn direction="right" className="mx-auto w-[210px] md:mx-0 md:w-[260px]">
             <div className="relative">
-              <div className="relative aspect-square w-full overflow-hidden rounded-full border-[6px] border-vermillion bg-teal shadow-plate">
+              <div className="relative aspect-square w-full overflow-hidden rounded-full border-[6px] border-vermillion bg-cream-bright shadow-plate">
                 <Image
                   src="/brand/mascot-head.webp"
                   alt="ภาพวาดมาสคอตของชุตาเบเกอรี่ หญิงสาวในกี่เพ้าแดงถือลูกท้อ"
@@ -59,7 +59,7 @@ export default function FounderSection() {
               </footer>
             </blockquote>
 
-            <p className="mt-8 inline-block border-2 border-pine press-pine px-5 py-3 font-display text-[19px] font-bold text-cream shadow-plate">
+            <p className="press-umber mt-8 inline-block border-2 border-brass px-5 py-3 font-display text-[19px] font-bold text-paper shadow-plate">
               ขนมเราไหว้ละเฮง!
             </p>
           </FadeIn>

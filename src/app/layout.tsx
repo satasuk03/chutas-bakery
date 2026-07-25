@@ -115,7 +115,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`${prompt.variable} ${sarabun.variable} press-cream font-body text-ink antialiased overflow-x-hidden`}
+        className={`${prompt.variable} ${sarabun.variable} press-paper font-body text-ink antialiased overflow-x-hidden`}
       >
         <JsonLd />
         {children}

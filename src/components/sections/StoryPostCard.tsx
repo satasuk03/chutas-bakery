@@ -22,11 +22,11 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
   const href = `/story/${post.slug}`;
 
   return (
-    <article className="press-cream group flex h-full flex-col border-2 border-pine p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
+    <article className="press-cream group flex h-full flex-col border-2 border-brass p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
       <div className="relative">
         <Link
           href={href}
-          className="relative block aspect-[16/10] overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright"
+          className="relative block aspect-[16/10] overflow-hidden border-[1.5px] border-vermillion bg-cream-bright"
         >
           <Image
             src={post.frontmatter.coverImage}
@@ -46,7 +46,7 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
       </div>
 
       <div className="flex flex-1 flex-col pt-3.5">
-        <p className="font-display text-[15px] font-semibold text-pine">
+        <p className="font-display text-[15px] font-semibold text-brass-text">
           {formatDate(post.frontmatter.date)}
         </p>
 
@@ -65,7 +65,7 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
             {post.frontmatter.tags.map((tag) => (
               <span
                 key={tag}
-                className="border border-pine px-2 py-0.5 font-display text-[13px] font-semibold text-pine"
+                className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
               >
                 {tag}
               </span>
@@ -73,10 +73,10 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
           </div>
         )}
 
-        <div className="mt-auto border-t-2 border-pine pt-3.5">
+        <div className="mt-auto border-t-2 border-brass pt-3.5">
           <Link
             href={href}
-            className="press-cream inline-flex min-h-11 items-center gap-1.5 border-2 border-pine px-3.5 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            className="press-paper inline-flex min-h-11 items-center gap-1.5 border-2 border-brass px-3.5 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             อ่านต่อ
             <ArrowRight className="size-4" aria-hidden />

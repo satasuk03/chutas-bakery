@@ -3,17 +3,22 @@
 @import "shadcn/tailwind.css";
 
 /* ─────────────────────────────────────────────────────────────
-   Chuta's Bakery — The Shanghai Print Shop
-   Visual world locked 2026-07-25. See DESIGN.md.
+   Chuta's Bakery — "ชาด–ทองรมควัน" (Vermillion + Smoked Brass)
+   Colour direction approved 2026-07-25 (revision 2). See DESIGN.md.
 
-   Four binding spec colors from the owner:
-     teal #5d9d8e · cream #f4e2c7 · vermillion #c41f14 · pine #1b7257
-   Never eyedrop these from the delivered art — it renders halftone
-   and samples off-spec (#559381 for the ground).
+   Cream-white paper is the dominant ground (~56%). Vermillion is the
+   brand red (~20%) and carries every action. Matte brass (~14%) is the
+   ornament that delivers "มงคล". Warm cream (~10%) is the plate and the
+   photo mat. Teal and pine are gone from the palette entirely.
 
    The one measurement this system is built around:
-     cream on teal = 2.48:1 — fails body AND large text.
-   So: text on teal is ink. Cream text lives on pine or vermillion.
+     brass #a8843c never carries text. On paper it is 3.20:1, on cream
+     2.84:1, on cream-bright 3.32:1 — it fails body everywhere, and on a
+     light ground it would sneak past a 3:1 "large text" check while
+     still being unreadable for a 50-year-old customer.
+   So: brass is hairlines, frames, keylines, rules and rails. When a
+   brass-coloured *word* is needed on a light ground it is `brass-text`
+   (#7a5f26, 5.53 on paper). On lacquer or umber, text is paper or cream.
    ───────────────────────────────────────────────────────────── */
 
 /* Chinese seal glyphs — Noto Sans SC subset to the 15 characters the
@@ -39,8 +44,9 @@
 }
 
 @theme inline {
-  /* shadcn bridge — remapped onto the print-shop palette so the Radix
-     primitives (sheet, card, input, navigation-menu) inherit the world */
+  /* shadcn bridge — remapped onto the vermillion/brass palette so the
+     Radix primitives (sheet, card, input, navigation-menu) inherit the
+     world without any of them naming a brand colour directly */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -60,19 +66,26 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* ── Brand: the four spec colors ── */
-  --color-teal: #5d9d8e;
-  --color-pine: #1b7257;
-  --color-cream: #f4e2c7;
-  --color-vermillion: #c41f14;
+  /* ── Grounds ── */
+  --color-paper: #faf5ea; /* dominant page ground, ~56%          */
+  --color-cream: #f2e7d2; /* plates, photo mats, cards           */
+  --color-cream-bright: #fdf9f1; /* inner field of a photo mat only */
+  --color-umber: #2e2419; /* dark band: footer, values board     */
 
-  /* ── Derived. Each exists only because a spec color could not
-        legally carry text at the size it was needed. ── */
-  --color-teal-deep: #46766a; /* cream display type clears 3:1 (4.08) */
-  --color-pine-deep: #123f33; /* footer ground, hard offset shadows   */
-  --color-cream-bright: #fbf1de; /* inner field of a photo mat only   */
-  --color-vermillion-deep: #a81a10; /* hover / pressed                */
-  --color-ink: #0d2a22; /* the only text color on teal (4.87)         */
+  /* ── Red. lacquer is the header ground and nothing else: as a
+        section ground it would blow the red budget and collide with
+        the vermillion CTA. ── */
+  --color-vermillion: #b8281a; /* actions, prices, seals         */
+  --color-vermillion-deep: #8d1e13; /* hover / pressed           */
+  --color-lacquer: #a81a10; /* the navbar ground ONLY            */
+  --color-lacquer-deep: #6f140d; /* the bar's bottom border      */
+
+  /* ── Brass. ORNAMENT ONLY — see the header comment. ── */
+  --color-brass: #a8843c; /* hairlines, frames, rules, rails     */
+  --color-brass-text: #7a5f26; /* brass when it must be a word   */
+
+  /* ── Ink ── */
+  --color-ink: #241d16; /* body + heading text, 15.30 on paper   */
 
   /* ── Type ── */
   --font-display: var(--font-prompt), ui-sans-serif, sans-serif;
@@ -91,12 +104,13 @@
   --radius-4xl: 6px;
 
   /* ── Depth: printed matter. Hard offset (the plate's thickness)
-        plus soft ambient (the room). Never a zero-offset glow. ── */
-  --shadow-plate: 3px 3px 0 0 #123f33, 0 6px 18px rgba(13, 42, 34, 0.18);
-  --shadow-plate-lifted: 5px 5px 0 0 #123f33, 0 12px 28px rgba(13, 42, 34, 0.24);
-  --shadow-sign: 2px 2px 0 0 #0d2a22, 0 4px 14px rgba(13, 42, 34, 0.2);
-  --shadow-sign-lifted: 4px 4px 0 0 #0d2a22, 0 8px 20px rgba(13, 42, 34, 0.26);
-  --shadow-seal: inset 0 2px 5px rgba(13, 42, 34, 0.28);
+        plus soft ambient (the room). Never a zero-offset glow.
+        The hard offset is umber — the darkest ink on the sheet. ── */
+  --shadow-plate: 3px 3px 0 0 #2e2419, 0 6px 18px rgba(46, 36, 25, 0.18);
+  --shadow-plate-lifted: 5px 5px 0 0 #2e2419, 0 12px 28px rgba(46, 36, 25, 0.24);
+  --shadow-sign: 2px 2px 0 0 #2e2419, 0 4px 14px rgba(46, 36, 25, 0.2);
+  --shadow-sign-lifted: 4px 4px 0 0 #2e2419, 0 8px 20px rgba(46, 36, 25, 0.26);
+  --shadow-seal: inset 0 2px 5px rgba(46, 36, 25, 0.28);
 
   --ease-press: cubic-bezier(0.16, 1, 0.3, 1);
   /* A stamp presses down and stops dead — it does not spring back. An
@@ -107,25 +121,28 @@
 :root {
   --radius: 2px;
 
-  /* shadcn semantic layer, print-shop values */
-  --background: #f4e2c7;
-  --foreground: #0d2a22;
-  --card: #f4e2c7;
-  --card-foreground: #0d2a22;
-  --popover: #fbf1de;
-  --popover-foreground: #0d2a22;
-  --primary: #c41f14;
-  --primary-foreground: #f4e2c7;
-  --secondary: #1b7257;
-  --secondary-foreground: #f4e2c7;
-  --muted: #e6cfa9;
-  --muted-foreground: #3c665c; /* 5.10:1 on cream — passes body */
-  --accent: #5d9d8e;
-  --accent-foreground: #0d2a22;
-  --destructive: #c41f14;
-  --border: #1b7257;
-  --input: #1b7257;
-  --ring: #c41f14;
+  /* shadcn semantic layer. Every value is a brand token, and every
+     foreground/background pair below is one of the measured pairings. */
+  --background: #faf5ea; /* paper                                */
+  --foreground: #241d16; /* ink on paper — 15.30                 */
+  --card: #f2e7d2; /* cream                                      */
+  --card-foreground: #241d16; /* ink on cream — 13.58            */
+  --popover: #fdf9f1; /* cream-bright                            */
+  --popover-foreground: #241d16; /* 15.84                        */
+  --primary: #b8281a; /* vermillion                              */
+  --primary-foreground: #faf5ea; /* paper on vermillion — 5.75   */
+  --secondary: #f2e7d2;
+  --secondary-foreground: #241d16;
+  --muted: #f2e7d2;
+  --muted-foreground: #7a5f26; /* brass-text on cream — 4.91     */
+  --accent: #f2e7d2;
+  --accent-foreground: #241d16;
+  --destructive: #b8281a;
+  /* Borders are brass. This is the one place brass belongs: a keyline
+     carries no information a reader has to decode. */
+  --border: #a8843c;
+  --input: #a8843c;
+  --ring: #b8281a;
 }
 
 /* ── The press: halftone dot grid + paper tooth ──
@@ -136,53 +153,72 @@
    This is the highest-leverage rule in the system. The delivered
    mascot and lockup are heavily textured prints; dropped onto flat
    CSS fields they read as stickers. Grain makes both surfaces one
-   material. */
+   material.
+
+   Two families:
+     press-paper / press-cream  — reading surfaces. Tooth only, no dot
+       grid: a halftone screen under 17px Thai body copy is noise.
+     press-lacquer / press-umber — saturated fields. Dot grid kept; it
+       is what stops them looking like flat CSS next to the printed
+       mascot. */
 @layer utilities {
-  .press-teal,
-  .press-cream,
-  .press-pine,
-  .press-teal-deep {
+  .press-paper {
+    background-color: var(--color-paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    background-blend-mode: multiply;
+  }
+  .press-cream {
+    background-color: var(--color-cream);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    background-blend-mode: multiply;
+  }
+  .press-lacquer {
+    background-color: var(--color-lacquer);
     background-image:
-      radial-gradient(circle, rgba(13, 42, 34, 0.2) 0.5px, transparent 1px),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+      radial-gradient(circle, rgba(46, 36, 25, 0.34) 0.5px, transparent 1px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
     background-size:
       3px 3px,
       180px 180px;
     background-blend-mode: multiply, multiply;
   }
-  .press-teal {
-    background-color: var(--color-teal);
-  }
-  .press-teal-deep {
-    background-color: var(--color-teal-deep);
-  }
-  .press-pine {
-    background-color: var(--color-pine);
-  }
-  .press-cream {
-    background-color: var(--color-cream);
-    /* cream is the reading surface — tooth only, no dot grid */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
+  .press-umber {
+    background-color: var(--color-umber);
+    /* Umber is already the darkest ink on the sheet, so a multiplied
+       dark dot would vanish. The screen here is a brass dust instead —
+       the same halftone read, laid on rather than pressed in. */
+    background-image:
+      radial-gradient(circle, rgba(168, 132, 60, 0.16) 0.5px, transparent 1px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+    background-size:
+      3px 3px,
+      180px 180px;
+    background-blend-mode: normal, multiply;
   }
 
-  /* Registration offset — a misregistered two-color press plate.
-     The world's native device for display lettering. Never body text. */
+  /* ── The brass ornament device ──
+     A 2px brass outer frame with a 1px vermillion keyline inset 4px,
+     which is how an auspicious enamel plate is actually built. This is
+     what delivers "มงคล", and brass carries no text doing it.
+
+     Drawn as an inward outline rather than a nested div so it can be
+     dropped onto an existing plate without changing its DOM or its
+     padding. -6px = the 2px border plus a 4px gap.
+
+     Do not put this on a focusable element: :focus-visible owns the
+     outline and would replace the keyline while focused. */
+  .frame-brass {
+    border: 2px solid var(--color-brass);
+    outline: 1px solid var(--color-vermillion);
+    outline-offset: -6px;
+  }
+
+  /* Registration offset — a misregistered two-colour press plate.
+     Display lettering only, never body text. */
   .reg-offset {
     text-shadow: 0.055em 0.055em 0 var(--color-vermillion);
-  }
-  .reg-offset-pine {
-    text-shadow: 0.055em 0.055em 0 var(--color-pine-deep);
-  }
-
-  /* Ink density at the foot of a full-bleed teal band — the one
-     gradient this system allows. */
-  .ink-foot {
-    background-image: linear-gradient(
-      to bottom,
-      transparent 55%,
-      rgba(18, 63, 51, 0.28) 100%
-    );
   }
 
   /* Vertical Chinese sign type (楚塔包子铺 runs top to bottom) */
@@ -273,26 +309,40 @@
   }
   ::selection {
     background: var(--color-vermillion);
-    color: var(--color-cream);
+    color: var(--color-paper);
   }
   /* Two-tone focus ring.
-     A single-color ring cannot work in this palette: the grounds span light
-     and dark, so nothing clears 3:1 against all of them. Vermillion — the
-     obvious brand choice — is 1.01:1 on pine and 1.00:1 on a vermillion
-     button, i.e. invisible on the header, the nav, and every primary CTA.
-     Cream and ink are 12:1 against each other, and at least one of the two
-     always clears 3:1 against any ground this system uses, so the pair is
-     legible everywhere. The outline is the load-bearing half because an
-     outline is never clipped by an `overflow: hidden` ancestor. */
+     A single-colour ring cannot work in this palette: the grounds span
+     light and dark, so nothing clears 3:1 against all of them.
+     Vermillion — the obvious brand choice — is 1.19:1 on lacquer and
+     1.00:1 on a vermillion button, i.e. invisible on the header and on
+     every primary CTA. Brass is 3.20:1 on paper and 2.14:1 on lacquer,
+     so it cannot be the ring either.
+
+     Ink and paper are 15.30:1 against each other, and at least one of
+     the two always clears 3:1 against every ground this system uses, so
+     the pair is legible everywhere. The outline is the load-bearing
+     half because an outline is never clipped by an `overflow: hidden`
+     ancestor.
+
+     Default = the light-ground form, because paper and cream are ~66%
+     of the page: ink outline clears 15.30 on paper, 13.58 on cream and
+     15.84 on cream-bright. */
   :focus-visible {
-    outline: 3px solid var(--color-cream);
+    outline: 3px solid var(--color-ink);
     outline-offset: 2px;
-    box-shadow: 0 0 0 8px var(--color-ink);
+    box-shadow: 0 0 0 8px var(--color-paper);
   }
-  /* On cream grounds, swap which tone leads. */
-  .press-cream :focus-visible,
-  .press-cream:focus-visible {
-    outline-color: var(--color-ink);
-    box-shadow: 0 0 0 8px var(--color-cream);
+  /* On the two saturated grounds, swap which tone leads: paper clears
+     6.85 on lacquer and 13.97 on umber, while ink is 2.23 and 1.10 and
+     would disappear. Written as descendant selectors so a paper CTA
+     plate sitting on the lacquer bar still gets the ring that reads
+     against the bar it is standing on. */
+  .press-lacquer :focus-visible,
+  .press-lacquer:focus-visible,
+  .press-umber :focus-visible,
+  .press-umber:focus-visible {
+    outline-color: var(--color-paper);
+    box-shadow: 0 0 0 8px var(--color-ink);
   }
 }

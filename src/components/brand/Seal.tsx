@@ -2,10 +2,15 @@
  * Seals — the brand's icon vocabulary.
  *
  * The 2026-07-25 identity ships four Chinese marks, and their color logic is
- * part of the spec: 福 is reversed (vermillion ground, cream glyph) while the
+ * part of the spec: 福 is reversed (vermillion ground, paper glyph) while the
  * 香港包子 block is positive (cream ground, vermillion ring and glyph). These
  * replace the lucide icons the previous brand used — a thin-line Croissant
  * cannot sit on a 1930s enamel sign.
+ *
+ * The reversed seal's ring is `paper`, not brass and not bare: on the lacquer
+ * navbar a vermillion seal is 1.19:1 against the ground and would vanish
+ * without it. Paper on lacquer is 6.85:1, so the ring reads on every ground
+ * the seal is used on. Its glyph is paper on vermillion — 5.75:1.
  *
  * Chinese in a Thai page is decorative: seals are aria-hidden unless given an
  * explicit `label`, and callers put the Thai reading in adjacent text.
@@ -52,7 +57,7 @@ export function Seal({
         // A stamped seal sits INTO the paper, not above it.
         "shadow-seal",
         tone === "reverse"
-          ? "border-[0.09em] border-cream bg-vermillion text-cream"
+          ? "border-[0.09em] border-paper bg-vermillion text-paper"
           : "border-[0.09em] border-vermillion bg-cream text-vermillion",
         glyph.length > 1 ? "tracking-[-0.06em]" : "",
         stamp && "animate-stamp",

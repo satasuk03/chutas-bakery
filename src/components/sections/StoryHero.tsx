@@ -4,7 +4,7 @@ import { Seal } from "@/components/brand/Seal";
 
 export default function StoryHero() {
   return (
-    <section className="press-teal relative overflow-hidden px-4 py-[clamp(48px,7vw,88px)] md:px-6">
+    <section className="press-cream relative overflow-hidden px-4 py-[clamp(48px,7vw,88px)] md:px-6">
       <div className="mx-auto flex max-w-[900px] flex-col items-center text-center">
         <FadeIn>
           <HangingSign sway>
@@ -15,7 +15,7 @@ export default function StoryHero() {
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <p className="press-cream mt-10 inline-block max-w-[46ch] border-2 border-pine px-6 py-4 font-body text-ink shadow-plate">
+          <p className="press-paper frame-brass mt-10 inline-block max-w-[46ch] px-6 py-4 font-body text-ink shadow-plate">
             เรื่องเล่า ความตั้งใจ และเบื้องหลังขนมทุกชิ้นจากครัวของเรา
           </p>
         </FadeIn>

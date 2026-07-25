@@ -80,16 +80,16 @@ export default function MenuProductDetail({
       <SheetContent
         side="right"
         showCloseButton={false}
-        className="press-cream flex w-full flex-col gap-0 border-l-[3px] border-pine-deep p-0 sm:w-[52vw] sm:max-w-[620px]"
+        className="press-cream flex w-full flex-col gap-0 border-l-2 border-brass p-0 sm:w-[52vw] sm:max-w-[620px]"
       >
-        <div className="press-pine flex shrink-0 items-center justify-between gap-3 border-b-2 border-pine-deep px-5 py-3.5">
-          <SheetTitle className="font-display text-[19px] font-bold text-cream">
+        <div className="press-umber flex shrink-0 items-center justify-between gap-3 border-b-2 border-brass px-5 py-3.5">
+          <SheetTitle className="font-display text-[19px] font-bold text-paper">
             {displayItem.nameTh}
           </SheetTitle>
           <button
             onClick={onClose}
             aria-label="ปิด"
-            className="inline-flex size-11 shrink-0 items-center justify-center border-2 border-cream/60 text-cream transition-colors hover:bg-vermillion"
+            className="inline-flex size-11 shrink-0 items-center justify-center border-2 border-brass text-paper transition-colors hover:bg-vermillion"
           >
             <X className="size-5" aria-hidden />
           </button>
@@ -102,12 +102,12 @@ export default function MenuProductDetail({
               <Carousel
                 opts={{ loop: true }}
                 setApi={setCarouselApi}
-                className="group relative border-2 border-pine bg-cream-bright p-2 shadow-plate"
+                className="group relative border-2 border-brass bg-cream-bright p-2 shadow-plate"
               >
                 <CarouselContent className="ml-0">
                   {allImages.map((src, i) => (
                     <CarouselItem key={i} className="pl-0">
-                      <div className="relative aspect-square overflow-hidden border-[1.5px] border-vermillion/70">
+                      <div className="relative aspect-square overflow-hidden border-[1.5px] border-vermillion">
                         <Image
                           src={src}
                           alt={`${displayItem.nameTh} ${i + 1}`}
@@ -122,8 +122,8 @@ export default function MenuProductDetail({
 
                 {hasMultipleImages && (
                   <>
-                    <CarouselPrevious className="press-cream left-4 size-11 border-2 border-pine shadow-sign" />
-                    <CarouselNext className="press-cream right-4 size-11 border-2 border-pine shadow-sign" />
+                    <CarouselPrevious className="press-paper left-4 size-11 border-2 border-brass shadow-sign" />
+                    <CarouselNext className="press-paper right-4 size-11 border-2 border-brass shadow-sign" />
                     <div className="absolute inset-x-0 bottom-5 flex justify-center gap-1.5">
                       {allImages.map((_, i) => (
                         <button
@@ -132,8 +132,8 @@ export default function MenuProductDetail({
                           aria-label={`ดูภาพที่ ${i + 1}`}
                           className={
                             i === imageIndex
-                              ? "h-2.5 w-6 border border-cream bg-vermillion"
-                              : "size-2.5 border border-pine-deep bg-cream"
+                              ? "h-2.5 w-6 border border-paper bg-vermillion"
+                              : "size-2.5 border border-brass bg-paper"
                           }
                         />
                       ))}
@@ -182,14 +182,14 @@ export default function MenuProductDetail({
 
             {displayItem.flavors && displayItem.flavors.length > 0 && (
               <div>
-                <h4 className="mb-2 font-display text-[15px] font-bold text-pine">
+                <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
                   รสชาติ
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {displayItem.flavors.map((flavor) => (
                     <span
                       key={flavor}
-                      className="border-2 border-pine px-3 py-1 font-display text-[15px] font-semibold text-pine"
+                      className="border-2 border-brass px-3 py-1 font-display text-[15px] font-semibold text-brass-text"
                     >
                       {flavor}
                     </span>
@@ -199,16 +199,16 @@ export default function MenuProductDetail({
             )}
 
             <div>
-              <h4 className="mb-2 font-display text-[15px] font-bold text-pine">
+              <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
                 ราคา
               </h4>
               {displayItem.variants ? (
-                <div className="border-2 border-pine shadow-sign">
+                <div className="border-2 border-brass shadow-sign">
                   {displayItem.variants.map((variant, i) => (
                     <div
                       key={variant.label}
                       className={`flex items-center justify-between gap-4 px-4 py-3 ${
-                        i > 0 ? "border-t border-pine/40" : ""
+                        i > 0 ? "border-t border-brass" : ""
                       } ${i % 2 === 1 ? "bg-cream-bright" : ""}`}
                     >
                       <span className="font-body text-ink">{variant.label}</span>
@@ -230,9 +230,9 @@ export default function MenuProductDetail({
           </div>
         </div>
 
-        <div className="press-pine shrink-0 border-t-2 border-pine-deep px-5 py-4">
+        <div className="press-umber shrink-0 border-t-2 border-brass px-5 py-4">
           <div className="flex items-center justify-between gap-4">
-            <span className="font-display text-[17px] font-bold text-cream">
+            <span className="font-display text-[17px] font-bold text-paper">
               สั่งขนมชิ้นนี้
             </span>
             <div className="flex items-center gap-2.5">
@@ -240,14 +240,14 @@ export default function MenuProductDetail({
                 href="https://m.me/chutasbakery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-12 items-center justify-center border-2 border-cream/80 bg-vermillion text-cream shadow-sign transition-colors hover:bg-vermillion-deep"
+                className="inline-flex size-12 items-center justify-center border-2 border-brass bg-vermillion text-paper shadow-sign transition-colors hover:bg-vermillion-deep"
                 aria-label="สั่งผ่าน Facebook Messenger"
               >
                 <FacebookIcon className="size-6" />
               </a>
               <a
                 href="tel:+66645492982"
-                className="inline-flex min-h-12 items-center gap-2 border-2 border-cream/80 bg-vermillion px-4 text-cream shadow-sign transition-colors hover:bg-vermillion-deep"
+                className="inline-flex min-h-12 items-center gap-2 border-2 border-brass bg-vermillion px-4 text-paper shadow-sign transition-colors hover:bg-vermillion-deep"
                 aria-label="โทรสั่งสินค้า"
               >
                 <Phone className="size-5" aria-hidden />

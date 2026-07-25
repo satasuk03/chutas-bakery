@@ -41,17 +41,20 @@ export default function MenuSection() {
   }, [pathname]);
 
   return (
-    <section className="press-cream px-4 py-12 md:px-6">
+    <section className="press-paper px-4 py-12 md:px-6">
       <div className="mx-auto max-w-[1200px]">
         {/* Category filter — sign plates on a rail, not pills. The active
             plate is vermillion so the current filter is obvious at a glance
             for a reader who is not hunting for subtle state.
 
-            The offsets are the measured header height, not a guess: 59px at
-            phone width, 67px from md up where the phone CTA (min-h-11 plus
-            py-2.5 plus a 3px border) makes the bar taller. A single 59px
-            clipped the active plate's top edge behind the header on desktop. */}
-        <div className="press-cream sticky top-[59px] z-30 -mx-4 mb-10 border-b-2 border-pine px-4 py-3 md:-mx-6 md:top-[67px] md:px-6">
+            The offsets are the RENDERED header height, read off the built
+            output at both breakpoints — never derived by adding up borders.
+            The header is now a lacquer bar plus a 2px lacquer-deep border
+            plus a 2px brass hairline, and the phone CTA (min-h-11 plus py-2
+            plus a 2px border) still makes it taller from md up. Re-measure
+            both numbers whenever the bar's construction changes: too small
+            and the active plate's top edge clips behind the header. */}
+        <div className="press-paper sticky top-[60px] z-30 -mx-4 mb-10 border-b-2 border-brass px-4 py-3 md:-mx-6 md:top-[68px] md:px-6">
           <div className="flex flex-wrap justify-center gap-2.5">
             {categories.map((cat) => {
               const active = activeCategory === cat.id;
@@ -62,8 +65,8 @@ export default function MenuSection() {
                   aria-pressed={active}
                   className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[15px] font-bold transition-colors ${
                     active
-                      ? "border-pine-deep bg-vermillion text-cream"
-                      : "press-cream border-pine text-ink shadow-sign hover:shadow-sign-lifted"
+                      ? "border-brass bg-vermillion text-paper"
+                      : "press-cream border-brass text-ink shadow-sign hover:shadow-sign-lifted"
                   }`}
                 >
                   {active && (
@@ -102,16 +105,16 @@ export default function MenuSection() {
             </AnimatePresence>
           </div>
         ) : (
-          <div className="press-pine mx-auto max-w-md border-2 border-pine-deep px-6 py-12 text-center shadow-plate">
-            <p className="font-display text-[21px] font-bold text-cream">
+          <div className="press-umber mx-auto max-w-md border-2 border-brass px-6 py-12 text-center shadow-plate">
+            <p className="font-display text-[21px] font-bold text-paper">
               ยังไม่มีขนมในหมวดนี้
             </p>
-            <p className="mt-2 font-body text-cream">
+            <p className="mt-2 font-body text-paper">
               กำลังเตรียมเมนูใหม่ รอติดตามนะคะ — หรือโทรถามได้เลยค่ะ
             </p>
             <a
               href="tel:0645492982"
-              className="mt-5 inline-flex min-h-11 items-center border-2 border-cream/80 bg-vermillion px-5 py-2.5 font-display text-[15px] font-bold text-cream shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[15px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             >
               โทรสั่ง 064-549-2982
             </a>
