@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-25T00:00:00.000Z",
+  "title": "Design System: Chuta's Bakery",
+  "extensions": {
+    "northStar": "The Shanghai Print Shop — every surface behaves like a sheet off a 1930s lithography press in a Chinese bakery quarter: jade-teal ink as a flat ground, cream enamel sign plates screwed onto it, vermillion seals stamped last.",
+    "colorMeta": {
+      "teal": {
+        "role": "primary",
+        "displayName": "Jade Teal",
+        "canonical": "#5d9d8e",
+        "spec": true,
+        "note": "Owner-specified. The ground the brand IS. Never carries cream text at readable size.",
+        "tonalRamp": ["#eaf3f0", "#b9d7cf", "#8dbcb0", "#5d9d8e", "#46766a", "#2e4e47", "#1a2e29"]
+      },
+      "pine": {
+        "role": "secondary",
+        "displayName": "Sign Green",
+        "canonical": "#1b7257",
+        "spec": true,
+        "note": "Owner-specified. Sign frames, tram lattice, and the dark ground that legally carries cream body text (4.61:1).",
+        "tonalRamp": ["#e7f2ed", "#a9d5c5", "#5aa98d", "#1b7257", "#123f33", "#0d2a22"]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Soft Cream",
+        "canonical": "#f4e2c7",
+        "spec": true,
+        "note": "Owner-specified. Sign plates, display type, and every surface a food photo sits on.",
+        "tonalRamp": ["#fbf1de", "#f4e2c7", "#e6cfa9", "#d3b689", "#a98d63"]
+      },
+      "vermillion": {
+        "role": "tertiary",
+        "displayName": "Seal Vermillion",
+        "canonical": "#c41f14",
+        "spec": true,
+        "note": "Owner-specified. Seals, Chinese characters, primary action. Never a ground for prose and never behind food.",
+        "tonalRamp": ["#fbe6e3", "#ef9a92", "#dc4a3c", "#c41f14", "#a81a10", "#7a120b"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Pine Black",
+        "canonical": "#0d2a22",
+        "spec": false,
+        "note": "Derived. The only text color used on a teal ground (4.87:1). Warmer and greener than black."
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and page titles. Prompt 700. Carries the vermillion registration offset." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings. Prompt 600." },
+      "title": { "displayName": "Title", "purpose": "Card and product names. Prompt 600." },
+      "body": { "displayName": "Body", "purpose": "Prose only. Sarabun 400 at 17px minimum — the primary customer is 43–58." },
+      "label": { "displayName": "Label", "purpose": "Buttons, nav, metadata. Prompt 600." },
+      "seal": { "displayName": "Seal", "purpose": "Chinese characters on seals and sign plates only. Self-hosted 15-glyph Noto Sans SC subset, 3.7 KB." }
+    },
+    "shadows": [
+      { "name": "plate", "value": "3px 3px 0 0 #123f33, 0 6px 18px rgba(13,42,34,0.18)", "purpose": "A cream sign plate screwed to a teal wall. Hard offset is the plate's thickness; soft blur is the room." },
+      { "name": "plate-lifted", "value": "5px 5px 0 0 #123f33, 0 12px 28px rgba(13,42,34,0.24)", "purpose": "Hover state of a plate." },
+      { "name": "sign", "value": "2px 2px 0 0 #0d2a22, 0 4px 14px rgba(13,42,34,0.20)", "purpose": "Smaller plates, buttons, menu cards." },
+      { "name": "seal-press", "value": "inset 0 2px 5px rgba(13,42,34,0.28)", "purpose": "A stamped seal sits INTO the paper, not above it." }
+    ],
+    "motion": [
+      { "name": "press", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "duration": "520ms", "purpose": "A plate arriving on the page." },
+      { "name": "registration-delay", "value": "90ms", "purpose": "The vermillion plate lands a beat after the cream one — a misregistered two-color press." },
+      { "name": "stamp", "value": "cubic-bezier(0.34, 1.4, 0.64, 1)", "duration": "180ms", "purpose": "Seal presses down: scale 1.12 to 1, once, on first reveal." }
+    ],
+    "breakpoints": { "sm": "640px", "md": "768px", "lg": "1024px", "xl": "1280px" },
+    "textures": [
+      {
+        "name": "press-teal / press-cream / press-pine",
+        "purpose": "Halftone dot grid plus paper tooth, applied as a background-image on the element itself (never a pseudo-element, to avoid stacking-context bugs). Without it the printed, textured mascot cutout reads as a sticker on flat CSS.",
+        "opacity": "dots ~20% at 3px pitch; tooth ~4%"
+      }
+    ],
+    "rules": [
+      "The four spec hexes are binding and must never be eyedropped from the delivered images — those render halftone and sample off-spec (#559381 for the ground).",
+      "Cream on teal is 2.48:1 and fails body AND large text. The poster gets away with it at 200px; screens do not. Text on teal is ink.",
+      "Food always sits on cream. Teal and vermillion never touch a bao.",
+      "The Latin wordmark is an image. Its typeface is unidentified, so setting it in a substitute reads as a brand error.",
+      "No text uses opacity to become secondary. Hierarchy is size and weight.",
+      "Corners are 2-4px. The radius scale itself is redefined so a stray rounded-2xl cannot betray the world.",
+      "Icons are the brand's own marks — seals, sign plates, lattice. Functional glyphs (chevron, close, menu, phone) may stay.",
+      "Chinese characters are decorative in a Thai page: aria-hidden, with a Thai label in adjacent text."
+    ],
+    "dos": [
+      "Put every food photo on a cream mat with a vermillion keyline.",
+      "Grain every teal ground so flat fields and printed assets read as one material.",
+      "Use the registration offset on display type — it is the world's native device, not a drop shadow.",
+      "Alternate grounds as full-bleed bands: teal, cream, teal, pine."
+    ],
+    "donts": [
+      "No rounded-2xl, pill-shaped rectangles, or blurred color blobs.",
+      "No lucide Croissant, Wheat, Leaf, Sparkles, Flower2, Cookie, Coffee — the previous brand's voice.",
+      "No glass, backdrop-filter, or gradient mesh.",
+      "No cream body text on a teal ground.",
+      "Don't swap the value tagline and the poster's product list."
+    ],
+    "openQuestions": [
+      "The Latin wordmark's typeface is unidentified and unlicensed.",
+      "Simplified (铺) vs traditional (舖) for a Yaowarat/Teochew audience.",
+      "brands/BRAND.md §13 still describes the previous cream-led identity; this redesign was confirmed for the website only."
+    ]
+  }
+}

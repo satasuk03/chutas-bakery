@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
@@ -54,51 +56,49 @@ export default async function StoryPostPage({
   return (
     <>
       <Header />
-      <main>
-        {/* Cover image hero */}
-        <section className="relative h-[300px] md:h-[400px] overflow-hidden">
-          <img
-            src={post.frontmatter.coverImage}
-            alt={post.frontmatter.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background-dark/70 to-transparent" />
+      <main className="press-teal">
+        {/* Cover print, matted on cream and hung on the teal wall rather than
+            bled full-width — food and process photos never touch the ground. */}
+        <section className="px-4 pt-8 md:px-6 md:pt-12">
+          <div className="press-cream mx-auto max-w-3xl border-2 border-pine p-2.5 shadow-plate">
+            <div className="relative aspect-[16/9] w-full overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright">
+              <Image
+                src={post.frontmatter.coverImage}
+                alt={post.frontmatter.title}
+                fill
+                priority
+                sizes="(min-width: 768px) 768px, 94vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </section>
 
-        {/* Article card */}
-        <section className="px-4 -mt-20 relative z-10 pb-16">
-          <article className="max-w-3xl mx-auto bg-white border border-surface shadow-paper rounded-sm p-6 md:p-10">
-            {/* Title & meta */}
-            <header className="mb-8 border-b border-dashed border-surface pb-6">
-              <h1 className="font-hand text-3xl md:text-4xl text-text-main mb-4 leading-tight">
+        {/* Article plate */}
+        <section className="relative z-10 px-4 pt-6 pb-[clamp(56px,9vw,112px)] md:px-6">
+          <article className="press-cream mx-auto max-w-3xl border-2 border-pine p-6 shadow-plate md:p-10">
+            <header className="mb-9 border-b-2 border-pine pb-6">
+              <h1 className="font-display text-[clamp(1.85rem,5vw,3rem)] leading-tight font-bold text-ink">
                 {post.frontmatter.title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-text-muted">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="size-4" />
-                  <span className="font-body text-sm">
-                    {formatDate(post.frontmatter.date)}
-                  </span>
-                </div>
-
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <span className="font-display text-[15px] font-semibold text-pine">
+                  {formatDate(post.frontmatter.date)}
+                </span>
                 {post.frontmatter.author && (
-                  <div className="flex items-center gap-1.5">
-                    <User className="size-4" />
-                    <span className="font-body text-sm">
-                      {post.frontmatter.author}
-                    </span>
-                  </div>
+                  <span className="font-display text-[15px] font-semibold text-pine">
+                    เขียนโดย {post.frontmatter.author}
+                  </span>
                 )}
               </div>
 
-              {/* Tags */}
               {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-4">
+                <div className="mt-4 flex flex-wrap gap-1.5">
                   {post.frontmatter.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-body text-xs bg-warm-beige text-text-main px-2 py-0.5 rounded-full border border-surface"
+                      className="border border-pine px-2 py-0.5 font-display text-[13px] font-semibold text-pine"
                     >
                       {tag}
                     </span>
@@ -107,20 +107,18 @@ export default async function StoryPostPage({
               )}
             </header>
 
-            {/* MDX content */}
-            <div className="prose-chuta">
+            <div>
               <MDXRemote source={post.content} components={mdxComponents} />
             </div>
 
-            {/* Back link */}
-            <div className="mt-12 pt-6 border-t border-dashed border-surface">
-              <a
+            <div className="mt-12 border-t-2 border-pine pt-6">
+              <Link
                 href="/story"
-                className="inline-flex items-center gap-2 bg-white border-2 border-surface text-text-main px-4 py-2 text-sm font-bold font-body rounded-full shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all"
+                className="press-cream inline-flex min-h-11 items-center gap-2 border-2 border-pine px-4 py-2.5 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               >
-                <ArrowLeft className="size-4" />
-                <span>กลับไปเรื่องราวทั้งหมด</span>
-              </a>
+                <ArrowLeft className="size-4" aria-hidden />
+                กลับไปเรื่องราวทั้งหมด
+              </Link>
             </div>
           </article>
         </section>

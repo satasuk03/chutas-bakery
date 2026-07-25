@@ -1,101 +1,71 @@
-import { ArrowRight, Calendar, Pin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { Post } from "@/types/post";
+import { Seal } from "@/components/brand/Seal";
 
-const tapeColors = [
-  "bg-terracotta/20",
-  "bg-sage/30",
-  "bg-gold/25",
-  "bg-terracotta/15",
-  "bg-sage/20",
-];
-
-const rotations = ["rotate-1", "-rotate-1", "rotate-2", "-rotate-1", "rotate-1"];
-
-function hashString(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return Math.abs(hash);
-}
-
+/**
+ * A story is a print pasted on a cream board — same construction as a product
+ * card, so the two grids read as one system. The scrapbook tape and random
+ * rotation are gone; a pinned post is marked with a 喜 seal instead of a
+ * lucide pin.
+ */
 function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("th-TH", {
+  return new Date(dateStr).toLocaleDateString("th-TH", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
 
-export default function StoryPostCard({
-  post,
-  index,
-}: {
-  post: Post;
-  index: number;
-}) {
-  const hash = hashString(post.slug);
-  const tapeColor = tapeColors[hash % tapeColors.length];
-  const rotation = rotations[index % rotations.length];
+export default function StoryPostCard({ post }: { post: Post; index?: number }) {
+  const href = `/story/${post.slug}`;
 
   return (
-    <article
-      className={`group relative bg-white p-3 pb-6 border border-surface shadow-paper transform ${rotation} hover:rotate-0 hover:scale-105 hover:shadow-paper-hover transition-all duration-300 rounded-sm`}
-    >
-      {/* Tape decoration */}
-      <div
-        className={`absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 ${tapeColor} rotate-2 z-20`}
-      />
+    <article className="press-cream group flex h-full flex-col border-2 border-pine p-2.5 shadow-plate transition-shadow duration-300 hover:shadow-plate-lifted">
+      <div className="relative">
+        <Link
+          href={href}
+          className="relative block aspect-[16/10] overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright"
+        >
+          <Image
+            src={post.frontmatter.coverImage}
+            alt={post.frontmatter.title}
+            fill
+            sizes="(min-width: 1024px) 380px, (min-width: 768px) 45vw, 90vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+          />
+        </Link>
+        {post.frontmatter.pinned && (
+          <Seal
+            glyph="喜"
+            label="เรื่องแนะนำ"
+            className="absolute -top-3 -right-3 size-11 text-[21px]"
+          />
+        )}
+      </div>
 
-      {/* Pinned badge */}
-      {post.frontmatter.pinned && (
-        <div className="absolute top-2 right-2 z-20 bg-gold text-white p-1.5 rounded-full shadow-paper">
-          <Pin className="size-3.5 fill-current" />
-        </div>
-      )}
+      <div className="flex flex-1 flex-col pt-3.5">
+        <p className="font-display text-[15px] font-semibold text-pine">
+          {formatDate(post.frontmatter.date)}
+        </p>
 
-      {/* Cover image */}
-      <a
-        href={`/story/${post.slug}`}
-        className="block relative aspect-[16/10] overflow-hidden mb-4 border border-surface rounded-sm bg-warm-beige"
-      >
-        <img
-          src={post.frontmatter.coverImage}
-          alt={post.frontmatter.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-      </a>
-
-      {/* Content */}
-      <div className="px-1">
-        {/* Date */}
-        <div className="flex items-center gap-1.5 mb-2 text-text-muted">
-          <Calendar className="size-3.5" />
-          <span className="font-body text-xs">
-            {formatDate(post.frontmatter.date)}
-          </span>
-        </div>
-
-        {/* Title */}
-        <a href={`/story/${post.slug}`}>
-          <h2 className="font-hand text-2xl text-text-main leading-tight mb-2 group-hover:text-terracotta transition-colors">
+        <Link href={href} className="mt-1">
+          <h2 className="font-display text-[21px] leading-tight font-bold text-ink underline-offset-4 group-hover:underline">
             {post.frontmatter.title}
           </h2>
-        </a>
+        </Link>
 
-        {/* Excerpt */}
-        <p className="font-body text-sm text-text-muted leading-relaxed mb-3 line-clamp-3">
+        <p className="mt-2 line-clamp-3 font-body text-ink">
           {post.frontmatter.excerpt}
         </p>
 
-        {/* Tags */}
         {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {post.frontmatter.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-body text-xs bg-warm-beige text-text-main px-2 py-0.5 rounded-full border border-surface"
+                className="border border-pine px-2 py-0.5 font-display text-[13px] font-semibold text-pine"
               >
                 {tag}
               </span>
@@ -103,15 +73,14 @@ export default function StoryPostCard({
           </div>
         )}
 
-        {/* Read more */}
-        <div className="border-t border-dashed border-surface pt-3">
-          <a
-            href={`/story/${post.slug}`}
-            className="inline-flex items-center gap-1 bg-white border-2 border-surface text-text-main px-3 py-1 text-sm font-bold font-body rounded-full shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all"
+        <div className="mt-auto border-t-2 border-pine pt-3.5">
+          <Link
+            href={href}
+            className="press-cream inline-flex min-h-11 items-center gap-1.5 border-2 border-pine px-3.5 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
-            <span>อ่านต่อ</span>
-            <ArrowRight className="size-3.5" />
-          </a>
+            อ่านต่อ
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
         </div>
       </div>
     </article>

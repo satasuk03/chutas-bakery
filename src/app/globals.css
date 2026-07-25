@@ -2,154 +2,258 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+/* ─────────────────────────────────────────────────────────────
+   Chuta's Bakery — The Shanghai Print Shop
+   Visual world locked 2026-07-25. See DESIGN.md.
+
+   Four binding spec colors from the owner:
+     teal #5d9d8e · cream #f4e2c7 · vermillion #c41f14 · pine #1b7257
+   Never eyedrop these from the delivered art — it renders halftone
+   and samples off-spec (#559381 for the ground).
+
+   The one measurement this system is built around:
+     cream on teal = 2.48:1 — fails body AND large text.
+   So: text on teal is ink. Cream text lives on pine or vermillion.
+   ───────────────────────────────────────────────────────────── */
+
+/* Chinese seal glyphs — Noto Sans SC subset to the 15 characters the
+   brand actually uses (楚塔包子铺香港福寿桃发糕月饼喜). 3.7 KB per weight.
+   A full CJK face would be megabytes in a static export. */
+@font-face {
+  font-family: "Noto Sans SC Seal";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/noto-sans-sc-seal-700.woff2") format("woff2");
+  unicode-range: U+5305, U+53D1, U+559C, U+5854, U+5B50, U+5BFF, U+6708,
+    U+6843, U+695A, U+6E2F, U+798F, U+7CD5, U+94FA, U+997C, U+9999;
+}
+@font-face {
+  font-family: "Noto Sans SC Seal";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/noto-sans-sc-seal-900.woff2") format("woff2");
+  unicode-range: U+5305, U+53D1, U+559C, U+5854, U+5B50, U+5BFF, U+6708,
+    U+6843, U+695A, U+6E2F, U+798F, U+7CD5, U+94FA, U+997C, U+9999;
+}
 
 @theme inline {
+  /* shadcn bridge — remapped onto the print-shop palette so the Radix
+     primitives (sheet, card, input, navigation-menu) inherit the world */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-  /* ── Chuta's Bakery Brand Tokens ── */
-  --color-burgundy: #800020;
-  --color-cream: #FFFDD0;
-  --color-gold: #D4AF37;
-  --color-charcoal: #333333;
-  --color-terracotta: #C86B5D;
-  --color-background-light: #F9F6F0;
-  --color-background-dark: #221210;
-  --color-text-main: #4A4238;
-  --color-text-muted: #8C867D;
-  --color-sage: #8DA399;
-  --color-surface: #EFECE6;
-  --color-warm-beige: #F5EFE6;
+  /* ── Brand: the four spec colors ── */
+  --color-teal: #5d9d8e;
+  --color-pine: #1b7257;
+  --color-cream: #f4e2c7;
+  --color-vermillion: #c41f14;
 
-  /* ── Font Families ── */
-  --font-hand: var(--font-mali), cursive;
-  --font-body: var(--font-prompt), sans-serif;
-  --font-display: var(--font-sarabun), sans-serif;
+  /* ── Derived. Each exists only because a spec color could not
+        legally carry text at the size it was needed. ── */
+  --color-teal-deep: #46766a; /* cream display type clears 3:1 (4.08) */
+  --color-pine-deep: #123f33; /* footer ground, hard offset shadows   */
+  --color-cream-bright: #fbf1de; /* inner field of a photo mat only   */
+  --color-vermillion-deep: #a81a10; /* hover / pressed                */
+  --color-ink: #0d2a22; /* the only text color on teal (4.87)         */
 
-  /* ── Custom Shadows ── */
-  --shadow-paper: 4px 4px 0px 0px #E6DCCD;
-  --shadow-paper-hover: 6px 6px 0px 0px #DBCAB8;
+  /* ── Type ── */
+  --font-display: var(--font-prompt), ui-sans-serif, sans-serif;
+  --font-body: var(--font-sarabun), ui-sans-serif, sans-serif;
+  --font-seal: "Noto Sans SC Seal", var(--font-prompt), serif;
+
+  /* ── Shape: rectangles and circles, nothing between.
+        The scale is redefined so a stray `rounded-2xl` left anywhere
+        in the codebase still renders as this world, not the last one. ── */
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 3px;
+  --radius-xl: 4px;
+  --radius-2xl: 4px;
+  --radius-3xl: 6px;
+  --radius-4xl: 6px;
+
+  /* ── Depth: printed matter. Hard offset (the plate's thickness)
+        plus soft ambient (the room). Never a zero-offset glow. ── */
+  --shadow-plate: 3px 3px 0 0 #123f33, 0 6px 18px rgba(13, 42, 34, 0.18);
+  --shadow-plate-lifted: 5px 5px 0 0 #123f33, 0 12px 28px rgba(13, 42, 34, 0.24);
+  --shadow-sign: 2px 2px 0 0 #0d2a22, 0 4px 14px rgba(13, 42, 34, 0.2);
+  --shadow-sign-lifted: 4px 4px 0 0 #0d2a22, 0 8px 20px rgba(13, 42, 34, 0.26);
+  --shadow-seal: inset 0 2px 5px rgba(13, 42, 34, 0.28);
+
+  --ease-press: cubic-bezier(0.16, 1, 0.3, 1);
+  /* A stamp presses down and stops dead — it does not spring back. An
+     overshoot curve here read as rubber, which is the wrong material. */
+  --ease-stamp: cubic-bezier(0.12, 0.8, 0.15, 1);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 2px;
+
+  /* shadcn semantic layer, print-shop values */
+  --background: #f4e2c7;
+  --foreground: #0d2a22;
+  --card: #f4e2c7;
+  --card-foreground: #0d2a22;
+  --popover: #fbf1de;
+  --popover-foreground: #0d2a22;
+  --primary: #c41f14;
+  --primary-foreground: #f4e2c7;
+  --secondary: #1b7257;
+  --secondary-foreground: #f4e2c7;
+  --muted: #e6cfa9;
+  --muted-foreground: #3c665c; /* 5.10:1 on cream — passes body */
+  --accent: #5d9d8e;
+  --accent-foreground: #0d2a22;
+  --destructive: #c41f14;
+  --border: #1b7257;
+  --input: #1b7257;
+  --ring: #c41f14;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* ── The press: halftone dot grid + paper tooth ──
+   Applied as background-image on the element itself, never a
+   pseudo-element — a ::after overlay creates a stacking context that
+   fights absolutely-positioned children (the mascot, the seals).
+
+   This is the highest-leverage rule in the system. The delivered
+   mascot and lockup are heavily textured prints; dropped onto flat
+   CSS fields they read as stickers. Grain makes both surfaces one
+   material. */
+@layer utilities {
+  .press-teal,
+  .press-cream,
+  .press-pine,
+  .press-teal-deep {
+    background-image:
+      radial-gradient(circle, rgba(13, 42, 34, 0.2) 0.5px, transparent 1px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    background-size:
+      3px 3px,
+      180px 180px;
+    background-blend-mode: multiply, multiply;
+  }
+  .press-teal {
+    background-color: var(--color-teal);
+  }
+  .press-teal-deep {
+    background-color: var(--color-teal-deep);
+  }
+  .press-pine {
+    background-color: var(--color-pine);
+  }
+  .press-cream {
+    background-color: var(--color-cream);
+    /* cream is the reading surface — tooth only, no dot grid */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /* Registration offset — a misregistered two-color press plate.
+     The world's native device for display lettering. Never body text. */
+  .reg-offset {
+    text-shadow: 0.055em 0.055em 0 var(--color-vermillion);
+  }
+  .reg-offset-pine {
+    text-shadow: 0.055em 0.055em 0 var(--color-pine-deep);
+  }
+
+  /* Ink density at the foot of a full-bleed teal band — the one
+     gradient this system allows. */
+  .ink-foot {
+    background-image: linear-gradient(
+      to bottom,
+      transparent 55%,
+      rgba(18, 63, 51, 0.28) 100%
+    );
+  }
+
+  /* Vertical Chinese sign type (楚塔包子铺 runs top to bottom) */
+  .sign-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0.14em;
+  }
+
+  .font-seal {
+    font-family: var(--font-seal);
+  }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* ── Motion: one authored moment, the press.
+      A plate arrives; its vermillion layer lands a beat late; a seal
+      stamps down once. Everything else is a state change. ── */
+@keyframes plate-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes stamp-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.12) rotate(-4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes lantern-sway {
+  0%,
+  100% {
+    transform: rotate(-1.1deg);
+  }
+  50% {
+    transform: rotate(1.1deg);
+  }
 }
 
 @layer utilities {
-  .mask-torn-paper {
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 H200 V30 Q190 35 180 30 T160 30 T140 30 T120 30 T100 30 T80 30 T60 30 T40 30 T20 30 T0 30 Z' fill='black'/%3E%3C/svg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 H200 V30 Q190 35 180 30 T160 30 T140 30 T120 30 T100 30 T80 30 T60 30 T40 30 T20 30 T0 30 Z' fill='black'/%3E%3C/svg%3E");
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
+  .animate-stamp {
+    animation: stamp-in 180ms var(--ease-stamp) both;
+  }
+  .animate-plate {
+    animation: plate-in 520ms var(--ease-press) both;
+  }
+  /* A hanging sign hangs — it moves because it is on hooks. */
+  .animate-sway {
+    transform-origin: top center;
+    animation: lantern-sway 7s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -159,5 +263,36 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Primary customers are 43–58. Body copy does not go below 17px. */
+  p,
+  li {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  ::selection {
+    background: var(--color-vermillion);
+    color: var(--color-cream);
+  }
+  /* Two-tone focus ring.
+     A single-color ring cannot work in this palette: the grounds span light
+     and dark, so nothing clears 3:1 against all of them. Vermillion — the
+     obvious brand choice — is 1.01:1 on pine and 1.00:1 on a vermillion
+     button, i.e. invisible on the header, the nav, and every primary CTA.
+     Cream and ink are 12:1 against each other, and at least one of the two
+     always clears 3:1 against any ground this system uses, so the pair is
+     legible everywhere. The outline is the load-bearing half because an
+     outline is never clipped by an `overflow: hidden` ancestor. */
+  :focus-visible {
+    outline: 3px solid var(--color-cream);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 8px var(--color-ink);
+  }
+  /* On cream grounds, swap which tone leads. */
+  .press-cream :focus-visible,
+  .press-cream:focus-visible {
+    outline-color: var(--color-ink);
+    box-shadow: 0 0 0 8px var(--color-cream);
   }
 }

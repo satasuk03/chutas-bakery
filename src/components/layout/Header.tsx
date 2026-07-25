@@ -2,45 +2,58 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Croissant, Menu, Phone } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Menu, Phone } from "lucide-react";
+import { BrandMark } from "@/components/brand/Wordmark";
+import { Seal } from "@/components/brand/Seal";
 
+/**
+ * The header is the shop's sign rail — a pine bar across the top of the teal
+ * wall. It is pine and not teal for a measured reason: cream on pine is
+ * 4.61:1, while cream on teal is 2.48:1 and fails at every size.
+ */
 const navItems = [
   { label: "หน้าแรก", href: "/" },
   { label: "เมนู", href: "/menu" },
   { label: "เรื่องราวของเรา", href: "/story" },
 ];
 
+const PHONE = "064-549-2982";
+const PHONE_HREF = "tel:0645492982";
+
 export default function Header() {
   const pathname = usePathname();
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-background-light/95 backdrop-blur-sm border-b border-surface px-4 py-3 shadow-sm transition-all duration-300">
-      <div className="max-w-[1280px] mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <Croissant className="text-terracotta size-7" />
-          <span className="font-hand text-2xl md:text-3xl text-text-main leading-none mt-1">
-            Chuta&apos;s Bakery
-          </span>
+    <header className="press-pine sticky top-0 z-40 w-full border-b-[3px] border-pine-deep">
+      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-4 px-4 py-2.5 md:px-6">
+        <Link
+          href="/"
+          className="-m-1 p-1"
+          aria-label="Chuta's Bakery — ไปหน้าแรก"
+        >
+          <BrandMark />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => {
-            const isActive =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
-
+            const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={active ? "page" : undefined}
                 className={
-                  isActive
-                    ? "font-hand font-bold text-terracotta underline decoration-2 decoration-sage/50 underline-offset-4 text-base tracking-wide"
-                    : "font-hand font-semibold text-text-main hover:text-terracotta transition-colors text-base tracking-wide"
+                  active
+                    ? "border-b-2 border-cream pb-0.5 font-display text-[17px] font-bold text-cream"
+                    : "border-b-2 border-transparent pb-0.5 font-display text-[17px] font-medium text-cream transition-colors hover:border-cream/60"
                 }
               >
                 {item.label}
@@ -49,64 +62,66 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Right side actions */}
-        <div className="flex items-center gap-3">
-          <button
-            className="hidden md:flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2"
-            onClick={() => (window.location.href = "tel:0645492982")}
+        <div className="flex items-center gap-2">
+          {/* Ordering happens on the phone — LINE and calls are the only
+              channels. So the number is the primary action, not a nicety. */}
+          <a
+            href={PHONE_HREF}
+            className="hidden min-h-11 items-center gap-2 border-2 border-cream/80 bg-vermillion px-4 py-2 font-display text-[15px] font-semibold text-cream shadow-sign transition-[transform,box-shadow,background-color] hover:bg-vermillion-deep hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none md:inline-flex"
           >
-            <Phone className="text-terracotta size-5" />
-            <span className="font-bold text-sm text-text-main">โทรสั่งเลย</span>
-          </button>
+            <Phone className="size-4" aria-hidden />
+            <span>โทรสั่ง {PHONE}</span>
+          </a>
 
-          {/* Mobile hamburger */}
           <Sheet>
             <SheetTrigger asChild>
-              <button className="md:hidden p-2 text-text-main hover:text-terracotta transition-colors">
-                <Menu className="size-6" />
+              <button
+                className="-m-1 inline-flex min-h-11 min-w-11 items-center justify-center p-1 text-cream md:hidden"
+                aria-label="เปิดเมนู"
+              >
+                <Menu className="size-7" aria-hidden />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-background-light w-72">
-              <div className="flex flex-col gap-6 mt-10 px-4">
-                <Link href="/" className="flex items-center gap-2 mb-4">
-                  <Croissant className="text-terracotta size-6" />
-                  <span className="font-hand text-2xl text-text-main">
-                    Chuta&apos;s Bakery
-                  </span>
-                </Link>
-                <nav className="flex flex-col gap-5">
-                  {navItems.map((item) => {
-                    const isActive =
-                      item.href === "/"
-                        ? pathname === "/"
-                        : pathname.startsWith(item.href);
+            <SheetContent
+              side="right"
+              className="press-pine w-[19rem] border-l-[3px] border-pine-deep text-cream"
+            >
+              <SheetTitle className="sr-only">เมนูนำทาง</SheetTitle>
+              <div className="flex h-full flex-col gap-8 px-6 pt-14 pb-8">
+                <BrandMark />
 
+                <nav className="flex flex-col">
+                  {navItems.map((item) => {
+                    const active = isActive(item.href);
                     return (
                       <Link
                         key={item.href}
                         href={item.href}
+                        aria-current={active ? "page" : undefined}
                         className={
-                          isActive
-                            ? "font-hand text-2xl text-terracotta"
-                            : "font-hand text-2xl text-text-main hover:text-terracotta transition-colors"
+                          active
+                            ? "flex min-h-14 items-center gap-3 border-b border-cream/25 font-display text-xl font-bold text-cream"
+                            : "flex min-h-14 items-center gap-3 border-b border-cream/25 font-display text-xl font-medium text-cream"
                         }
                       >
+                        {active ? (
+                          <Seal glyph="福" className="size-7 text-[13px]" />
+                        ) : (
+                          <span aria-hidden className="size-7" />
+                        )}
                         {item.label}
                       </Link>
                     );
                   })}
                 </nav>
-                <div className="pt-4 border-t border-surface">
-                  <button
-                    className="flex items-center gap-2 bg-white border-2 border-surface shadow-paper hover:shadow-paper-hover active:translate-x-[2px] active:translate-y-[2px] transition-all rounded-xl px-4 py-2 w-full justify-center"
-                    onClick={() => (window.location.href = "tel:0645492982")}
-                  >
-                    <Phone className="text-terracotta size-5" />
-                    <span className="font-bold text-sm text-text-main">
-                      โทรสั่งเลย
-                    </span>
-                  </button>
-                </div>
+
+                <a
+                  href={PHONE_HREF}
+                  className="mt-auto inline-flex min-h-12 items-center justify-center gap-2 border-2 border-cream/80 bg-vermillion px-4 py-3 font-display text-base font-semibold text-cream shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                >
+                  <Phone className="size-5" aria-hidden />
+                  โทรสั่ง {PHONE}
+                </a>
               </div>
             </SheetContent>
           </Sheet>

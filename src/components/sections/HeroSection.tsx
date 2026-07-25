@@ -1,16 +1,39 @@
 "use client";
 
+/**
+ * ── DIRECTION CONTRACT ────────────────────────────────────────────────
+ * THESIS: The first viewport is a printed poster, not a hero section. It
+ *   refuses the category default this replaced — centered script headline,
+ *   rounded photo card, blurred terracotta blob.
+ * OWN-WORLD: Halftoned jade-teal ground; cream enamel plates with pine
+ *   frames and hard 3px offsets; vermillion seals stamped into the paper;
+ *   Chinese sign type; tram lattice. Recognizable with all copy removed.
+ * STORY: This is a Chinese auspicious bakery with a real person behind it;
+ *   the sweets are handmade and fresh; you order by calling.
+ * FIRST VIEWPORT: Mascot bleeds off the bottom-right, oversized vermillion
+ *   楚塔 behind her, lattice further back. Left: a teal-deep press plate
+ *   carrying the display headline, a cream sign plate with the product line
+ *   and the value tagline, then the phone CTA. 福 stamped top-left,
+ *   香港包子 bottom-right. A real photo of the bao is pasted on a cream mat
+ *   across the mascot's skirt.
+ * FORM: Brief-pinned world (1930s Shanghai / guofeng poster) — no concept
+ *   roll. Staging: "poster plate, landscape", confirmed by the user.
+ * ─────────────────────────────────────────────────────────────────────
+ */
+
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { ArrowRight, CheckCircle, Heart, Truck, Flower2 } from "lucide-react";
-import { FadeIn } from "@/components/ui/fade-in";
+import { Phone, ArrowRight } from "lucide-react";
+import { Seal, BaoziSeal } from "@/components/brand/Seal";
+import { LatticePanel } from "@/components/brand/Lattice";
+import { StandingSign } from "@/components/brand/SignPlate";
 
+/** Real product photography. Kept from the previous build — it is product truth. */
 const heroImages = [
-  { src: "/peach-hero-crop.webp", alt: "ขนมมงคลโฮมเมดจาก Chuta's Bakery" },
   { src: "/menu/bao-basket.webp", alt: "ซาลาเปาในตะกร้า จาก Chuta's Bakery" },
   { src: "/menu/peach-bao.webp", alt: "ซิ่วท้อ จาก Chuta's Bakery" },
-  { src: "/menu/fa-gao-small-bao.webp", alt: "ฮวกก้วยเล็ก จาก Chuta's Bakery" },
   { src: "/menu/fa-gao-bao.webp", alt: "ฮวกก้วยใหญ่ จาก Chuta's Bakery" },
+  { src: "/menu/fa-gao-small-bao.webp", alt: "ฮวกก้วยเล็ก จาก Chuta's Bakery" },
 ];
 
 export default function HeroSection() {
@@ -21,147 +44,170 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000);
+    const interval = setInterval(nextSlide, 4200);
     return () => clearInterval(interval);
   }, [nextSlide]);
 
   return (
-    <section className="relative flex items-center pt-8 pb-12 md:py-16 overflow-hidden px-4">
-      {/* Background blobs */}
-      <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+    <section className="press-teal relative overflow-hidden">
+      {/* Ink density at the foot of the sheet — the one gradient allowed.
+          z-0, not above the content: the grid below is `relative` with no
+          z-index, so it opens no stacking context and a z-30 overlay here
+          painted a ~21% pine wash over the plates and the proof row,
+          quietly pulling ink-on-teal from 4.87 down to about 4.15. This
+          belongs in the ground, which is where it now sits. */}
+      <div
+        aria-hidden
+        className="ink-foot pointer-events-none absolute inset-0 z-0"
+      />
 
-      <div className="mx-auto max-w-5xl w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
-        {/* Text Content */}
-        <div className="order-2 md:order-1 flex flex-col gap-5 md:gap-6 text-center md:text-left">
-          {/* Badge */}
-          <FadeIn delay={0}>
-            <div className="inline-flex w-fit mx-auto md:mx-0 items-center gap-2 rounded-full border border-terracotta/25 bg-terracotta/8 px-4 py-1.5 font-hand text-sm text-terracotta">
-              ✨ ไหว้แล้วเฮง!
-            </div>
-          </FadeIn>
-
-          {/* Main headline */}
-          <FadeIn delay={0.1}>
-            <h1 className="font-hand font-bold text-5xl md:text-6xl lg:text-7xl leading-tight text-text-main">
-              เบเกอรี่<span className="text-terracotta">ชุตา</span>
+      <div className="relative mx-auto grid max-w-[1200px] items-center gap-8 px-4 pt-10 pb-0 md:min-h-[86vh] md:grid-cols-[1.05fr_1fr] md:gap-6 md:px-6 md:pt-12">
+        {/* ── Left: the press plate.
+            Text before figure at every width: a first-time visitor has to
+            know what this shop is before they meet its mascot. ── */}
+        <div className="animate-plate relative z-20 md:pb-16">
+          {/* Cream on teal-deep is 4.08:1 — legal for display scale only,
+              which is exactly what this is. Never reuse for body copy. */}
+          <div className="press-teal-deep inline-block border-2 border-pine-deep px-5 py-4 shadow-plate md:px-8 md:py-7">
+            <h1 className="reg-offset font-display text-[clamp(2.9rem,11vw,5.25rem)] leading-[0.95] font-bold tracking-[-0.025em] text-cream">
+              ชุตา
+              <br />
+              เบเกอรี่
             </h1>
-          </FadeIn>
+          </div>
 
-          {/* Quote */}
-          <FadeIn delay={0.2}>
-            <p className="font-hand text-xl md:text-2xl text-terracotta font-medium italic">
-              &ldquo;ซาลาเปา ซิ่วท้อ ฮวกก้วย&rdquo;
-            </p>
-          </FadeIn>
-
-          {/* Description */}
-          <FadeIn delay={0.3}>
-            <p className="font-body text-base md:text-lg text-text-muted leading-relaxed max-w-md mx-auto md:mx-0">
-              พบกับขนมมงคลโฮมเมด ที่เราตั้งใจคัดสรรวัตถุดิบชั้นดี ทำสดใหม่ทุกวัน
-              เพื่อช่วงเวลาพิเศษของคุณและคนที่คุณรัก
-            </p>
-          </FadeIn>
-
-          {/* CTAs */}
-          <FadeIn delay={0.4}>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-1">
-              <a
-                href="/menu"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-terracotta px-8 py-3.5 font-hand font-bold text-lg text-white shadow-lg hover:bg-terracotta/90 hover:shadow-terracotta/30 hover:-translate-y-0.5 transition-all"
-              >
-                <span>ดูรายการขนม</span>
-                <ArrowRight className="size-5" />
-              </a>
-              <a
-                href="https://facebook.com/chutasbakery/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-surface bg-white px-8 py-3.5 font-hand font-bold text-lg text-text-main hover:bg-warm-beige hover:-translate-y-0.5 transition-all shadow-sm"
-              >
-                ติดต่อสอบถาม
-              </a>
+          {/* The poster's product line + the brand's value tagline. These are
+              different things and BRAND.md §12 keeps them separate. */}
+          {/* 福 is stamped onto the corner of the plate, the way a seal is
+              actually applied — not floated beside it as an icon. */}
+          <div className="relative mt-5 inline-block">
+            <div className="press-cream border-2 border-pine px-5 py-4 pl-9 shadow-plate md:pl-11">
+              <p className="font-display text-[17px] leading-snug font-bold text-vermillion md:text-[19px]">
+                ซาลาเปา · ซิ่วท้อ · ขนมตามเทศกาล
+              </p>
+              <p className="mt-1.5 max-w-[34ch] font-body text-ink">
+                ขนมมงคลสดใหม่ ทำมือ ไม่ใส่สารกันบูด
+              </p>
             </div>
-          </FadeIn>
+            <Seal
+              glyph="福"
+              label="ฮก — โชคลาภ"
+              stamp
+              className="absolute -top-4 -left-5 size-12 text-[21px] md:-top-5 md:-left-6 md:size-14 md:text-[26px]"
+            />
+          </div>
 
-          {/* Trust badges */}
-          <FadeIn delay={0.5}>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2 text-sm font-body text-text-muted">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle className="size-4 text-terracotta" />
-                <span>วัตถุดิบพรีเมียม</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Heart className="size-4 text-terracotta" />
-                <span>ทำด้วยใจ</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Truck className="size-4 text-terracotta" />
-                <span>ส่งทั่วไทย</span>
-              </div>
-            </div>
-          </FadeIn>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="tel:0645492982"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border-2 border-cream/80 bg-vermillion px-6 py-3 font-display text-[17px] font-bold text-cream shadow-plate transition-[transform,box-shadow,background-color] hover:bg-vermillion-deep hover:shadow-plate-lifted active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
+            >
+              <Phone className="size-5" aria-hidden />
+              โทรสั่ง 064-549-2982
+            </a>
+            <a
+              href="/menu"
+              className="press-cream inline-flex min-h-12 items-center justify-center gap-2 border-2 border-pine px-6 py-3 font-display text-[17px] font-bold text-ink shadow-plate transition-[transform,box-shadow] hover:shadow-plate-lifted active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
+            >
+              ดูรายการขนม
+              <ArrowRight className="size-5" aria-hidden />
+            </a>
+          </div>
+
+          {/* Proof, in ink on teal — 4.87:1 */}
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            {["ทำมือทุกชิ้น", "สดใหม่ทุกวัน", "ไม่ใส่สารกันบูด"].map((t) => (
+              <li
+                key={t}
+                className="font-display text-[15px] font-semibold text-ink"
+              >
+                <span aria-hidden className="mr-1.5 text-vermillion">
+                  ✚
+                </span>
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Image */}
-        <FadeIn direction="left" delay={0.2} className="order-1 md:order-2">
-          <div className="flex flex-col items-center px-6 md:px-0 gap-4">
-            {/* Image container */}
-            <div className="relative w-full max-w-sm md:max-w-md aspect-square">
-              {/* Pulsing background */}
-              <div className="absolute inset-0 bg-terracotta/15 rounded-full scale-90 animate-pulse" />
+        {/* ── Right: the figure ── */}
+        <div className="relative min-h-[420px] self-end md:min-h-[86vh]">
+          {/* tram scaffold, furthest back */}
+          <LatticePanel className="absolute top-0 right-2 h-[62%] w-auto opacity-45 md:right-4 md:h-[68%]" />
 
-              {/* Photo */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl border-8 border-white rotate-3 hover:rotate-0 transition-transform duration-700 z-10">
-                {heroImages.map((img, i) => (
-                  <Image
-                    key={img.src}
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    priority={i === 0}
-                    className={`object-cover transition-opacity duration-1000 ${
-                      i === currentIndex ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-                ))}
-                <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-cream/20 to-transparent mix-blend-overlay" />
-              </div>
+          {/* 楚塔 as a sign hung on the scaffold, not as a giant glyph behind
+              the figure.
 
-              {/* Floating badge — anchored to bottom-left of image frame */}
-              <div className="absolute -bottom-4 -left-4 md:-bottom-4 md:-left-10 z-20 animate-[float_6s_ease-in-out_infinite]">
-                <div className="bg-terracotta text-white p-4 rounded-full w-20 h-20 md:w-24 md:h-24 flex flex-col items-center justify-center text-center shadow-xl border-4 border-dashed border-white/30">
-                  <span className="font-hand font-bold text-lg md:text-xl leading-none">
-                    100%
-                  </span>
-                  <span className="font-body text-[9px] md:text-[10px] mt-0.5 leading-tight">
-                    Homemade
-                  </span>
-                </div>
-              </div>
+              The delivered lockup does set 楚塔 huge in red behind the mascot,
+              and that works because the lockup is square — the glyphs clear her
+              silhouette on both sides. In a landscape viewport the same figure
+              is the full height of the column and covers all but an edge of
+              them, which reads as a stray red mark rather than the shop's name.
+              So the hero takes the device from the *poster* instead, where 楚塔
+              hangs on a cream plate against the green ironwork. */}
+          <StandingSign
+            glyphs="楚塔"
+            label="ชุตา"
+            className="animate-sway absolute top-0 right-1 z-20 text-[15px] md:right-6 md:text-[19px]"
+          />
 
-              {/* Decorative flower icon */}
-              <div className="absolute -top-4 right-8 z-20">
-                <Flower2 className="size-10 md:size-12 text-terracotta drop-shadow-lg rotate-12 opacity-80" />
-              </div>
-            </div>
+          {/* the mascot, bleeding off the bottom edge as the sketch had her */}
+          <Image
+            src="/brand/mascot.webp"
+            alt="มาสคอตชุตาเบเกอรี่ หญิงสาวในกี่เพ้าแดงถือลูกท้อซิ่วท้อ"
+            width={1000}
+            height={1826}
+            priority
+            sizes="(min-width: 768px) 44vw, 80vw"
+            className="relative z-10 mx-auto block h-auto w-[76%] max-w-[400px] translate-y-[2px] md:absolute md:right-[-2%] md:bottom-0 md:mx-0 md:w-[88%] md:max-w-none"
+          />
 
-            {/* Carousel dots — outside the image container, no overlap */}
-            <div className="flex justify-center gap-1.5 pt-2">
-              {heroImages.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  aria-label={`ดูภาพที่ ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
-                    i === currentIndex
-                      ? "w-5 h-2 bg-terracotta"
-                      : "w-2 h-2 bg-terracotta/30 hover:bg-terracotta/60"
+          {/* a real photo of the sweets, pasted on a cream mat.
+              Food never touches teal — this is the rule the mat exists for. */}
+          <div className="press-cream absolute bottom-3 left-0 z-20 w-[42%] max-w-[190px] border-2 border-pine p-1.5 shadow-plate md:bottom-16 md:left-0 md:w-[38%] md:max-w-[220px] md:p-2">
+            <div className="relative aspect-square w-full overflow-hidden border-[1.5px] border-vermillion/70 bg-cream-bright">
+              {heroImages.map((img, i) => (
+                <Image
+                  key={img.src}
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="220px"
+                  className={`object-cover transition-opacity duration-700 ${
+                    i === currentIndex ? "opacity-100" : "opacity-0"
                   }`}
                 />
               ))}
             </div>
+            <div className="flex items-center justify-between px-0.5 pt-2">
+              <span className="font-display text-[13px] font-bold text-ink">
+                ทำสดทุกเช้า
+              </span>
+              <span className="flex gap-1">
+                {heroImages.map((img, i) => (
+                  <button
+                    key={img.src}
+                    onClick={() => setCurrentIndex(i)}
+                    aria-label={`ดูภาพขนมที่ ${i + 1}`}
+                    aria-current={i === currentIndex}
+                    className={
+                      i === currentIndex
+                        ? "size-2 bg-vermillion"
+                        : "size-2 border border-pine bg-transparent"
+                    }
+                  />
+                ))}
+              </span>
+            </div>
           </div>
-        </FadeIn>
+
+          {/* 香港包子 — the shop's other sign, stamped bottom-right */}
+          <BaoziSeal
+            stamp
+            className="absolute right-1 bottom-4 z-20 w-[76px] text-[13px] md:right-2 md:bottom-8 md:w-[104px] md:text-[17px]"
+          />
+        </div>
       </div>
     </section>
   );

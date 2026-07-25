@@ -1,35 +1,31 @@
-"use client";
-
-import { CakeSlice } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { HangingSign } from "@/components/brand/SignPlate";
+import { BaoziSeal } from "@/components/brand/Seal";
 
 export default function MenuHeroSection() {
   return (
-    <section className="py-16 px-4 relative overflow-hidden bg-warm-beige">
-      {/* Background blobs */}
-      <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] bg-terracotta/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+    <section className="press-teal relative overflow-hidden px-4 py-[clamp(48px,7vw,88px)] md:px-6">
+      <div className="mx-auto flex max-w-[900px] flex-col items-center text-center">
         <FadeIn>
-          <CakeSlice className="text-sage size-14 mx-auto mb-4" />
+          <HangingSign sway>
+            <h1 className="font-display text-[clamp(1.85rem,5vw,3rem)] leading-none font-bold text-vermillion">
+              เมนูของเรา
+            </h1>
+          </HangingSign>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <h1 className="font-hand text-4xl md:text-5xl text-text-main mb-6">
-            เมนูของเรา
-          </h1>
+        <FadeIn delay={0.08}>
+          {/* The poster's product line belongs here — it is a product list. */}
+          <p className="mt-10 font-display text-[19px] font-bold text-ink md:text-[21px]">
+            ซาลาเปา · ซิ่วท้อ · ขนมตามเทศกาล
+          </p>
+          <p className="press-cream mt-5 inline-block border-2 border-pine px-5 py-3 font-body text-ink shadow-plate">
+            มีบริการจัดส่งคิดตามระยะทาง หรือมารับเองได้ที่ร้านค่ะ
+          </p>
         </FadeIn>
 
-        {/* Decorative divider */}
-        <div className="w-24 h-1 bg-terracotta/30 mx-auto mb-8 rounded-full" />
-
-        <FadeIn delay={0.2}>
-          <p className="font-body text-xl text-text-main/80 leading-relaxed max-w-2xl mx-auto">
-            เพราะเราอยากส่งต่อความอร่อยแบบโฮมเมดถึงมือคุณ
-          </p>
-          <p className="font-body text-sm text-text-main/80 leading-relaxed max-w-2xl mx-auto">
-            มีบริการจัดส่งคิดตามระยะทาง หรือสามารถมารับเองได้ที่ร้านค่า
-          </p>
+        <FadeIn delay={0.16}>
+          <BaoziSeal className="mt-9 w-[100px] text-[17px]" stamp />
         </FadeIn>
       </div>
     </section>

@@ -1,9 +1,23 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { Cookie, Coffee, Wheat, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import calendarData from "@/data/calendar-events.json";
+import { HangingSign } from "@/components/brand/SignPlate";
+import { Seal } from "@/components/brand/Seal";
 
+/**
+ * The festival calendar as a rail of hanging tags.
+ *
+ * A Chinese shop hangs its dates from a rail; it does not put them in
+ * gradient-filled rounded rectangles. Each date is a cream enamel tag on two
+ * hooks. Scroll, snap, arrow, and dot behavior are unchanged from the previous
+ * build — this is a visual replacement, not a behavior change.
+ *
+ * Past dates are NOT dimmed with opacity: the primary customer is 43–58 and
+ * faded text is the first thing to fail for that reader. A past tag switches
+ * its date from vermillion to pine and carries a "ผ่านมาแล้ว" stamp instead.
+ */
 const thaiDays = [
   "อาทิตย์",
   "จันทร์",
@@ -29,15 +43,16 @@ const thaiMonths = [
   "ธันวาคม",
 ];
 
-const iconMap: Record<string, React.ElementType> = {
-  cookie: Cookie,
-  coffee: Coffee,
-  wheat: Wheat,
+/** Major festivals get 福; recurring merit days get their own mark. */
+const sealFor: Record<string, string> = {
+  wheat: "福",
+  cookie: "喜",
+  coffee: "包子",
 };
 
 const events = calendarData.events.map((e) => ({
   ...e,
-  icon: iconMap[e.icon] ?? Wheat,
+  seal: sealFor[e.icon] ?? "福",
   date: new Date(e.date),
 }));
 
@@ -77,26 +92,31 @@ export default function CalendarSection() {
   };
 
   return (
-    <section className="py-14 md:py-20">
-      <div className="px-4 max-w-[1280px] mx-auto text-center mb-12">
-        <h2 className="font-hand text-3xl md:text-4xl text-text-main mb-2">
-          🏮 ปฏิทินวันไหว้ 🏮
-        </h2>
-        <p className="font-body text-text-muted">ไหว้ตามเทศกาล</p>
+    <section className="press-teal relative overflow-hidden py-[clamp(56px,9vw,112px)]">
+      <div className="mx-auto mb-4 flex max-w-[1200px] flex-col items-center px-4 text-center md:px-6">
+        <HangingSign>
+          <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-vermillion">
+            ปฏิทินวันไหว้
+          </h2>
+        </HangingSign>
+        <p className="mt-6 font-body font-medium text-ink">
+          ไหว้ตามเทศกาล — สั่งล่วงหน้าเพื่อให้ได้ของสด
+        </p>
       </div>
 
       <div className="relative">
-        {/* Carousel strip */}
+        {/* the rail the tags hang from */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-[62px] right-0 left-0 h-[3px] bg-pine-deep"
+        />
+
         <div
           ref={stripRef}
-          className="flex gap-5 overflow-x-auto snap-x snap-mandatory py-10 [&::-webkit-scrollbar]:hidden"
-          style={{
-            paddingInline: "calc(50vw - 7rem)",
-            scrollbarWidth: "none",
-          }}
+          className="flex gap-5 overflow-x-auto py-10 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden"
+          style={{ paddingInline: "calc(50vw - 7rem)", scrollbarWidth: "none" }}
         >
           {events.map((event, i) => {
-            const Icon = event.icon;
             const d = new Date(event.date);
             d.setHours(0, 0, 0, 0);
             const isPast = d < today;
@@ -109,66 +129,75 @@ export default function CalendarSection() {
                 ref={(el) => {
                   cardRefs.current[i] = el;
                 }}
-                className="snap-center flex-none"
+                className="flex-none snap-center"
               >
                 <a
                   href={event.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    if (!isActive) {
-                      goTo(i);
-                    }
+                    if (!isActive) goTo(i);
                   }}
-                  className={`block relative w-56 h-72 rounded-[2rem] overflow-hidden border-2 transition-all duration-500 ${
-                    isActive
-                      ? "border-gold shadow-paper-hover scale-105"
-                      : isPast
-                        ? "border-surface shadow-paper scale-95 grayscale opacity-60 hover:opacity-80 hover:grayscale-0 cursor-pointer"
-                        : "border-surface shadow-paper scale-95 opacity-65 hover:opacity-85 cursor-pointer"
-                  }`}
+                  aria-current={isActive ? "true" : undefined}
+                  className="group flex w-56 flex-col items-center focus-visible:outline-none"
                 >
-                  {/* Gradient background */}
+                  {/* hooks */}
+                  <span
+                    aria-hidden
+                    className="flex w-14 justify-between transition-transform duration-500"
+                  >
+                    <span className="h-5 w-[3px] bg-pine-deep" />
+                    <span className="h-5 w-[3px] bg-pine-deep" />
+                  </span>
+
+                  {/* the tag */}
                   <div
-                    className={`absolute inset-0 bg-linear-to-br ${event.gradient} transition-transform duration-700 ${isActive ? "scale-105" : ""}`}
-                  />
-                  <div className="absolute inset-0 bg-black/5" />
+                    className={`press-cream relative w-full px-5 pt-6 pb-7 transition-all duration-500 ${
+                      isActive
+                        ? "scale-[1.04] border-[3px] border-vermillion shadow-plate-lifted"
+                        : "scale-[0.96] border-2 border-pine shadow-plate group-hover:scale-100"
+                    }`}
+                  >
+                    {isActive && (
+                      <Seal
+                        glyph={event.seal}
+                        className={`absolute -top-4 -right-4 ${
+                          event.seal.length > 1
+                            ? "size-11 text-[15px]"
+                            : "size-11 text-[21px]"
+                        }`}
+                      />
+                    )}
 
-                  {/* Status badge — active card */}
-                  {isActive && (
-                    <div className="absolute top-4 left-0 right-0 flex justify-center z-10">
-                      <span className="bg-white/90 text-gold text-xs font-body px-3 py-1 rounded-full border border-gold/40 shadow-sm">
-                        {isPast ? "ผ่านมาแล้ว" : isToday ? "วันนี้!" : "ถัดไป"}
-                      </span>
-                    </div>
-                  )}
+                    <p
+                      className={`text-center font-display text-[3.5rem] leading-none font-bold ${
+                        isPast ? "text-pine" : "text-vermillion"
+                      }`}
+                    >
+                      {d.getDate()}
+                    </p>
+                    <p className="mt-1.5 text-center font-display text-[15px] font-semibold text-ink">
+                      {thaiMonths[d.getMonth()]}
+                    </p>
+                    <p className="text-center font-body text-ink">
+                      วัน{thaiDays[d.getDay()]}
+                    </p>
 
-                  {/* Past ribbon — non-active past cards */}
-                  {isPast && !isActive && (
-                    <div className="absolute top-3 left-0 right-0 flex justify-center z-10">
-                      <span className="bg-black/20 text-white/80 text-[10px] font-body px-2.5 py-0.5 rounded-full">
-                        ผ่านมาแล้ว
-                      </span>
-                    </div>
-                  )}
+                    <span
+                      aria-hidden
+                      className="mx-auto my-3 block h-[2px] w-10 bg-vermillion"
+                    />
 
-                  {/* Card content */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-5">
-                    <div className="bg-white/90 backdrop-blur-md px-5 py-4 rounded-xl border border-surface shadow-sm w-full">
-                      <p className="font-display font-bold text-5xl text-text-main leading-none">
-                        {d.getDate()}
-                      </p>
-                      <p className="font-body text-xs text-text-muted mt-1">
-                        {thaiMonths[d.getMonth()]}
-                      </p>
-                      <p className="font-body text-xs text-text-muted mb-3">
-                        วัน{thaiDays[d.getDay()]}
-                      </p>
-                      <div className="w-8 h-px bg-surface mx-auto mb-3" />
-                      <Icon className="text-terracotta size-7 mx-auto mb-2" />
-                      <h3 className="font-hand text-base text-text-main leading-snug">
-                        {event.title}
-                      </h3>
-                    </div>
+                    <h3 className="text-center font-display text-[17px] leading-snug font-bold text-ink">
+                      {event.title}
+                    </h3>
+
+                    <p
+                      className={`mt-3 text-center font-display text-[13px] font-bold ${
+                        isPast ? "text-pine" : "text-vermillion"
+                      }`}
+                    >
+                      {isPast ? "ผ่านมาแล้ว" : isToday ? "วันนี้!" : "ถัดไป"}
+                    </p>
                   </div>
                 </a>
               </div>
@@ -176,41 +205,46 @@ export default function CalendarSection() {
           })}
         </div>
 
-        {/* Prev arrow */}
         <button
           onClick={() => goTo(activeIdx - 1)}
           disabled={activeIdx === 0}
           aria-label="ย้อนกลับ"
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-surface shadow-paper rounded-full p-2.5 hover:shadow-paper-hover transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed"
+          className="press-cream absolute top-1/2 left-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-pine shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-pine/40 md:left-6"
         >
-          <ChevronLeft className="size-5 text-text-main" />
+          <ChevronLeft className="size-6 text-ink" aria-hidden />
         </button>
-
-        {/* Next arrow */}
         <button
           onClick={() => goTo(activeIdx + 1)}
           disabled={activeIdx === events.length - 1}
           aria-label="ถัดไป"
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-surface shadow-paper rounded-full p-2.5 hover:shadow-paper-hover transition-all duration-200 disabled:opacity-25 disabled:cursor-not-allowed"
+          className="press-cream absolute top-1/2 right-3 z-10 grid size-12 -translate-y-1/2 place-items-center border-2 border-pine shadow-plate transition-shadow hover:shadow-plate-lifted disabled:cursor-not-allowed disabled:border-pine/40 md:right-6"
         >
-          <ChevronRight className="size-5 text-text-main" />
+          <ChevronRight className="size-6 text-ink" aria-hidden />
         </button>
       </div>
 
-      {/* Dot indicators */}
-      <div className="flex justify-center items-center gap-2 mt-3">
-        {events.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`ไปที่วันที่ ${i + 1}`}
-            className={`rounded-full transition-all duration-300 ${
-              i === activeIdx
-                ? "w-6 h-2 bg-gold"
-                : "w-2 h-2 bg-surface hover:bg-text-muted"
-            }`}
-          />
-        ))}
+      {/* 27 dots is 27 things to aim at. A counter and a progress rule read
+          faster, and the arrows already do the stepping. */}
+      {/* On a cream plate, not loose on the teal: vermillion on teal is
+          1.88:1, and this counter is information, not ornament. */}
+      <div className="mx-auto mt-2 w-fit px-4">
+        <div className="press-cream flex flex-col items-center gap-2 border-2 border-pine px-5 py-3 shadow-plate">
+          <p className="font-display text-[15px] font-bold text-ink">
+            <span className="text-vermillion">{activeIdx + 1}</span> /{" "}
+            {events.length} วันไหว้ในปีนี้
+          </p>
+          <div
+            className="h-2 w-[180px] border-2 border-pine-deep"
+            role="presentation"
+          >
+            <div
+              className="h-full bg-vermillion transition-[width] duration-500"
+              style={{
+                width: `${((activeIdx + 1) / events.length) * 100}%`,
+              }}
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

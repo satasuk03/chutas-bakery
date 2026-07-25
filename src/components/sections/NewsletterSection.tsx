@@ -2,49 +2,82 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Mail } from "lucide-react";
+import { Seal } from "@/components/brand/Seal";
 
+/**
+ * Not rendered on the home page today (see page.tsx) — restyled into the new
+ * world so it is ready if it ships, rather than left as a terracotta relic.
+ *
+ * There is no mailing-list backend, so the form does not pretend to succeed:
+ * submitting shows the shop's real channels instead of a fake confirmation.
+ */
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="py-24 px-4 bg-terracotta text-white relative overflow-hidden">
-      {/* Dot pattern overlay */}
-      <div
-        className="absolute top-0 left-0 w-full h-full opacity-10"
-        style={{
-          backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      />
+    <section className="press-pine px-4 py-[clamp(56px,9vw,112px)] text-cream md:px-6">
+      <div className="mx-auto max-w-[640px]">
+        <div className="relative">
+          <div className="press-cream border-2 border-pine-deep px-6 py-8 shadow-plate md:px-10">
+            <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink">
+              ไม่พลาดข่าวขนมตามเทศกาล
+            </h2>
+            <p className="mt-2 max-w-[46ch] font-body text-ink">
+              ทิ้งอีเมลไว้ เราจะแจ้งเมื่อเปิดรับออเดอร์ขนมไหว้รอบถัดไป
+            </p>
 
-      <div className="max-w-2xl mx-auto text-center relative z-10">
-        <Mail className="size-12 mx-auto mb-4 animate-bounce" />
-
-        <h2 className="font-hand text-3xl md:text-4xl mb-4">ไม่พลาดข่าวสารจากเตา</h2>
-
-        <p className="font-body text-white/90 mb-8">
-          รับข่าวสารเมนูพิเศษและโปรโมชั่นก่อนใคร ส่งตรงถึงอีเมลคุณ
-        </p>
-
-        <form
-          className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <Input
-            type="email"
-            placeholder="อีเมลของคุณ"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 px-6 py-3 rounded-full text-text-main border-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-0 shadow-lg placeholder:text-text-muted/70 font-body bg-white"
+            {submitted ? (
+              <div className="mt-6 border-2 border-vermillion px-5 py-4">
+                <p className="font-display text-[17px] font-bold text-vermillion">
+                  ขอบคุณค่ะ
+                </p>
+                <p className="mt-1 font-body text-ink">
+                  ตอนนี้เรารับออเดอร์ทางโทรศัพท์และเฟซบุ๊กเป็นหลัก — โทร{" "}
+                  <a
+                    href="tel:0645492982"
+                    className="font-semibold text-vermillion underline decoration-2 underline-offset-2"
+                  >
+                    064-549-2982
+                  </a>{" "}
+                  ได้เลยค่ะ
+                </p>
+              </div>
+            ) : (
+              <form
+                className="mt-6 flex flex-col gap-3 sm:flex-row"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSubmitted(true);
+                }}
+              >
+                <label htmlFor="newsletter-email" className="sr-only">
+                  อีเมลของคุณ
+                </label>
+                <Input
+                  id="newsletter-email"
+                  type="email"
+                  required
+                  placeholder="อีเมลของคุณ"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-12 flex-1 rounded-none border-2 border-pine bg-cream-bright font-body text-ink placeholder:text-pine"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex min-h-12 items-center justify-center border-2 border-cream/80 bg-vermillion px-6 font-display text-[17px] font-bold whitespace-nowrap text-cream shadow-sign transition-[transform,box-shadow,background-color] hover:bg-vermillion-deep active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                >
+                  ติดตาม
+                </button>
+              </form>
+            )}
+          </div>
+          <Seal
+            glyph="喜"
+            label="ความยินดี"
+            className="absolute -top-5 -right-5 size-14 text-[26px]"
           />
-          <button
-            type="submit"
-            className="px-8 py-3 bg-sage hover:bg-[#7A9187] text-white font-bold font-hand rounded-full shadow-lg transition-colors duration-200 whitespace-nowrap"
-          >
-            ติดตาม
-          </button>
-        </form>
+        </div>
       </div>
     </section>
   );
