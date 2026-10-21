@@ -1,4 +1,5 @@
 import menuData from "@/data/menu-items.json";
+import { photoAlt } from "@/data/photo-alts";
 import type { MenuData } from "@/types/menu";
 import { FadeIn } from "@/components/ui/fade-in";
 import { HangingSign } from "@/components/brand/SignPlate";
@@ -94,7 +95,7 @@ export default function AuspiciousSection() {
 
           <FadeIn delay={0.08}>
             <p className="mx-auto mt-10 max-w-[52ch] font-body text-ink">
-              ขนมไหว้แต่ละอย่างมีความหมายของตัวเอง
+              ขนมไหว้เจ้าแต่ละอย่างมีความหมายของตัวเอง
               เลือกให้ตรงกับสิ่งที่อยากขอ แล้วไหว้เสร็จก็กินได้ ไม่ต้องทิ้ง
             </p>
           </FadeIn>
@@ -107,7 +108,7 @@ export default function AuspiciousSection() {
                 <div className="relative h-full">
                   <PhotoMat
                     src={c.image}
-                    alt={c.item!.nameTh}
+                    alt={photoAlt(c.image, c.item!.nameTh)}
                     aspect="aspect-[4/3]"
                     className="h-full"
                     sizes="(min-width: 1024px) 380px, (min-width: 768px) 32vw, 90vw"

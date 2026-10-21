@@ -6,24 +6,27 @@ import Image from "next/image";
  * outranks expression: ink on cream at 13.58:1, a 68ch measure, and more
  * space above a heading than below it. Prompt sets headings, Sarabun prose.
  *
+ * Posts render their title as the page's one h1, so markdown `#` becomes an
+ * h2 and lower levels shift down with it; the styling of each level is kept.
+ *
  * The `hr` is the one place ornament is allowed — a vermillion rule with the
  * brand's cross mark, standing in for the printer's fleuron.
  */
 export const mdxComponents: MDXComponents = {
   h1: (props) => (
-    <h1
+    <h2
       className="mt-12 mb-5 font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink first:mt-0"
       {...props}
     />
   ),
   h2: (props) => (
-    <h2
+    <h3
       className="mt-11 mb-4 font-display text-[clamp(1.4rem,3.2vw,1.85rem)] leading-tight font-bold text-ink first:mt-0"
       {...props}
     />
   ),
   h3: (props) => (
-    <h3
+    <h4
       className="mt-9 mb-3 font-display text-[21px] leading-snug font-bold text-brass-text"
       {...props}
     />

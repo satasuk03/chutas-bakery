@@ -55,7 +55,7 @@ export default function Header() {
           <Link
             href="/"
             className="-m-1 p-1"
-            aria-label="Chuta's Bakery — ไปหน้าแรก"
+            aria-label="ชุตาเบเกอรี่ — ไปหน้าแรก"
           >
             <BrandMark />
           </Link>

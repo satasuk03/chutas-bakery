@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/sections/HeroSection";
@@ -5,6 +6,12 @@ import ValuesSection from "@/components/sections/ValuesSection";
 import AuspiciousSection from "@/components/sections/AuspiciousSection";
 import CalendarSection from "@/components/sections/Calendar";
 import FounderSection from "@/components/sections/FounderSection";
+import { SITE_URL } from "@/lib/seo";
+
+// Title, description and Open Graph come from the layout; only the canonical is per-route.
+export const metadata: Metadata = {
+  alternates: { canonical: SITE_URL },
+};
 
 /**
  * Grounds alternate as full-bleed bands — paper, umber, paper, cream, paper,

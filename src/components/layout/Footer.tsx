@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/Wordmark";
 import { BaoziSeal } from "@/components/brand/Seal";
 import { LatticeRule } from "@/components/brand/Lattice";
+import { SHOP_ADDRESS, MAPS_URL } from "@/lib/seo";
 
 /**
  * The foot of the page is the deepest ink on the sheet: an umber ground with
@@ -47,7 +48,19 @@ export default function Footer() {
               โทรสั่ง {PHONE}
             </a>
 
-            <div className="mt-5 flex gap-3">
+            <address className="mt-5 max-w-xs font-body not-italic text-cream">
+              {SHOP_ADDRESS}
+            </address>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center font-body text-cream underline underline-offset-4 hover:text-paper"
+            >
+              ดูแผนที่ Google Maps
+            </a>
+
+            <div className="mt-3 flex gap-3">
               <a
                 href="https://www.facebook.com/chutasbakery"
                 target="_blank"

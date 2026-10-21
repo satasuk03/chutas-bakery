@@ -33,6 +33,7 @@ import Image from "next/image";
 import { Phone, ArrowRight } from "lucide-react";
 import { Seal, BaoziSeal } from "@/components/brand/Seal";
 import { PhotoMat } from "@/components/brand/PhotoMat";
+import { photoAlt } from "@/data/photo-alts";
 
 /**
  * Real product photography — product truth, kept from the previous build.
@@ -46,19 +47,19 @@ const heroProducts = [
     src: "/menu/bao-basket.webp",
     label: "ซาลาเปา",
     glyph: "包子",
-    alt: "ซาลาเปาในตะกร้า จาก Chuta's Bakery",
+    alt: photoAlt("/menu/bao-basket.webp", "ซาลาเปา"),
   },
   {
     src: "/menu/fa-gao-bao.webp",
     label: "ฮวกก้วย",
     glyph: "发糕",
-    alt: "ฮวกก้วยใหญ่ จาก Chuta's Bakery",
+    alt: photoAlt("/menu/fa-gao-bao.webp", "ฮวกก้วย"),
   },
   {
     src: "/menu/peach-bao.webp",
     label: "ซิ่วท้อ",
     glyph: "寿桃",
-    alt: "ซิ่วท้อ จาก Chuta's Bakery",
+    alt: photoAlt("/menu/peach-bao.webp", "ซิ่วท้อ"),
   },
 ];
 

@@ -12,6 +12,7 @@ import {
   CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { photoAlt } from "@/data/photo-alts";
 import type { MenuItem } from "@/types/menu";
 import { Seal, productSeal } from "@/components/brand/Seal";
 
@@ -110,7 +111,7 @@ export default function MenuProductDetail({
                       <div className="relative aspect-square overflow-hidden border-[1.5px] border-vermillion">
                         <Image
                           src={src}
-                          alt={`${displayItem.nameTh} ${i + 1}`}
+                          alt={photoAlt(src, `${displayItem.nameTh} ${i + 1}`)}
                           fill
                           sizes="(min-width: 640px) 580px, 92vw"
                           className="object-cover"

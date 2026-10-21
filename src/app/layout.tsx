@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Prompt, Sarabun } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/layout/JsonLd";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "@/lib/seo";
 
 /**
  * Two Thai families, each with one job (DESIGN.md → Typography).
@@ -17,6 +18,10 @@ import JsonLd from "@/components/layout/JsonLd";
  * The Latin wordmark is deliberately absent from this stack: its typeface is
  * unidentified, so it ships as the delivered image instead (see Wordmark.tsx).
  */
+const HOME_TITLE = "ซาลาเปา ฮวกก้วย ซิ่วท้อ ขนมไหว้เจ้า บางแค | ชุตาเบเกอรี่";
+const HOME_DESCRIPTION =
+  "ซาลาเปา ฮวกก้วย ซิ่วท้อ ขนมไหว้เจ้าทำมือ สดใหม่ทุกวัน ไม่ใส่สารกันบูด รับจัดถาดไหว้ ส่งตามระยะทางหรือรับเองที่ร้าน บางแค โทร 064-549-2982";
+
 const prompt = Prompt({
   variable: "--font-prompt",
   subsets: ["thai", "latin"],
@@ -29,66 +34,35 @@ const sarabun = Sarabun({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_URL = "https://fromchuta.com";
+// Lacquer, the navbar colour — tints the mobile browser chrome.
+export const viewport: Viewport = { themeColor: "#a81a10" };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
 
   title: {
-    default:
-      "Chuta's Bakery — ฮวกเปา ซาลาเปา ขนมไหว้เจ้าโฮมเมด ทำสดด้วยมือทุกวัน",
-    template: "%s | Chuta's Bakery",
+    default: HOME_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
-  keywords: [
-    "ฮวกเปา",
-    "ฮวกก้วย",
-    "ซาลาเปา",
-    "ซิ่วท้อ",
-    "ขนมไหว้เจ้า",
-    "ขนมไหว้พระจันทร์",
-    "เบเกอรี่จีน",
-    "Chuta's Bakery",
-    "ชูตาเบเกอรี่",
-    "ทำสดด้วยมือทุกวัน",
-    "ไม่ใส่สารกันเสีย",
-  ],
+  description: HOME_DESCRIPTION,
 
   // Open Graph — controls how the link looks when shared on Facebook/LINE
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: SITE_URL,
-    siteName: "Chuta's Bakery",
-    title: "Chuta's Bakery — ฮวกเปา ซิ่วท้อ ฮวกก้วย ซาลาเปา ขนมไหว้เจ้าโฮมเมด",
-    description:
-      "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
-    images: [
-      {
-        url: "/og-image.webp",
-        width: 1200,
-        height: 630,
-        alt: "Chuta's Bakery — ขนมไหว้เจ้าโฮมเมดทำสดด้วยมือทุกวัน",
-      },
-    ],
+    siteName: SITE_NAME,
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
   },
 
   // Twitter / X card
   twitter: {
     card: "summary_large_image",
-    title: "Chuta's Bakery — ฮวกเปา ซิ่วท้อ ฮวกก้วย ซาลาเปา ขนมไหว้เจ้าโฮมเมด",
-    description:
-      "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
-    images: ["/og-image.webp"],
-  },
-
-  // Canonical URL (prevents duplicate-content penalty)
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      "th-TH": SITE_URL,
-    },
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
   },
 
   formatDetection: {

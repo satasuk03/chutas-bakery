@@ -9,7 +9,7 @@ export default function MenuHeroSection() {
         <FadeIn>
           <HangingSign sway>
             <h1 className="font-display text-[clamp(1.85rem,5vw,3rem)] leading-none font-bold text-vermillion">
-              เมนูของเรา
+              เมนูและราคา
             </h1>
           </HangingSign>
         </FadeIn>

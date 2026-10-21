@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -7,7 +9,21 @@ import { ArrowLeft } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
+import { SITE_URL, SITE_NAME, SITE_NAME_EN, BAKERY_NAME, BAKERY_ALTERNATE_NAMES } from "@/lib/seo";
 import { mdxComponents } from "@/components/mdx-components";
+
+// Posts credit the shop under either its Thai or English name.
+const ORG_AUTHORS = new Set([SITE_NAME, SITE_NAME_EN, BAKERY_NAME, ...BAKERY_ALTERNATE_NAMES]);
+
+const postUrl = (slug: string) => `${SITE_URL}/story/${slug}`;
+
+// Facebook/LINE scrapers handle JPEG better than WebP, so prefer a .jpg sibling
+// of the cover when one ships in public/; otherwise use the cover as given.
+// No width/height: covers vary, and a wrong size is worse than none.
+const coverJpg = (src: string) => {
+  const jpg = src.replace(/\.webp$/, ".jpg");
+  return fs.existsSync(path.join(process.cwd(), "public", jpg)) ? jpg : src;
+};
 
 export function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -22,15 +38,30 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return {};
 
+  const { title, excerpt, date } = post.frontmatter;
+  const url = postUrl(slug);
+  const cover = coverJpg(post.frontmatter.coverImage);
+  const image = { url: cover, alt: title };
+
   return {
-    title: post.frontmatter.title,
-    description: post.frontmatter.excerpt,
+    title,
+    description: excerpt,
+    alternates: { canonical: url },
     openGraph: {
-      title: post.frontmatter.title,
-      description: post.frontmatter.excerpt,
-      images: post.frontmatter.coverImage
-        ? [{ url: post.frontmatter.coverImage }]
-        : undefined,
+      type: "article",
+      locale: "th_TH",
+      siteName: SITE_NAME,
+      url,
+      title,
+      description: excerpt,
+      publishedTime: date,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: excerpt,
+      images: [cover],
     },
   };
 }
@@ -53,8 +84,53 @@ export default async function StoryPostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const { title, excerpt, date, author } = post.frontmatter;
+  const url = postUrl(slug);
+  const bakery = {
+    "@type": "Bakery",
+    "@id": `${SITE_URL}/#bakery`,
+    name: BAKERY_NAME,
+    url: SITE_URL,
+  };
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#post`,
+        headline: title,
+        description: excerpt,
+        datePublished: date,
+        image: `${SITE_URL}${coverJpg(post.frontmatter.coverImage)}`,
+        inLanguage: "th",
+        author: author && !ORG_AUTHORS.has(author)
+          ? { "@type": "Person", name: author }
+          : bakery,
+        publisher: bakery,
+        mainEntityOfPage: url,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "หน้าแรก", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "เรื่องราวของเรา",
+            item: `${SITE_URL}/story`,
+          },
+          { "@type": "ListItem", position: 3, name: title, item: url },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Header />
       <main className="press-paper">
         {/* Cover print, matted on cream and hung on the paper wall rather than
