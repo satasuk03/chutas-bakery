@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { photoAlt } from "@/data/photo-alts";
 import type { MenuItem } from "@/types/menu";
 import { Seal, productSeal } from "@/components/brand/Seal";
 
@@ -49,7 +50,7 @@ export default function MenuProductCard({
         <div className="relative aspect-square w-full overflow-hidden border-[1.5px] border-vermillion bg-cream-bright">
           <Image
             src={item.image}
-            alt={item.nameTh}
+            alt={photoAlt(item.image, item.nameTh)}
             fill
             sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"

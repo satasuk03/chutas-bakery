@@ -4,16 +4,19 @@ import Footer from "@/components/layout/Footer";
 import MenuHeroSection from "@/components/sections/MenuHeroSection";
 import MenuSection from "@/components/sections/MenuSection";
 import MenuTagline from "@/components/sections/MenuTagline";
+import MenuJsonLd from "@/components/layout/MenuJsonLd";
+import { pageMetadata, menuDescription } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "เมนูขนม",
-  description:
-    "เมนูขนมโฮมเมดจาก Chuta's Bakery — ซาลาเปา ฮวกก้วย ฮวกเปา ซิ่วท้อ ขนมไหว้พระจันทร์ และชุดจัดไหว้ ทำสดด้วยมือทุกวัน",
-};
+export const metadata: Metadata = pageMetadata({
+  path: "/menu",
+  title: "เมนูและราคา ซาลาเปา ฮวกก้วย ซิ่วท้อ",
+  description: menuDescription(),
+});
 
 export default function MenuPage() {
   return (
     <>
+      <MenuJsonLd />
       <Header />
       <main>
         <MenuHeroSection />

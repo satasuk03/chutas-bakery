@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Seal } from "@/components/brand/Seal";
+
+export const metadata: Metadata = {
+  title: "ไม่พบหน้าที่ต้องการ",
+  robots: { index: false },
+};
 
 export default function NotFound() {
   return (

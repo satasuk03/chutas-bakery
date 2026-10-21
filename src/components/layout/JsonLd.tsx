@@ -1,34 +1,35 @@
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_NAME_EN,
+  BAKERY_NAME,
+  BAKERY_ALTERNATE_NAMES,
+  MAPS_URL,
+  DEFAULT_OG_IMAGE,
+} from "@/lib/seo";
+
 /**
- * LocalBusiness + Bakery structured data (JSON-LD).
- *
- * This is what powers Google's Knowledge Panel, star ratings in search
- * results, and "bakery near me" / Google Maps visibility.
- *
+ * Site-wide structured data (JSON-LD): the Bakery as a LocalBusiness and the
+ * WebSite it publishes, linked by @id. Route-specific nodes (Menu, BlogPosting,
+ * BreadcrumbList) are rendered by their own pages.
  */
 export default function JsonLd() {
-  const schema = {
-    "@context": "https://schema.org",
+  const bakery = {
     "@type": "Bakery",
-    name: "Chuta's Bakery",
-    alternateName: "ชูตาเบเกอรี่",
+    "@id": `${SITE_URL}/#bakery`,
+    name: BAKERY_NAME,
+    alternateName: [...new Set(BAKERY_ALTERNATE_NAMES)],
     description:
-      "ฮวกเปา ฮวกก้วย ซาลาเปา ซิ่วท้อ และขนมไหว้พระจันทร์ ทำสดด้วยมือทุกวัน ไม่ใส่สารกันเสีย ส่งต่อความโชคดีด้วยรสมือแม่",
-    url: "https://fromchuta.com",
+      "ร้านขนมมงคลทำมือ ซาลาเปา ฮวกก้วย (ฮวกเปา) ซิ่วท้อ และขนมตามเทศกาล สำหรับไหว้เจ้า ไหว้บรรพบุรุษ และงานมงคล ทำสดใหม่ทุกวัน ไม่ใส่สารกันบูด ฝีมือคุณชุตาตั้งแต่เยาวราช ปี 2540",
+    knowsLanguage: "th",
+    url: SITE_URL,
     telephone: "+66-64-549-2982",
     priceRange: "฿฿",
-    servesCuisine: [
-      "ขนมไหว้เจ้า",
-      "ฮวกเปา",
-      "ฮวกก้วย",
-      "ซาลาเปา",
-      "ซิ่วท้อ",
-      "ขนมไหว้พระจันทร์",
-      "เบเกอรี่จีน",
-    ],
+    servesCuisine: ["ขนมไหว้เจ้า", "เบเกอรี่จีน", "Chinese"],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "64 ซอยเพชรเกษม 55/2",
-      addressLocality: "เขตบางแค แขวงหลักสอง",
+      streetAddress: "64 ซอยเพชรเกษม 55/2 แขวงหลักสอง",
+      addressLocality: "เขตบางแค",
       addressRegion: "กรุงเทพมหานคร",
       postalCode: "10160",
       addressCountry: "TH",
@@ -41,13 +42,15 @@ export default function JsonLd() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "07:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Saturday", "Sunday"],
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
         opens: "07:00",
         closes: "18:00",
       },
@@ -56,8 +59,26 @@ export default function JsonLd() {
       "https://www.facebook.com/chutasbakery",
       "https://www.instagram.com/chutasbakery",
     ],
-    image: "https://fromchuta.com/og-image.webp",
-    hasMap: "https://maps.app.goo.gl/j3jvUV4n1swc7HJm6",
+    image: `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
+    logo: `${SITE_URL}/icon.png`,
+    hasMenu: `${SITE_URL}/menu`,
+    hasMap: MAPS_URL,
+    areaServed: { "@type": "City", name: "กรุงเทพมหานคร" },
+  };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: SITE_NAME,
+    alternateName: [SITE_NAME_EN, "fromchuta.com"],
+    url: SITE_URL,
+    inLanguage: "th",
+    publisher: { "@id": `${SITE_URL}/#bakery` },
+  };
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [bakery, website],
   };
 
   return (
