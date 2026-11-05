@@ -86,12 +86,8 @@ export default async function StoryPostPage({
 
   const { title, excerpt, date, author } = post.frontmatter;
   const url = postUrl(slug);
-  const bakery = {
-    "@type": "Bakery",
-    "@id": `${SITE_URL}/#bakery`,
-    name: BAKERY_NAME,
-    url: SITE_URL,
-  };
+  // The full Bakery node is emitted site-wide by JsonLd; reference it.
+  const bakery = { "@id": `${SITE_URL}/#bakery` };
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -101,6 +97,7 @@ export default async function StoryPostPage({
         headline: title,
         description: excerpt,
         datePublished: date,
+        dateModified: post.frontmatter.modified ?? date,
         image: `${SITE_URL}${coverJpg(post.frontmatter.coverImage)}`,
         inLanguage: "th",
         author: author && !ORG_AUTHORS.has(author)
@@ -159,11 +156,11 @@ export default async function StoryPostPage({
               </h1>
 
               <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <span className="font-display text-[15px] font-semibold text-brass-text">
+                <span className="font-display text-[17px] font-semibold text-brass-text">
                   {formatDate(post.frontmatter.date)}
                 </span>
                 {post.frontmatter.author && (
-                  <span className="font-display text-[15px] font-semibold text-brass-text">
+                  <span className="font-display text-[17px] font-semibold text-brass-text">
                     เขียนโดย {post.frontmatter.author}
                   </span>
                 )}
@@ -174,7 +171,7 @@ export default async function StoryPostPage({
                   {post.frontmatter.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
+                      className="border border-brass px-2 py-0.5 font-display text-[17px] font-semibold text-brass-text"
                     >
                       {tag}
                     </span>
@@ -190,7 +187,7 @@ export default async function StoryPostPage({
             <div className="mt-12 border-t-2 border-brass pt-6">
               <Link
                 href="/story"
-                className="press-paper inline-flex min-h-11 items-center gap-2 border-2 border-brass px-4 py-2.5 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+                className="press-paper inline-flex min-h-11 items-center gap-2 border-2 border-brass px-4 py-2.5 font-display text-[17px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               >
                 <ArrowLeft className="size-4" aria-hidden />
                 กลับไปเรื่องราวทั้งหมด

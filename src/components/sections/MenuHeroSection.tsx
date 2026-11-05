@@ -1,6 +1,7 @@
 import { FadeIn } from "@/components/ui/fade-in";
 import { HangingSign } from "@/components/brand/SignPlate";
 import { BaoziSeal } from "@/components/brand/Seal";
+import { ORDER_LEAD_DAYS } from "@/lib/seo";
 
 export default function MenuHeroSection() {
   return (
@@ -20,7 +21,7 @@ export default function MenuHeroSection() {
             ซาลาเปา · ซิ่วท้อ · ขนมตามเทศกาล
           </p>
           <p className="press-paper frame-brass mt-5 inline-block px-5 py-3 font-body text-ink shadow-plate">
-            มีบริการจัดส่งคิดตามระยะทาง หรือมารับเองได้ที่ร้านค่ะ
+            สั่งล่วงหน้าอย่างน้อย {ORDER_LEAD_DAYS} วัน · มีบริการจัดส่งคิดตามระยะทาง หรือมารับเองได้ที่ร้านค่ะ
           </p>
         </FadeIn>
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BrandMark } from "@/components/brand/Wordmark";
 import { BaoziSeal } from "@/components/brand/Seal";
 import { LatticeRule } from "@/components/brand/Lattice";
-import { SHOP_ADDRESS, MAPS_URL } from "@/lib/seo";
+import { SHOP_ADDRESS, MAPS_URL, OPENING_HOURS_LABEL } from "@/lib/seo";
 
 /**
  * The foot of the page is the deepest ink on the sheet: an umber ground with
@@ -43,7 +43,7 @@ export default function Footer() {
             </p>
             <a
               href="tel:0645492982"
-              className="press-paper mt-4 inline-flex min-h-11 items-center gap-2 border-2 border-brass px-4 py-2 font-display text-[15px] font-bold text-vermillion shadow-sign transition-[transform,box-shadow,color] hover:text-vermillion-deep active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              className="press-paper mt-4 inline-flex min-h-11 items-center gap-2 border-2 border-brass px-4 py-2 font-display text-[17px] font-bold text-vermillion shadow-sign transition-[transform,box-shadow,color] hover:text-vermillion-deep active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             >
               โทรสั่ง {PHONE}
             </a>
@@ -65,17 +65,17 @@ export default function Footer() {
                 href="https://www.facebook.com/chutasbakery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-11 items-center justify-center border-2 border-brass font-display text-[13px] font-bold text-paper transition-colors hover:border-paper hover:bg-vermillion"
+                className="inline-flex min-h-11 px-3 items-center justify-center border-2 border-brass font-display text-[17px] font-bold text-paper transition-colors hover:border-paper hover:bg-vermillion"
               >
-                FB
+                Facebook
               </a>
               <a
                 href="https://www.instagram.com/chutasbakery"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-11 items-center justify-center border-2 border-brass font-display text-[13px] font-bold text-paper transition-colors hover:border-paper hover:bg-vermillion"
+                className="inline-flex min-h-11 px-3 items-center justify-center border-2 border-brass font-display text-[17px] font-bold text-paper transition-colors hover:border-paper hover:bg-vermillion"
               >
-                IG
+                Instagram
               </a>
             </div>
           </div>
@@ -122,16 +122,12 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 font-body">
               <li className="flex justify-between gap-4">
-                <span>จันทร์ – ศุกร์</span>
-                <span className="font-display font-semibold">6:30 – 18:00</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span>เสาร์ – อาทิตย์</span>
-                <span className="font-display font-semibold">6:30 – 18:00</span>
+                <span>ทุกวัน</span>
+                <span className="font-display font-semibold">{OPENING_HOURS_LABEL}</span>
               </li>
             </ul>
             <BaoziSeal className="mt-6 w-[92px] text-[15px]" />
-            <p className="mt-2 font-display text-[13px] font-semibold text-paper">
+            <p className="mt-2 font-display text-[17px] font-semibold text-paper">
               ซาลาเปาฮ่องกง
             </p>
           </div>

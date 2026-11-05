@@ -43,6 +43,7 @@ export default function MenuSection() {
   return (
     <section className="press-paper px-4 py-12 md:px-6">
       <div className="mx-auto max-w-[1200px]">
+        <h2 className="sr-only">เมนูขนม</h2>
         {/* Category filter — sign plates on a rail, not pills. The active
             plate is vermillion so the current filter is obvious at a glance
             for a reader who is not hunting for subtle state.
@@ -63,7 +64,7 @@ export default function MenuSection() {
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
                   aria-pressed={active}
-                  className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[15px] font-bold transition-colors ${
+                  className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[17px] font-bold transition-colors ${
                     active
                       ? "border-brass bg-vermillion text-paper"
                       : "press-cream border-brass text-ink shadow-sign hover:shadow-sign-lifted"
@@ -114,7 +115,7 @@ export default function MenuSection() {
             </p>
             <a
               href="tel:0645492982"
-              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[15px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[17px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             >
               โทรสั่ง 064-549-2982
             </a>

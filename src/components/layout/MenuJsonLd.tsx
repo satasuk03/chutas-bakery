@@ -4,27 +4,18 @@ import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 const { categories, items } = menuData as MenuData;
 
-/** Only real price data: single price, or a low–high range across variants. */
+/** Only real price data: one Offer per size, or the single price. */
 function offerFor(item: MenuItem) {
-  const prices = item.variants?.length
-    ? item.variants.map((v) => v.price)
-    : item.price !== undefined
-      ? [item.price]
-      : [];
-  if (prices.length === 0) return undefined;
-
-  const low = Math.min(...prices);
-  const high = Math.max(...prices);
-  if (low === high) {
-    return { "@type": "Offer", price: low, priceCurrency: "THB" };
+  if (item.variants?.length) {
+    return item.variants.map((v) => ({
+      "@type": "Offer",
+      name: v.label,
+      price: v.price,
+      priceCurrency: "THB",
+    }));
   }
-  return {
-    "@type": "AggregateOffer",
-    lowPrice: low,
-    highPrice: high,
-    offerCount: prices.length,
-    priceCurrency: "THB",
-  };
+  if (item.price === undefined) return undefined;
+  return { "@type": "Offer", price: item.price, priceCurrency: "THB" };
 }
 
 function menuItem(item: MenuItem) {
@@ -57,12 +48,22 @@ export default function MenuJsonLd() {
     url: `${SITE_URL}/menu`,
     inLanguage: "th",
     hasMenuSection: sections,
+    mainEntityOfPage: `${SITE_URL}/menu`,
+  };
+
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "หน้าแรก", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "เมนูและราคา", item: `${SITE_URL}/menu` },
+    ],
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify([schema, breadcrumb]) }}
     />
   );
 }

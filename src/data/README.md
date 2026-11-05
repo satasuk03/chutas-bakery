@@ -26,6 +26,7 @@ Example: `2026-02-20_1430_our-bakery-story.mdx`
 | `title`      | `string`   | Yes      | Post title                                       |
 | `slug`       | `string`   | Yes      | URL slug (e.g. `tee-kong-seh-2026` → `/story/tee-kong-seh-2026`) |
 | `date`       | `string`   | Yes      | Publication date (`YYYY-MM-DD`)                  |
+| `modified`   | `string`   | No       | Last real content edit (`YYYY-MM-DD`); sitemap and `dateModified` use it |
 | `coverImage` | `string`   | Yes      | Path to cover image (e.g. `/images/cover.jpg`)   |
 | `excerpt`    | `string`   | Yes      | Short description shown on the card              |
 | `author`     | `string`   | No       | Author name                                      |

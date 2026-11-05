@@ -6,6 +6,7 @@ import {
   BAKERY_ALTERNATE_NAMES,
   MAPS_URL,
   DEFAULT_OG_IMAGE,
+  OPENING_HOURS,
 } from "@/lib/seo";
 
 /**
@@ -20,7 +21,9 @@ export default function JsonLd() {
     name: BAKERY_NAME,
     alternateName: [...new Set(BAKERY_ALTERNATE_NAMES)],
     description:
-      "ร้านขนมมงคลทำมือ ซาลาเปา ฮวกก้วย (ฮวกเปา) ซิ่วท้อ และขนมตามเทศกาล สำหรับไหว้เจ้า ไหว้บรรพบุรุษ และงานมงคล ทำสดใหม่ทุกวัน ไม่ใส่สารกันบูด ฝีมือคุณชุตาตั้งแต่เยาวราช ปี 2540",
+      "ร้านขนมมงคลทำมือ ซาลาเปา ฮวกก้วย (ฮวกเปา) ซิ่วท้อ และขนมตามเทศกาล สำหรับไหว้เจ้า ไหว้บรรพบุรุษ และงานมงคล ทำสดใหม่ทุกวัน ไม่ใส่สารกันบูด ฝีมือคุณชุตาตั้งแต่เยาวราช ปี 2540 หน้าร้านปัจจุบันอยู่ซอยเพชรเกษม 55/2 บางแค",
+    foundingDate: "1997",
+    foundingLocation: { "@type": "Place", name: "เยาวราช กรุงเทพมหานคร" },
     knowsLanguage: "th",
     url: SITE_URL,
     telephone: "+66-64-549-2982",
@@ -36,8 +39,8 @@ export default function JsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 13.708214281606999,
-      longitude: 100.39429540947636,
+      latitude: 13.70821,
+      longitude: 100.3943,
     },
     openingHoursSpecification: [
       {
@@ -51,8 +54,7 @@ export default function JsonLd() {
           "Saturday",
           "Sunday",
         ],
-        opens: "07:00",
-        closes: "18:00",
+        ...OPENING_HOURS,
       },
     ],
     sameAs: [
@@ -61,7 +63,7 @@ export default function JsonLd() {
     ],
     image: `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
     logo: `${SITE_URL}/icon.png`,
-    hasMenu: `${SITE_URL}/menu`,
+    hasMenu: { "@type": "Menu", "@id": `${SITE_URL}/menu#menu`, url: `${SITE_URL}/menu` },
     hasMap: MAPS_URL,
     areaServed: { "@type": "City", name: "กรุงเทพมหานคร" },
   };

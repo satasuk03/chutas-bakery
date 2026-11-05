@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import MenuHeroSection from "@/components/sections/MenuHeroSection";
 import MenuSection from "@/components/sections/MenuSection";
 import MenuTagline from "@/components/sections/MenuTagline";
+import MenuPriceList from "@/components/sections/MenuPriceList";
 import MenuJsonLd from "@/components/layout/MenuJsonLd";
 import { pageMetadata, menuDescription } from "@/lib/seo";
 
@@ -21,6 +22,7 @@ export default function MenuPage() {
       <main>
         <MenuHeroSection />
         <MenuSection />
+        <MenuPriceList />
         <MenuTagline />
       </main>
       <Footer />

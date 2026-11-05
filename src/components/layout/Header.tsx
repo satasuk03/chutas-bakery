@@ -89,7 +89,7 @@ export default function Header() {
                 channels. So the number is the primary action, not a nicety. */}
             <a
               href={PHONE_HREF}
-              className={`hidden min-h-11 items-center gap-2 px-4 py-2 text-[15px] md:inline-flex ${CTA_CLASS}`}
+              className={`hidden min-h-11 items-center gap-2 px-4 py-1 leading-tight text-[17px] md:inline-flex ${CTA_CLASS}`}
             >
               <Phone className="size-4" aria-hidden />
               <span>โทรสั่ง {PHONE}</span>

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { photoAlt } from "@/data/photo-alts";
 import type { MenuItem } from "@/types/menu";
 import { Seal, productSeal } from "@/components/brand/Seal";
+import { VegetarianMark } from "./VegetarianMark";
 
 /**
  * A product is a print pasted on a cream board.
@@ -57,7 +58,7 @@ export default function MenuProductCard({
           />
           {badge && (
             <span
-              className={`absolute top-0 left-0 px-2.5 py-1 font-display text-[13px] font-bold ${badge.className}`}
+              className={`absolute top-0 left-0 px-2.5 py-1 font-display text-[17px] font-bold ${badge.className}`}
             >
               {badge.label}
             </span>
@@ -77,10 +78,11 @@ export default function MenuProductCard({
       </div>
 
       <div className="flex flex-1 flex-col pt-3.5">
-        <h3 className="font-display text-[21px] leading-tight font-bold text-ink">
+        <h3 className="flex flex-wrap items-center gap-2 font-display text-[21px] leading-tight font-bold text-ink">
           {item.nameTh}
+          {item.vegetarian && <VegetarianMark />}
         </h3>
-        <p className="mt-0.5 font-display text-[15px] font-semibold text-vermillion">
+        <p className="mt-0.5 font-display text-[17px] font-semibold text-vermillion">
           {item.nameEn}
         </p>
         <p className="mt-2 font-body text-ink">{item.descriptionTh}</p>
@@ -90,7 +92,7 @@ export default function MenuProductCard({
             {item.flavors.map((flavor) => (
               <span
                 key={flavor}
-                className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
+                className="border border-brass px-2 py-0.5 font-display text-[17px] font-semibold text-brass-text"
               >
                 {flavor}
               </span>
@@ -117,7 +119,7 @@ export default function MenuProductCard({
           </span>
           <button
             onClick={() => onDetailClick(item)}
-            className="press-paper inline-flex min-h-11 shrink-0 items-center gap-1.5 border-2 border-brass px-3 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            className="press-paper inline-flex min-h-11 shrink-0 items-center gap-1.5 border-2 border-brass px-3 py-2 font-display text-[17px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             ดูรายละเอียด
             <ArrowRight className="size-4" aria-hidden />

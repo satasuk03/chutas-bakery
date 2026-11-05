@@ -15,6 +15,7 @@ import {
 import { photoAlt } from "@/data/photo-alts";
 import type { MenuItem } from "@/types/menu";
 import { Seal, productSeal } from "@/components/brand/Seal";
+import { VegetarianMark } from "./VegetarianMark";
 
 /**
  * Product detail. A sheet, not a modal — the reader is comparing against the
@@ -156,10 +157,11 @@ export default function MenuProductDetail({
 
           <div className="space-y-5 px-5 py-6">
             <div>
-              <h3 className="font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink">
+              <h3 className="flex flex-wrap items-center gap-2.5 font-display text-[clamp(1.5rem,3.4vw,2.25rem)] leading-tight font-bold text-ink">
                 {displayItem.nameTh}
+                {displayItem.vegetarian && <VegetarianMark />}
               </h3>
-              <p className="mt-0.5 font-display text-[15px] font-semibold text-vermillion">
+              <p className="mt-0.5 font-display text-[17px] font-semibold text-vermillion">
                 {displayItem.nameEn}
               </p>
             </div>
@@ -183,14 +185,14 @@ export default function MenuProductDetail({
 
             {displayItem.flavors && displayItem.flavors.length > 0 && (
               <div>
-                <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
+                <h4 className="mb-2 font-display text-[17px] font-bold text-brass-text">
                   รสชาติ
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {displayItem.flavors.map((flavor) => (
                     <span
                       key={flavor}
-                      className="border-2 border-brass px-3 py-1 font-display text-[15px] font-semibold text-brass-text"
+                      className="border-2 border-brass px-3 py-1 font-display text-[17px] font-semibold text-brass-text"
                     >
                       {flavor}
                     </span>
@@ -200,7 +202,7 @@ export default function MenuProductDetail({
             )}
 
             <div>
-              <h4 className="mb-2 font-display text-[15px] font-bold text-brass-text">
+              <h4 className="mb-2 font-display text-[17px] font-bold text-brass-text">
                 ราคา
               </h4>
               {displayItem.variants ? (
@@ -252,7 +254,7 @@ export default function MenuProductDetail({
                 aria-label="โทรสั่งสินค้า"
               >
                 <Phone className="size-5" aria-hidden />
-                <span className="font-display text-[15px] font-bold">โทรสั่ง</span>
+                <span className="font-display text-[17px] font-bold">โทรสั่ง</span>
               </a>
             </div>
           </div>

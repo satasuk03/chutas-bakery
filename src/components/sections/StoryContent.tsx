@@ -37,7 +37,7 @@ export default function StoryContent({
                   key={tag.id}
                   onClick={() => setActiveTag(tag.id)}
                   aria-pressed={active}
-                  className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[15px] font-bold transition-colors ${
+                  className={`relative inline-flex min-h-11 items-center border-2 px-4 py-2 font-display text-[17px] font-bold transition-colors ${
                     active
                       ? "border-brass bg-vermillion text-paper"
                       : "press-cream border-brass text-ink shadow-sign hover:shadow-sign-lifted"
@@ -100,7 +100,7 @@ export default function StoryContent({
             </p>
             <button
               onClick={() => setActiveTag("all")}
-              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[15px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+              className="press-paper mt-5 inline-flex min-h-11 items-center border-2 border-brass px-5 py-2.5 font-display text-[17px] font-bold text-vermillion shadow-sign active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             >
               ดูเรื่องราวทั้งหมด
             </button>

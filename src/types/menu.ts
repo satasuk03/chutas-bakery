@@ -20,6 +20,8 @@ export interface MenuItem {
   variants?: PriceVariant[];
   flavors?: string[];
   longDescription?: string;
+  /** เจ, as confirmed by the owner. Absent means not เจ. */
+  vegetarian?: boolean;
 }
 
 export interface MenuCategory {
