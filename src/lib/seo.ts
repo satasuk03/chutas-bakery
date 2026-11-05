@@ -18,14 +18,25 @@ export const SHOP_ADDRESS =
   "64 ซอยเพชรเกษม 55/2 แขวงหลักสอง บางแค กรุงเทพมหานคร 10160";
 export const MAPS_URL = "https://maps.app.goo.gl/j3jvUV4n1swc7HJm6";
 
+/**
+ * Opening hours as listed on the Google Business Profile (checked 2026-11-05).
+ * The owner's rule is "follow Google": change them there first, then here.
+ */
+export const OPENING_HOURS = { opens: "06:10", closes: "17:40" };
+export const OPENING_HOURS_LABEL = "6:10 – 17:40";
+
+/** Owner-confirmed ordering terms. One source for every page that states them. */
+export const ORDER_LEAD_DAYS = 3;
+export const TRAY_SERVICE = "จัดถาดไหว้ ค่าจัดถาด 150–300 บาทตามจำนวนซิ่วท้อ เริ่มต้น 12 ใบขึ้นไป";
+
 /** Date of the last real content change to the home and menu pages. */
-export const SITE_LAST_MODIFIED = "2026-07-25";
+export const SITE_LAST_MODIFIED = "2026-11-05";
 
 export const DEFAULT_OG_IMAGE = {
   url: "/og-image.jpg",
   width: 1200,
   height: 630,
-  alt: "ซาลาเปา ฮวกก้วย และซิ่วท้อ ของชุตาเบเกอรี่ ร้านขนมมงคล เยาวราช 2540 — ขนมมงคลสดใหม่ ทำมือ ไม่ใส่สารกันบูด",
+  alt: "ซาลาเปา ฮวกก้วย และซิ่วท้อ ของชุตาเบเกอรี่ ร้านขนมมงคล บางแค สูตรจากเยาวราช 2540 — ขนมมงคลสดใหม่ ทำมือ ไม่ใส่สารกันบูด",
 };
 
 /**

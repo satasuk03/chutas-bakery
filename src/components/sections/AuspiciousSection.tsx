@@ -117,7 +117,7 @@ export default function AuspiciousSection() {
                       <h3 className="font-display text-[21px] leading-tight font-bold text-ink">
                         {c.item!.nameTh}
                       </h3>
-                      <p className="mt-0.5 font-display text-[15px] font-semibold text-brass-text">
+                      <p className="mt-0.5 font-display text-[17px] font-semibold text-brass-text">
                         {c.item!.nameEn}
                       </p>
 
@@ -129,7 +129,7 @@ export default function AuspiciousSection() {
                         aria-hidden
                         className="mt-4 block h-[2px] w-14 bg-brass"
                       />
-                      <p className="mt-3 font-display text-[13px] font-bold tracking-wide text-brass-text">
+                      <p className="mt-3 font-display text-[17px] font-bold tracking-wide text-brass-text">
                         {c.field}
                       </p>
                       <p className="mt-1 font-display text-[19px] leading-snug font-bold text-vermillion">
@@ -138,7 +138,7 @@ export default function AuspiciousSection() {
                       <p className="mt-2 font-body text-ink">{c.note}</p>
 
                       {c.occasion && (
-                        <p className="mt-3 border-t border-brass pt-3 font-display text-[15px] font-semibold text-ink">
+                        <p className="mt-3 border-t border-brass pt-3 font-display text-[17px] font-semibold text-ink">
                           {c.occasion}
                         </p>
                       )}

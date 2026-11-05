@@ -6,7 +6,23 @@
 /fonts/*
   Cache-Control: public, max-age=86400
 
+# Photos and brand art are not content-hashed either: a week, then revalidate
+# in the background, so a replaced photo shows up within days, not a year.
+/menu/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/brand/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/posts/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/og-image.*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# 'unsafe-inline' for scripts is required: the static export inlines the RSC
+# payload and JSON-LD as <script> tags.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'

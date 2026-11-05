@@ -299,6 +299,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* The base, not just p/li: labels, addresses and table cells inherit it,
+       and the 43–58 reader needs 17px there too. */
+    font-size: 1.0625rem;
     -webkit-font-smoothing: antialiased;
   }
   /* Primary customers are 43–58. Body copy does not go below 17px. */

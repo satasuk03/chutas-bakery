@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import calendarData from "@/data/calendar-events.json";
 import { HangingSign } from "@/components/brand/SignPlate";
 import { Seal } from "@/components/brand/Seal";
+import { ORDER_LEAD_DAYS } from "@/lib/seo";
 
 /**
  * The festival calendar as a rail of hanging tags.
@@ -103,7 +104,7 @@ export default function CalendarSection() {
           </h2>
         </HangingSign>
         <p className="mt-6 font-body font-medium text-ink">
-          ไหว้ตามเทศกาล — สั่งล่วงหน้าเพื่อให้ได้ของสด
+          ไหว้ตามเทศกาล — สั่งล่วงหน้าอย่างน้อย {ORDER_LEAD_DAYS} วัน เพื่อให้ได้ของสด
         </p>
       </div>
 
@@ -134,10 +135,9 @@ export default function CalendarSection() {
                 }}
                 className="flex-none snap-center"
               >
-                <a
-                  href={event.href}
-                  onClick={(e) => {
-                    e.preventDefault();
+                <button
+                  type="button"
+                  onClick={() => {
                     if (!isActive) goTo(i);
                   }}
                   aria-current={isActive ? "true" : undefined}
@@ -178,8 +178,8 @@ export default function CalendarSection() {
                     >
                       {d.getDate()}
                     </p>
-                    <p className="mt-1.5 text-center font-display text-[15px] font-semibold text-ink">
-                      {thaiMonths[d.getMonth()]}
+                    <p className="mt-1.5 text-center font-display text-[17px] font-semibold text-ink">
+                      {thaiMonths[d.getMonth()]} {d.getFullYear() + 543}
                     </p>
                     <p className="text-center font-body text-ink">
                       วัน{thaiDays[d.getDay()]}
@@ -195,14 +195,14 @@ export default function CalendarSection() {
                     </h3>
 
                     <p
-                      className={`mt-3 text-center font-display text-[13px] font-bold ${
+                      className={`mt-3 text-center font-display text-[17px] font-bold ${
                         isPast ? "text-brass-text" : "text-vermillion"
                       }`}
                     >
                       {isPast ? "ผ่านมาแล้ว" : isToday ? "วันนี้!" : "ถัดไป"}
                     </p>
                   </div>
-                </a>
+                </button>
               </div>
             );
           })}
@@ -232,9 +232,9 @@ export default function CalendarSection() {
           is information, and a plate is how this world presents information. */}
       <div className="mx-auto mt-2 w-fit px-4">
         <div className="press-paper frame-brass flex flex-col items-center gap-2 px-5 py-3 shadow-plate">
-          <p className="font-display text-[15px] font-bold text-ink">
-            <span className="text-vermillion">{activeIdx + 1}</span> /{" "}
-            {events.length} วันไหว้ในปีนี้
+          <p className="font-display text-[17px] font-bold text-ink">
+            วันไหว้ที่ <span className="text-vermillion">{activeIdx + 1}</span> /{" "}
+            {events.length}
           </p>
           <div
             className="h-2 w-[180px] border-2 border-brass"

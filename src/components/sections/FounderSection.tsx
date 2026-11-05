@@ -36,8 +36,8 @@ export default function FounderSection() {
           </FadeIn>
 
           <FadeIn delay={0.12}>
-            <p className="font-display text-[15px] font-bold tracking-wide text-vermillion">
-              จากเยาวราช ปี 2540 ถึงวันนี้
+            <p className="font-display text-[17px] font-bold tracking-wide text-vermillion">
+              จากเยาวราช ปี 2540 ถึงหน้าร้านบางแควันนี้
             </p>
 
             <blockquote className="mt-4">

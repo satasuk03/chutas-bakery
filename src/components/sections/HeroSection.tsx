@@ -30,10 +30,11 @@
  */
 
 import Image from "next/image";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, MapPin } from "lucide-react";
 import { Seal, BaoziSeal } from "@/components/brand/Seal";
 import { PhotoMat } from "@/components/brand/PhotoMat";
 import { photoAlt } from "@/data/photo-alts";
+import { SHOP_ADDRESS, MAPS_URL } from "@/lib/seo";
 
 /**
  * Real product photography — product truth, kept from the previous build.
@@ -75,8 +76,8 @@ export default function HeroSection() {
                 width: a first-time visitor has to know what this shop sells
                 before she meets its mascot. ── */}
           <div className="animate-plate">
-            <p className="font-display text-[15px] font-bold tracking-wide text-vermillion md:text-[17px]">
-              ร้านขนมจีนมงคล · เยาวราช 2540
+            <p className="font-display text-[17px] font-bold tracking-wide text-vermillion">
+              ร้านขนมจีนมงคล · สูตรจากเยาวราช 2540
             </p>
 
             {/* the brass hairline above the name — the ornament that carries
@@ -101,7 +102,8 @@ export default function HeroSection() {
             <div className="relative mt-6 inline-block">
               <div className="frame-brass press-cream px-5 py-4 pl-9 shadow-plate md:pl-11">
                 <p className="max-w-[34ch] font-display text-[19px] leading-snug font-semibold text-ink md:text-[21px]">
-                  ขนมมงคลสดใหม่ ทำมือ ไม่ใส่สารกันบูด
+                  ขนมมงคลสดใหม่ ทำมือ{" "}
+                  <span className="whitespace-nowrap">ไม่ใส่สารกันบูด</span>
                 </p>
               </div>
               <Seal
@@ -132,22 +134,37 @@ export default function HeroSection() {
               </a>
             </div>
 
+            {/* Yaowarat is where the recipe comes from; the shop is in Bang
+                Khae. Without this line the page read as a Chinatown
+                storefront to search engines and AI summaries alike. */}
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-11 items-start gap-2 font-body text-ink underline-offset-4 hover:underline"
+            >
+              <MapPin className="mt-1 size-5 shrink-0 text-vermillion" aria-hidden />
+              <span>
+                <span className="font-semibold">หน้าร้าน:</span> {SHOP_ADDRESS}
+              </span>
+            </a>
+
             {/* ── The proof: three real photographs, in the first viewport.
                   Each sits on a cream mat with a brass frame and a
                   vermillion keyline — red and dark grounds never touch a
                   food photo (PRODUCT.md → Brand Commitments). ── */}
             <ul className="mt-8 grid grid-cols-3 gap-2.5 md:mt-9 md:gap-5">
-              {heroProducts.map((p, i) => (
+              {heroProducts.map((p) => (
                 <li key={p.src}>
                   <PhotoMat
                     src={p.src}
                     alt={p.alt}
-                    priority={i < 2}
+                    priority
                     className="h-full p-1.5 md:p-2.5"
                     sizes="(min-width: 768px) 280px, 33vw"
                   >
                     <span className="flex items-baseline justify-between gap-1.5">
-                      <span className="font-display text-[15px] leading-none font-bold text-ink md:text-[17px]">
+                      <span className="font-display text-[17px] leading-none font-bold text-ink">
                         {p.label}
                       </span>
                       <span
@@ -175,6 +192,8 @@ export default function HeroSection() {
               width={1000}
               height={1826}
               sizes="(min-width: 768px) 300px, 190px"
+              // She is the LCP element on phones: never lazy-load her.
+              priority
               className="block h-auto w-full scale-x-[-1]"
             />
 

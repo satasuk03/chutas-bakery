@@ -46,7 +46,7 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
       </div>
 
       <div className="flex flex-1 flex-col pt-3.5">
-        <p className="font-display text-[15px] font-semibold text-brass-text">
+        <p className="font-display text-[17px] font-semibold text-brass-text">
           {formatDate(post.frontmatter.date)}
         </p>
 
@@ -65,7 +65,7 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
             {post.frontmatter.tags.map((tag) => (
               <span
                 key={tag}
-                className="border border-brass px-2 py-0.5 font-display text-[13px] font-semibold text-brass-text"
+                className="border border-brass px-2 py-0.5 font-display text-[17px] font-semibold text-brass-text"
               >
                 {tag}
               </span>
@@ -76,7 +76,7 @@ export default function StoryPostCard({ post }: { post: Post; index?: number }) 
         <div className="mt-auto border-t-2 border-brass pt-3.5">
           <Link
             href={href}
-            className="press-paper inline-flex min-h-11 items-center gap-1.5 border-2 border-brass px-3.5 py-2 font-display text-[15px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            className="press-paper inline-flex min-h-11 items-center gap-1.5 border-2 border-brass px-3.5 py-2 font-display text-[17px] font-bold text-ink shadow-sign transition-[transform,box-shadow] hover:shadow-sign-lifted active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             อ่านต่อ
             <ArrowRight className="size-4" aria-hidden />

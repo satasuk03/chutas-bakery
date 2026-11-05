@@ -22,15 +22,18 @@ const HOME_TITLE = "ซาลาเปา ฮวกก้วย ซิ่วท�
 const HOME_DESCRIPTION =
   "ซาลาเปา ฮวกก้วย ซิ่วท้อ ขนมไหว้เจ้าทำมือ สดใหม่ทุกวัน ไม่ใส่สารกันบูด รับจัดถาดไหว้ ส่งตามระยะทางหรือรับเองที่ร้าน บางแค โทร 064-549-2982";
 
+// `subsets` only decides what is preloaded; the latin faces are still declared
+// and load on demand. Preloading both subsets of every weight was 18 font
+// requests racing the hero photos. 800 was never used.
 const prompt = Prompt({
   variable: "--font-prompt",
-  subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["thai"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const sarabun = Sarabun({
   variable: "--font-sarabun",
-  subsets: ["thai", "latin"],
+  subsets: ["thai"],
   weight: ["400", "500", "600", "700"],
 });
 
